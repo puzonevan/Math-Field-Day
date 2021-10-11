@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
 /* Universals */
 *{
@@ -7,29 +7,59 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 header{
-    background-color: #11151C;
+    background-color: #242325;
     display: flex;
     justify-content: space-around;
-    padding: 2em 0em;
+    align-items: center;
+    padding: 1em 0em;
 }
 
-/* Header Styles */
-.players{
-    display: flex;
-    justify-content: space-around;
+/*** HEADER STYLES ***/
+
+/* Game Title */
+.game-title h1{
+    color: #FFFFFF;
+    text-transform: uppercase;
+    text-decoration: underline;
+    letter-spacing: .1em;
+    font-size: 2em;
+    font-weight: 700;
 }
+
+/* Player Styles */
 .player-1, .player-2{
     display: flex; 
     justify-content: space-around;
+    margin: 1em;
 }
 .player-1 h3, .player-2 h3{
-    color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: .1em;
     font-size: 1.3em;
+    font-weight: 500;
+}
+.player-1 h3{
+    color: #F03A47;
+}
+.player-2 h3{
+    color: #276FBF;
 }
 .player-1 input, .player-2 input{
     height: 1.5em;
     width: 15em;
-    
+}
+
+/* Header Button Style */
+.header-button{
+    background: transparent;
+    border: none;
+    width: 10em;
+
+    color: #FFFFFF;
+    font-size: 1.2em;
+
+    padding: .5em 0em;
+}
+.header-button:hover{
+    border: 2.5px solid white;
 }
