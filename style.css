@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+/* Universals */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+header{
+    background-color: #11151C;
+    display: flex;
+    justify-content: space-around;
+    padding: 2em 0em;
+}
+
+/* Header Styles */
+.players{
+    display: flex;
+    justify-content: space-around;
+}
+.player-1, .player-2{
+    display: flex; 
+    justify-content: space-around;
+}
+.player-1 h3, .player-2 h3{
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: 1.3em;
+}
+.player-1 input, .player-2 input{
+    height: 1.5em;
+    width: 15em;
+    
+}
