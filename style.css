@@ -37,6 +37,7 @@ header{
     letter-spacing: .1em;
     font-size: 1.3em;
     font-weight: 500;
+    margin-right: .5em;
 }
 .player-1 h3{
     color: #F03A47;
@@ -76,7 +77,8 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    z-index: -1;
+    opacity: 0;
 }
 
 .lightbox-box{
@@ -85,3 +87,17 @@ header{
     background-color: #FEFEFE;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
+
+
+/* Table Styles */
+table, td{
+    border: 1px solid #11151C;
+    border-collapse: collapse;
+}
+td{
+    padding: .2em;
+    height: 20px; 
+    width: 20px;
+}
+
+

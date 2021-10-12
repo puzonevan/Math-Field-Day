@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Javascript -->
+    <script src="games/header.js" async></script>
 
     <title>Math Field Day</title>
 </head>
 <body>
-    <header>
+    <header id="header">
 
         <div class="game-title">
-            <h1>Example Game Title</h1>
+            <h1 id="game-title-current">Math Field Day</h1>
         </div>
 
         <div class="players">
@@ -34,16 +35,17 @@
             <button type="button" class="header-button" id="rules-button">Rules</button>
             <div class="lightbox" id="rules-lightbox">
                 <div class="lightbox-box">
-
+                    <h2 class="game-name" id="game-name">Example Game Name</h2>
+                    <p class="game-rules" id="game-rules"></p>
                 </div>
             </div>
         </div>
 
-        <div>
+        <div class="new-game">
             <button type="button" class="header-button" id="new-game-button">New Game</button>
             <div class="lightbox" id="new-game-lightbox">
                 <div class="lightbox-box">
-
+                    
                 </div>
             </div>
         </div>
@@ -52,31 +54,28 @@
             <button type="button" class="header-button" id="menu-button">Menu</button>
             <div class="lightbox" id="menu-lightbox">
                 <div class="lightbox-box">
-
+                    <h2 class="menu-name" id="menu-name">Math Field Day Games</h2>
                 </div>
             </div>
         </div>
-    
-
-    
-        
-        
-        
 
     </header>
 
-    <section class="menu" id="menu">
-
-    </section>
-
     <section class="board" id="board">
         <table> 
-            
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
         </table>
     </section>
-    
-    <footer>
-
-    </footer>
 </body>
 </html>
