@@ -9,6 +9,7 @@
 
     <!-- Javascript -->
     <script src="games/header.js" async></script>
+    <script src="games/menu.js" async></script>
 
     <title>Math Field Day</title>
 </head>
@@ -45,6 +46,11 @@
             <button type="button" class="header-button" id="new-game-button">New Game</button>
             <div class="lightbox" id="new-game-lightbox">
                 <div class="lightbox-box">
+                    <h2 class="new-game-header">New Game? Are you sure?</h2>
+                    <div class="new-game-buttons">
+                        <button type="button" class="new-game-button" id="cancel">Cancel</button>
+                        <button type="button" class="new-game-button" id="restart">Restart</button>
+                    </div>
                     
                 </div>
             </div>
@@ -55,6 +61,14 @@
             <div class="lightbox" id="menu-lightbox">
                 <div class="lightbox-box">
                     <h2 class="menu-name" id="menu-name">Math Field Day Games</h2>
+                    <p class="menu-description">List of Games below</p>
+                    <ul class="menu-games">
+                        <li class="back-red" id="menu-five">Five in a Row</li>
+                        <li class="back-blue" id="menu-capture">Capture</li>
+                        <li class="back-blue" id="menu-tic-tac-toe">3-D Tic Tac Toe</li>
+                        <li class="back-red" id="menu-hex">Hex</li>
+                        <li class="back-blue" id="menu-mancala">Mancala</li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -65,7 +65,7 @@ header{
     border: 2.5px solid white;
 }
 
-/* Lightbox Sytles */
+/* Lightbox Styles */
 .lightbox{
     position: absolute;
     top: 0;
@@ -82,12 +82,79 @@ header{
 }
 
 .lightbox-box{
-    width: 20em;
-    height: 20em;
+    width: 50em;
+    height: auto;
+    padding: 2em 5em;
     background-color: #FEFEFE;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+/* New Game Lightbox Styles */
+.new-game-header{
+    font-size: 2em;
+    margin: .5em;
+    color:  #242325;
+}
+.new-game-button{
+    width: 15em;
+    height: 3em;
+    margin: 1em;
+    font-size: 1.3em;
+    border: none;
+}
+.new-game-button:active{
+    background: #F03A47;
+    color: #FFFFFF;
+}
+
+
+/* Menu Lightbox Styles */
+.menu-name {
+    text-transform: uppercase;
+    font-size: 3em;
+    margin: .5em;
+    color:  #242325;
+}
+.menu-games{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.menu-games li{
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: .1em;
+    color: #FFFFFF;
+    width: 40%;
+    text-align: center;
+    padding: 1em 0em 1em 0em;
+    margin: .5em;
+    border: 5px solid #FFFFFF;
+}
+
+.back-red{
+    background: #F03A47;
+    transition: .15s;
+}
+.back-red:hover, .back-blue:hover{
+    background: #FFFFFF;
+    color: #000000;
+}
+.back-blue{
+    background: #276FBF;
+}
+.back-red:hover{
+    border: 5px solid #F03A47;
+}
+.back-blue:hover{
+    border: 5px solid #276FBF;
+}
 
 /* Table Styles */
 table, td{

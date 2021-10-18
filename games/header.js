@@ -22,8 +22,9 @@ rulesButton.addEventListener('click', (e) =>{
     else{
         document.getElementById("board").style.filter = "blur(1.5rem)";
         document.getElementById("rules-lightbox").style.opacity = "1";
-        document.getElementById("new-game-lightbox").style.opacity = "0";
-        document.getElementById("menu-lightbox").style.opacity = "0";
+        document.getElementById("rules-lightbox").style.visibility = "visible";
+        document.getElementById("new-game-lightbox").style.visibility = "hidden";
+        document.getElementById("menu-lightbox").style.visibility = "hidden";
         rulesStatus = true;
         newGameStatus = false;
         menuStatus = false;
@@ -41,9 +42,13 @@ newGameButton.addEventListener("click", (e) =>{
     }
     else{
         document.getElementById("board").style.filter = "blur(1.5rem)";
+        // document.getElementById("new-game-lightbox").style.opacity = "1";
+        // document.getElementById("rules-lightbox").style.opacity = "0";
+        // document.getElementById("menu-lightbox").style.opacity = "0";
         document.getElementById("new-game-lightbox").style.opacity = "1";
-        document.getElementById("rules-lightbox").style.opacity = "0";
-        document.getElementById("menu-lightbox").style.opacity = "0";
+        document.getElementById("new-game-lightbox").style.visibility = "visible";
+        document.getElementById("rules-lightbox").style.visibility = "hidden";
+        document.getElementById("menu-lightbox").style.visibility = "hidden";
         newGameStatus = true;
         rulesStatus = false;
         menuStatus = false;
@@ -60,9 +65,13 @@ menuButton.addEventListener("click", (e) =>{
     }
     else{
         document.getElementById("board").style.filter = "blur(1.5rem)";
+        // document.getElementById("menu-lightbox").style.opacity = "1";
+        // document.getElementById("rules-lightbox").style.opacity = "0";
+        // document.getElementById("new-game-lightbox").style.opacity = "0";
         document.getElementById("menu-lightbox").style.opacity = "1";
-        document.getElementById("rules-lightbox").style.opacity = "0";
-        document.getElementById("new-game-lightbox").style.opacity = "0";
+        document.getElementById("menu-lightbox").style.visibility = "visible";
+        document.getElementById("new-game-lightbox").style.visibility = "hidden";
+        document.getElementById("rules-lightbox").style.visibility = "hidden";
         menuStatus = true;
         newGameStatus = false;
         rulesStatus = false;
