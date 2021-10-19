@@ -11,25 +11,26 @@ let rulesStatus = false;
 let newGameStatus = false;
 let menuStatus = false; 
 
-const closeLightbox = () => {
-
+const closeLightbox = (name) => {
+    document.getElementById("board").style.filter = "blur(0)";
+    document.getElementById(`${name}-lightbox`).style.visibility = "hidden";
+    document.getElementById(`${name}-lightbox`).style.opacity = "0";
 };
 
-const openLightbox = () =>{
-    
+const openLightbox = (name) =>{
+    document.getElementById("board").style.filter = "blur(1.5rem)";
+    document.getElementById(`${name}-lightbox`).style.opacity = "1";
+    document.getElementById(`${name}-lightbox`).style.visibility = "visible";
 };
 
 const rulesLightbox = rulesButton.addEventListener('click', (e) =>{
 
     if(rulesStatus){
-        document.getElementById("board").style.filter = "blur(0)";
-        document.getElementById("rules-lightbox").style.opacity = "0";
+        closeLightbox("rules");
         rulesStatus = false;
     }
     else{
-        document.getElementById("board").style.filter = "blur(1.5rem)";
-        document.getElementById("rules-lightbox").style.opacity = "1";
-        document.getElementById("rules-lightbox").style.visibility = "visible";
+        openLightbox("rules");
         document.getElementById("new-game-lightbox").style.visibility = "hidden";
         document.getElementById("menu-lightbox").style.visibility = "hidden";
         rulesStatus = true;
@@ -43,14 +44,11 @@ const rulesLightbox = rulesButton.addEventListener('click', (e) =>{
 const newGameLightbox = newGameButton.addEventListener("click", (e) =>{
     
     if(newGameStatus){
-        document.getElementById("board").style.filter = "blur(0)";
-        document.getElementById("new-game-lightbox").style.opacity = "0";
+        closeLightbox("new-game");
         newGameStatus = false;
     }
     else{
-        document.getElementById("board").style.filter = "blur(1.5rem)";
-        document.getElementById("new-game-lightbox").style.opacity = "1";
-        document.getElementById("new-game-lightbox").style.visibility = "visible";
+        openLightbox("new-game");
         document.getElementById("rules-lightbox").style.visibility = "hidden";
         document.getElementById("menu-lightbox").style.visibility = "hidden";
         newGameStatus = true;
@@ -63,14 +61,11 @@ const newGameLightbox = newGameButton.addEventListener("click", (e) =>{
 
 const menuLightbox = menuButton.addEventListener("click", (e) =>{
     if(menuStatus){
-        document.getElementById("board").style.filter = "blur(0)";
-        document.getElementById("menu-lightbox").style.opacity = "0";
+        closeLightbox("menu");
         menuStatus = false;
     }
     else{
-        document.getElementById("board").style.filter = "blur(1.5rem)";
-        document.getElementById("menu-lightbox").style.opacity = "1";
-        document.getElementById("menu-lightbox").style.visibility = "visible";
+        openLightbox("menu");
         document.getElementById("new-game-lightbox").style.visibility = "hidden";
         document.getElementById("rules-lightbox").style.visibility = "hidden";
         menuStatus = true;
