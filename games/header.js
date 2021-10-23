@@ -81,3 +81,4 @@ const menuLightbox = menuButton.addEventListener("click", (e) =>{
 
 });
 
+export {closeLightbox, openLightbox};

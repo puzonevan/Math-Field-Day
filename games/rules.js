@@ -37,3 +37,5 @@ const rules = {
                         diagonally. However, the winner can also win by getting three in a row \
                         in the same spot of the 3 boards."
 }
+
+export { rules };

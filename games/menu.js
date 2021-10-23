@@ -1,5 +1,7 @@
 // Import Header for rules
+import { closeLightbox, openLightbox } from './header.js';
 // Import Rules for Each Game 
+import {rules} from './rules.js';
 
 
 // Get each game button from the menu 
@@ -17,10 +19,11 @@ fiveInARowButton.addEventListener('click', (e) =>{
 
     // Change the game rules
     document.getElementById("game-name").innerHTML = "Five in a Row";
-    document.getElementById("game-rules").innerHTML = "Five in a Row rules";
+    document.getElementById("game-rules").innerHTML = rules['five-in-a-row'];
 
-    // Open the Rules Lightbox
-    rulesLightbox;
+    // Close the menu and open the rules 
+    closeLightbox("menu");
+    openLightbox("rules");
 });
 
 // Capture click 
@@ -31,7 +34,11 @@ captureButton.addEventListener('click', (e) =>{
     
     // Change the game rules
     document.getElementById("game-name").innerHTML = "Capture";
-    document.getElementById("game-rules").innerHTML = "Capture rules";
+    document.getElementById("game-rules").innerHTML = rules.capture;
+
+    // Close the menu and open the rules 
+    closeLightbox("menu");
+    openLightbox("rules");
 });
 
 // 3D-tic-tac-toe click 
@@ -42,7 +49,11 @@ ticTacToeButton.addEventListener('click', (e) =>{
 
     // Change the game rules
     document.getElementById("game-name").innerHTML = "3D-Tic-Tac-Toe";
-    document.getElementById("game-rules").innerHTML = "3D-Tic-Tac-Toe rules";
+    document.getElementById("game-rules").innerHTML = rules['tic-tac-toe-3d'];
+
+    // Close the menu and open the rules 
+    closeLightbox("menu");
+    openLightbox("rules");
 });
 
 // Hex click 
@@ -53,7 +64,11 @@ hexButton.addEventListener('click', (e) =>{
 
     // Change the game rules
     document.getElementById("game-name").innerHTML = "Hex";
-    document.getElementById("game-rules").innerHTML = "Hex rules";
+    document.getElementById("game-rules").innerHTML = rules.hex;
+
+    // Close the menu and open the rules 
+    closeLightbox("menu");
+    openLightbox("rules");
 });
 
 // Mancala click 
@@ -64,5 +79,9 @@ mancalaButton.addEventListener('click', (e) =>{
 
     // Change the game rules
     document.getElementById("game-name").innerHTML = "Mancala";
-    document.getElementById("game-rules").innerHTML = "Mancala rules";
+    document.getElementById("game-rules").innerHTML = rules.mancala;
+
+    // Close the menu and open the rules 
+    closeLightbox("menu");
+    openLightbox("rules");
 });
