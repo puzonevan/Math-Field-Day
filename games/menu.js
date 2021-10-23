@@ -1,17 +1,21 @@
-// Import Header for rules
+/************* IMPORTS *************/
 import { closeLightbox, openLightbox } from './header.js';
-// Import Rules for Each Game 
 import {rules} from './rules.js';
 
+/////////////////////////////////////////////////////////////////////
 
-// Get each game button from the menu 
+/********** BUTTON VARIABLES **********/
 const fiveInARowButton = document.getElementById("menu-five");
 const captureButton = document.getElementById("menu-capture");
 const ticTacToeButton = document.getElementById("menu-tic-tac-toe");
 const hexButton = document.getElementById("menu-hex");
 const mancalaButton = document.getElementById("menu-mancala");
 
+/////////////////////////////////////////////////////////////////////
 
+/********** FUNCTIONS **********/
+
+// Menu Button when any game is clicked 
 const menuButton = (game) =>{
     
     // Change game name 
@@ -27,37 +31,36 @@ const menuButton = (game) =>{
 
 }
 
+/////////////////////////////////////////////////////////////////////
+
+/********** DOM EVENTS **********/
+
 // Five in a Row click 
 fiveInARowButton.addEventListener('click', (e) =>{
-
+    // Call Menu function
     menuButton("Five in a Row");
-
 });
 
 // Capture click 
 captureButton.addEventListener('click', (e) =>{
-
+    // Call Menu function
     menuButton("Capture");
-
 });
 
 // 3D-tic-tac-toe click 
 ticTacToeButton.addEventListener('click', (e) =>{
-
+    // Call Menu function
     menuButton("3D Tic Tac Toe");
-
 });
 
 // Hex click 
 hexButton.addEventListener('click', (e) =>{
-
+    // Call Menu function 
     menuButton("Hex");
-
 });
 
 // Mancala click 
 mancalaButton.addEventListener('click', (e) =>{
-
+    // Call Mancala function
     menuButton("Mancala");
-
 });
