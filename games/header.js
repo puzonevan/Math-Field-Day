@@ -1,8 +1,3 @@
-
-
-const player1 = document.getElementById("player-1-name");
-const player2 = document.getElementById("player-2-name");
-
 const rulesButton = document.getElementById("rules-button");
 const menuButton = document.getElementById("menu-button");
 const newGameButton = document.getElementById("new-game-button");
@@ -51,7 +46,7 @@ const openLightbox = (name) =>{
             document.getElementById("menu-lightbox").style.visibility = "hidden";
             break;
         case "menu": 
-            rulesStatus = true;
+            rulesStatus = false;
             newGameStatus = false;
             menuStatus = true;
             document.getElementById("new-game-lightbox").style.visibility = "hidden";

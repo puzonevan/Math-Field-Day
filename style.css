@@ -111,6 +111,16 @@ header{
     color: #FFFFFF;
 }
 
+/* Rules Lightbox Styles */
+.game-name{
+    font-size: 2em;
+    margin: .5em;
+}
+.game-rules{
+    font-size: 1.2em;
+    line-height: 1.5em;
+    letter-spacing: .05em;
+}
 
 /* Menu Lightbox Styles */
 .menu-name {
