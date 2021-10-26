@@ -46,9 +46,10 @@ const openLightbox = (name) =>{
     // Blur the board
     document.getElementById("board").style.filter = "blur(1.5rem)";
 
-    // Opent the Lightbox
+    // Open the Lightbox
     document.getElementById(`${name}-lightbox`).style.opacity = "1";
     document.getElementById(`${name}-lightbox`).style.visibility = "visible";
+    
 
     // Change the statuses and close other lightboxes
     switch(name) {
