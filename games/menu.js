@@ -38,7 +38,7 @@ const menuButton = (game) =>{
 // Five in a Row click 
 fiveInARowButton.addEventListener('click', (e) =>{
     // Call Menu function
-    menuButton("Five in a Row");
+    menuButton("Five in a Row"); 
 });
 
 // Capture click 

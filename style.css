@@ -176,5 +176,9 @@ td{
     height: 20px; 
     width: 20px;
 }
+.board table{
+    margin: 3em auto;
+}
+
 
 

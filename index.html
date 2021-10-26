@@ -10,6 +10,7 @@
     <!-- Javascript -->
     <script src="games/menu.js" type="module" async></script>
     <script src="games/newGame.js" type="module" async></script>
+    <script src="games/capture/capture.js" type="module" async></script>
 
     <title>Math Field Day</title>
 </head>
@@ -75,21 +76,23 @@
 
     </header>
 
-    <section class="board" id="board">
-        <table> 
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+    <section>
+        <div class="board">
+            <table id="board"> 
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </section>
 </body>
 </html>

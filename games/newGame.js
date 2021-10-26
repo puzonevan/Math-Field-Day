@@ -22,7 +22,7 @@ cancel.addEventListener('click', () =>{
 });
 
 // Restart Button click 
-restart.addEventListener('restart', () =>{
+restart.addEventListener('click', () =>{
     
     // Close the Lightbox 
     closeLightbox('new-game');
