@@ -39,6 +39,21 @@ const fiveInARowBoard = () =>{
 
 const hexBoard = () =>{
 
+    // Single Table 
+    const hexTable = document.createElement('table');
+
+    // Five in a Row For loop: 30x30
+    for (let row = 0; row < 12; row++){
+        const nRow = document.createElement('tr');
+        for(let col = 0; col < 12; col++){
+            const nCol = document.createElement('td');
+            nRow.appendChild(nCol);
+        }
+        hexTable.appendChild(nRow);
+    }
+
+    document.getElementById('board').appendChild(hexTable);
+
 }
 
 const mancalaBoard = () =>{
