@@ -108,5 +108,4 @@ const menuLightbox = menuButton.addEventListener("click", (e) =>{
 /////////////////////////////////////////////////////////////////////
 
 /********** EXPORTS **********/
-
 export {closeLightbox, openLightbox};

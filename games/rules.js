@@ -38,4 +38,7 @@ const rules = {
                         in the same spot of the 3 boards."
 }
 
+/////////////////////////////////////////////////////////////////////
+
+/********** EXPORTS **********/
 export { rules };
