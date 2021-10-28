@@ -1,4 +1,13 @@
+/********** TO DO **********/
+// [X] Initialize Each Board 
+// [ ] Class and Id's by Board
+// [X] Export Fucntion
+// [ ] 
 
+
+/////////////////////////////////////////////////////////////////////
+
+/********** BOARD FUNCTIONS **********/
 const captureBoard = () =>{
 
     // Single Table
@@ -113,8 +122,12 @@ const ticTacToe3DBoard = () =>{
     
 }
 
+/////////////////////////////////////////////////////////////////////
 
+/********** EXPORT FUNCTIONS **********/
 const initializeBoard = (game) =>{
+
+    // Create the appropriate board 
     switch(game){
         case "capture": 
             captureBoard();
@@ -129,6 +142,7 @@ const initializeBoard = (game) =>{
             mancalaBoard(); 
             break;
         case "tic-tac-toe-3d":
+            // 3D Tic Tac Toe requires three boards
             ticTacToe3DBoard(); 
             ticTacToe3DBoard();
             ticTacToe3DBoard();
