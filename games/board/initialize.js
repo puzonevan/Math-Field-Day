@@ -12,6 +12,7 @@ const captureBoard = () =>{
 
     // Single Table
     const captureTable = document.createElement('table');
+    captureTable.className = "capture 6x6";
 
     // Capture Board: 6x6 Grid
     for (let row = 0; row < 6; row++){
