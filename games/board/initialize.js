@@ -12,9 +12,9 @@ const captureBoard = () =>{
 
     // Single Table
     const captureTable = document.createElement('table');
-    captureTable.className = "capture 6x6";
-    captureTable.id = "capture";
-
+    captureTable.setAttribute("class", "capture");
+    captureTable.setAttribute("id", "capture");
+    
     // Capture Board: 6x6 Grid
     for (let row = 0; row < 6; row++){
         const nRow = document.createElement('tr');
@@ -33,6 +33,8 @@ const fiveInARowBoard = () =>{
 
     // Single Table 
     const fiveInARowTable = document.createElement('table');
+    fiveInARowTable.setAttribute("class", "five-in-a-row");
+    fiveInARowTbale.setAttribute("id", "five-in-a-row");
 
     // Five in a Row For loop: 30x30
     for (let row = 0; row < 25; row++){
@@ -52,6 +54,8 @@ const hexBoard = () =>{
 
     // Single Table 
     const hexTable = document.createElement('table');
+    hexTable.setAttribute("class", "hex");
+    hexTable.setAttribute("id", "hex");
 
     // Five in a Row For loop: 30x30
     for (let row = 0; row < 12; row++){
@@ -71,6 +75,8 @@ const mancalaBoard = () =>{
 
     // Single Table
     const mancalaTable = document.createElement('table');
+    mancalaTable.setAttribute("class", "mancala");
+    mancalaTable.setAttribute("id", "mancala");
 
     // Insert First Row 
     const row1 = document.createElement('tr');
@@ -110,7 +116,9 @@ const ticTacToe3DBoard = () =>{
     
     // Create 3 Seperate Tables
     const table = document.createElement('table');
-
+    table.setAttribute("class", "tic-tac-toe-3d");
+    table.setAttribute("id", "tic-tac-toe-3d");
+    
     for(let row = 0; row < 3; row++){
         const nRow = document.createElement('tr');
         for(let col = 0; col < 3; col++){
