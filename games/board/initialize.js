@@ -7,6 +7,12 @@
 /////////////////////////////////////////////////////////////////////
 
 /********** HELPER FUNCTIONS **********/
+
+/**
+ * createTable - creates table object and set appropriate classes and id's
+ * @param {""} game name of the game
+ * @returns table DOM
+ */
 const createTable = (game) =>{
 
     // Create Table and set attributes
@@ -17,10 +23,22 @@ const createTable = (game) =>{
     return table;
 }
 
+/**
+ * createRow - creates Row object and set appropriate classes and id's
+ * @param {""} game name of the game
+ * @param {#} row table's row number
+ * @returns row DOM
+ */
 const createRow = (game, row) =>{
     
 }
 
+/**
+ * createCol - creates Col object and set appropriate classes and id's
+ * @param {""} game name of the game 
+ * @param {#} col table's col number
+ * @returns col DOM
+ */
 const createCol = (game, col) =>{
 
 }
@@ -30,6 +48,10 @@ const createCol = (game, col) =>{
 /////////////////////////////////////////////////////////////////////
 
 /********** BOARD FUNCTIONS **********/
+
+/**
+ * captureBoard - creates and adds Capture Board
+ */
 const captureBoard = () =>{
 
     // Capture Table
@@ -42,7 +64,6 @@ const captureBoard = () =>{
         const nRow = document.createElement('tr');
         nRow.setAttribute("id", `row-${row}`);
         
-
         for(let col = 0; col < 6; col++){
             const nCol = document.createElement('td');
             nCol.setAttribute("id", `col-${col}`)
@@ -133,7 +154,7 @@ const ticTacToe3DBoard = () =>{
     
     // Create div for table
     const div = document.createElement('div');
-    
+
     // 3D Tic Tac Toe Table
     const table = createTable("tic-tac-toe-3d");
     
