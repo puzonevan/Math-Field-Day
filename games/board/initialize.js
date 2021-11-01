@@ -4,6 +4,28 @@
 // [X] Export Function
 // [ ] 
 
+/////////////////////////////////////////////////////////////////////
+
+/********** HELPER FUNCTIONS **********/
+const createTable = (game) =>{
+
+    // Create Table and set attributes
+    const table = document.createElement("table");
+    table.setAttribute("class", game);
+    table.setAttribute("id", game);
+
+    return table;
+}
+
+const createRow = (game, row) =>{
+    
+}
+
+const createCol = (game, col) =>{
+
+}
+
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -11,15 +33,19 @@
 const captureBoard = () =>{
 
     // Capture Table
-    const captureTable = document.createElement('table');
-    captureTable.setAttribute("class", "capture");
-    captureTable.setAttribute("id", "capture");
+    const captureTable = createTable("capture");
     
-    // Capture Board: 6x6 Grid
+    // Capture Board: 6x6 
     for (let row = 0; row < 6; row++){
+
+        // New Row
         const nRow = document.createElement('tr');
+        nRow.setAttribute("id", `row-${row}`);
+        
+
         for(let col = 0; col < 6; col++){
             const nCol = document.createElement('td');
+            nCol.setAttribute("id", `col-${col}`)
             nRow.appendChild(nCol);
         }
         captureTable.appendChild(nRow);
@@ -32,9 +58,7 @@ const captureBoard = () =>{
 const fiveInARowBoard = () =>{
 
     // Five in a Row Table
-    const fiveInARowTable = document.createElement('table');
-    fiveInARowTable.setAttribute("class", "five-in-a-row");
-    fiveInARowTbale.setAttribute("id", "five-in-a-row");
+    const fiveInARowTable = createTable("five-in-a-row");
 
     // Five in a Row For loop: 30x30
     for (let row = 0; row < 25; row++){
@@ -53,9 +77,7 @@ const fiveInARowBoard = () =>{
 const hexBoard = () =>{
 
     // Hex Table
-    const hexTable = document.createElement('table');
-    hexTable.setAttribute("class", "hex");
-    hexTable.setAttribute("id", "hex");
+    const hexTable = createTable("hex");
 
     // Hex loop: 12x12
     for (let row = 0; row < 12; row++){
@@ -74,9 +96,7 @@ const hexBoard = () =>{
 const mancalaBoard = () =>{
 
     // Mancala Table
-    const mancalaTable = document.createElement('table');
-    mancalaTable.setAttribute("class", "mancala");
-    mancalaTable.setAttribute("id", "mancala");
+    const mancalaTable = createTable("mancala");
 
     // Insert First Row 
     const row1 = document.createElement('tr');
@@ -114,11 +134,8 @@ const ticTacToe3DBoard = () =>{
     // Create div for table
     const div = document.createElement('div');
     
-    
     // 3D Tic Tac Toe Table
-    const table = document.createElement('table');
-    table.setAttribute("class", "tic-tac-toe-3d");
-    table.setAttribute("id", "tic-tac-toe-3d");
+    const table = createTable("tic-tac-toe-3d");
     
     for(let row = 0; row < 3; row++){
         const nRow = document.createElement('tr');
