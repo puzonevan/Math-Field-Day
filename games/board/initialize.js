@@ -30,7 +30,10 @@ const createTable = (game) =>{
  * @returns row DOM
  */
 const createRow = (game, row) =>{
+    const newRow = document.createElement("tr");
+    newRow.setAttribute("id", `row-${row}`);
     
+    return newRow;
 }
 
 /**
@@ -40,7 +43,10 @@ const createRow = (game, row) =>{
  * @returns col DOM
  */
 const createCol = (game, col) =>{
+    const newCol = document.createElement("td");
+    newCol.setAttribute("id", `col-${col}`);
 
+    return newCol;
 }
 
 
@@ -61,12 +67,10 @@ const captureBoard = () =>{
     for (let row = 0; row < 6; row++){
 
         // New Row
-        const nRow = document.createElement('tr');
-        nRow.setAttribute("id", `row-${row}`);
+        const nRow = createRow("capture", row);
         
         for(let col = 0; col < 6; col++){
-            const nCol = document.createElement('td');
-            nCol.setAttribute("id", `col-${col}`)
+            const nCol = createCol("capture", col);
             nRow.appendChild(nCol);
         }
         captureTable.appendChild(nRow);
@@ -85,12 +89,13 @@ const fiveInARowBoard = () =>{
     for (let row = 0; row < 25; row++){
 
         // Create new row 
-        const nRow = document.createElement('tr');
+        const nRow = createRow("five-in-a-row", row);
         for(let col = 0; col < 50; col++){
 
             // Create new col
-            const nCol = document.createElement('td');
+            const nCol = createCol("five-in-a-row", col);
             nRow.appendChild(nCol);
+
         }
 
         // Append Row to table
@@ -109,9 +114,9 @@ const hexBoard = () =>{
 
     // Hex loop: 12x12
     for (let row = 0; row < 12; row++){
-        const nRow = document.createElement('tr');
+        const nRow = createRow("hex", row);
         for(let col = 0; col < 12; col++){
-            const nCol = document.createElement('td');
+            const nCol = createCol("hex", col);
             nRow.appendChild(nCol);
         }
         hexTable.appendChild(nRow);
@@ -166,9 +171,9 @@ const ticTacToe3DBoard = () =>{
     const table = createTable("tic-tac-toe-3d");
     
     for(let row = 0; row < 3; row++){
-        const nRow = document.createElement('tr');
+        const nRow = createRow("tic-tac-toe-3d", row);
         for(let col = 0; col < 3; col++){
-            const nCol = document.createElement('td');
+            const nCol = createCol("tic-tac-toe-3d", col);
             nRow.appendChild(nCol);
         }
         table.appendChild(nRow);

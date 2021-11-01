@@ -1,6 +1,7 @@
 /************* IMPORTS *************/
 import { closeLightbox } from './header.js';
-// Import Restart Board Function
+import { restartBoard } from './board/restart.js';
+import { initializeBoard } from './board/initialize.js';
 
 
 /////////////////////////////////////////////////////////////////////
@@ -28,5 +29,6 @@ restart.addEventListener('click', () =>{
     closeLightbox('new-game');
 
     // Restart the game 
-
+    restartBoard();
+    initializeBoard("five-in-a-row");
 });
