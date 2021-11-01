@@ -30,6 +30,8 @@ const createTable = (game) =>{
  * @returns row DOM
  */
 const createRow = (game, row) =>{
+
+    // Create Row and set attributes
     const newRow = document.createElement("tr");
     newRow.setAttribute("id", `row-${row}`);
     
@@ -43,6 +45,8 @@ const createRow = (game, row) =>{
  * @returns col DOM
  */
 const createCol = (game, col) =>{
+
+    // Create Col and set attributes 
     const newCol = document.createElement("td");
     newCol.setAttribute("id", `col-${col}`);
 
@@ -214,6 +218,7 @@ const initializeBoard = (game) =>{
             ticTacToe3DBoard();
             break;
     }
+
 }
 
 /////////////////////////////////////////////////////////////////////

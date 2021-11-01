@@ -177,6 +177,10 @@ td{
     height: 20px; 
     width: 20px;
 }
+td:hover{
+    background: #FF00FF;
+}
+
 .board table{
     margin: 3em auto;
 }
