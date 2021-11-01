@@ -1,7 +1,7 @@
 /********** TO DO **********/
-// [X] Initialize Each Board 
+// [x] Initialize Each Board 
 // [ ] Class and Id's by Board
-// [X] Export Function
+// [x] Export Function
 // [ ] 
 
 /////////////////////////////////////////////////////////////////////
