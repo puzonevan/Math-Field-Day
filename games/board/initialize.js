@@ -57,7 +57,7 @@ const captureBoard = () =>{
     // Capture Table
     const captureTable = createTable("capture");
     
-    // Capture Board: 6x6 
+    // Capture Grid: 6x6 
     for (let row = 0; row < 6; row++){
 
         // New Row
@@ -81,16 +81,23 @@ const fiveInARowBoard = () =>{
     // Five in a Row Table
     const fiveInARowTable = createTable("five-in-a-row");
 
-    // Five in a Row For loop: 30x30
+    // Five in a Row Grid: 30x30
     for (let row = 0; row < 25; row++){
+
+        // Create new row 
         const nRow = document.createElement('tr');
         for(let col = 0; col < 50; col++){
+
+            // Create new col
             const nCol = document.createElement('td');
             nRow.appendChild(nCol);
         }
+
+        // Append Row to table
         fiveInARowTable.appendChild(nRow);
     }
 
+    // Append table to board div
     document.getElementById('board').appendChild(fiveInARowTable);
 
 }
@@ -174,6 +181,11 @@ const ticTacToe3DBoard = () =>{
 /////////////////////////////////////////////////////////////////////
 
 /********** EXPORT FUNCTIONS **********/
+
+/**
+ * initializeBoard - hub function used in other files to create appropriate board
+ * @param {*} game name of the game
+ */
 const initializeBoard = (game) =>{
 
     // Create the appropriate board 
