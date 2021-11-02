@@ -19,13 +19,18 @@ let game;
 
 /////////////////////////////////////////////////////////////////////
 
-/************* HELPER  FUNCTIONS *************/
+/************* HELPER FUNCTIONS *************/
 
 /////////////////////////////////////////////////////////////////////
 
 /************* EXPORT FUNCTIONS *************/
 const startGame = (game) =>{
-    console.log(game);
+
+    // Initialize Players 
+    player1 = new Player();
+    player2 = new Player();
+
+    // Initialize Game
 }
 
 export { startGame };
