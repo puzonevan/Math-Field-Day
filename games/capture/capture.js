@@ -27,6 +27,8 @@ class Capture{
         this._player1 = player1;
         this._player2 = player2;
         this._gameOver = false;
+        this._board = [[]];
+        this._domBoard = [[]];
     }
 
     get player1(){
@@ -39,6 +41,19 @@ class Capture{
         return this._gameOver;
     }
 
+    playerMove(player, move){
+
+    }
+
+    changeBoard(){
+
+    }
+
+    checkWinner(){
+
+    }
+
+    
 }
 
 
