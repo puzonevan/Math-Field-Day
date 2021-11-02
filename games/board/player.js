@@ -24,10 +24,9 @@ class Player {
     
     /**
      * Player Constructor - creates player object
-     * @param {""} name name of the player
      */
-    constructor(name){
-        this._name = name; 
+    constructor(){
+        this._name = ""; 
         this._turn = false;
         this._winner = false;
         this._currentMove = {};
@@ -80,5 +79,7 @@ class Player {
     /////////////////////////////////////////////////////////////////////
 
     /************* STATIC METHODS *************/
-    
+
 }
+
+export { Player };

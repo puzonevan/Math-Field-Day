@@ -1,13 +1,17 @@
 /************* IMPORTS *************/
+// Import Header functions
 import { closeLightbox, openLightbox } from './header.js';
+// Import Board functions
 import { initializeBoard } from "./board/initialize.js";
 import { restartBoard } from "./board/restart.js";
-import {rules} from './rules.js';
-
+// Import Rules
+import { rules } from './rules.js';
+// Import Game Loop functions 
+import { startGame } from './board/gameLoop.js';
 
 /////////////////////////////////////////////////////////////////////
 
-/********** BUTTON VARIABLES **********/
+/********** GAME BUTTON VARIABLES **********/
 const fiveInARowButton = document.getElementById("menu-five");
 const captureButton = document.getElementById("menu-capture");
 const ticTacToeButton = document.getElementById("menu-tic-tac-toe");
@@ -16,22 +20,24 @@ const mancalaButton = document.getElementById("menu-mancala");
 
 /////////////////////////////////////////////////////////////////////
 
-/********** FUNCTIONS **********/
+/********** HELPER FUNCTIONS **********/
 
-// Menu Button when any game is clicked 
+/**
+ * menuButton - change header according to game and open rules
+ * @param {""} game name of the game
+ */
 const menuButton = (game) =>{
     
-    // Change game name 
+    // Change game title in header
     document.getElementById("game-title-current").innerHTML = game;
 
-    // Change game rules 
+    // Change game rules in rules lightbox
     document.getElementById("game-name").innerHTML = game;
     document.getElementById("game-rules").innerHTML = rules[game];
 
-    // Close the menu and open the rules 
+    // Close the menu and open the rules lightbox
     closeLightbox("menu");
     openLightbox("rules");
-
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -46,6 +52,9 @@ fiveInARowButton.addEventListener('click', (e) =>{
     // Restart and Initialize the Board
     restartBoard(document.getElementById("board"));
     initializeBoard("five-in-a-row");
+
+    // Start the Game 
+    startGame("five-in-a-row");
 });
 
 // Capture click 
@@ -56,6 +65,9 @@ captureButton.addEventListener('click', (e) =>{
     // Restart and Initialize the Board
     restartBoard(document.getElementById("board"));
     initializeBoard("capture");
+
+    // Start the Game 
+    startGame("capture");
 });
 
 // 3D-tic-tac-toe click 
@@ -66,6 +78,9 @@ ticTacToeButton.addEventListener('click', (e) =>{
     // Restart and Initialize the Board
     restartBoard(document.getElementById("board"));
     initializeBoard("tic-tac-toe-3d");
+
+    // Start the Game 
+    startGame("tic-tac-toe-3d");
 });
 
 // Hex click 
@@ -76,6 +91,9 @@ hexButton.addEventListener('click', (e) =>{
     // Restart and Initialize the Board
     restartBoard(document.getElementById("board"));
     initializeBoard("hex");
+
+    // Start the Game 
+    startGame("hex");
 });
 
 // Mancala click 
@@ -86,4 +104,7 @@ mancalaButton.addEventListener('click', (e) =>{
     // Restart and Initialize the Board
     restartBoard(document.getElementById("board"));
     initializeBoard("mancala");
+
+    // Start the Game 
+    startGame("mancala");
 });

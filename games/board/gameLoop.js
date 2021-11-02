@@ -4,8 +4,23 @@
 // [] Experiment with game loops
 
 /************* IMPORTS *************/
-// import all the games 
+// Import Player Class 
+import { Player } from "./player.js";
+// Import Game Classes
+
 
 /////////////////////////////////////////////////////////////////////
 
 /************* PLAYER VARIABLES *************/
+const player1 = new Player();
+const player2 = new Player();
+
+
+/////////////////////////////////////////////////////////////////////
+
+/************* EXPORT FUNCTIONS *************/
+const startGame = (game) =>{
+    console.log(game);
+}
+
+export {startGame};
