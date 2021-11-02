@@ -12,9 +12,14 @@ import { Player } from "./player.js";
 /////////////////////////////////////////////////////////////////////
 
 /************* PLAYER VARIABLES *************/
-const player1 = new Player();
-const player2 = new Player();
+let player1;
+let player2;
+/************* GAME VARIABLES *************/
+let game;
 
+/////////////////////////////////////////////////////////////////////
+
+/************* HELPER  FUNCTIONS *************/
 
 /////////////////////////////////////////////////////////////////////
 
@@ -23,4 +28,4 @@ const startGame = (game) =>{
     console.log(game);
 }
 
-export {startGame};
+export { startGame };
