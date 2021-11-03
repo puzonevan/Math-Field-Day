@@ -61,6 +61,8 @@ class Capture{
 
 /************* EXPORT *************/
 
+export { Capture };
+
 // Player p1 
 // Player p2
 // Game capture 

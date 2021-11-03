@@ -7,6 +7,11 @@
 // Import Player Class 
 import { Player } from "./player.js";
 // Import Game Classes
+import { Capture } from "../capture/capture.js";
+import { FiveInARow } from "../five-in-a-row/fiveInARow.js";
+import { Hex } from "../hex/hex.js";
+import { Mancala } from "../mancala/mancala.js";
+import { TicTacToe3D } from "../tic-tac-toe-3d/ticTacToe3d.js";
 
 
 /////////////////////////////////////////////////////////////////////
