@@ -1,4 +1,3 @@
-
 /********** BUTTON VARIABLES **********/
 const rulesButton = document.getElementById("rules-button");
 const menuButton = document.getElementById("menu-button");
@@ -108,4 +107,4 @@ const menuLightbox = menuButton.addEventListener("click", (e) =>{
 /////////////////////////////////////////////////////////////////////
 
 /********** EXPORTS **********/
-export {closeLightbox, openLightbox};
+export { closeLightbox, openLightbox };

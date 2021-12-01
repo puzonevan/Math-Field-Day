@@ -22,3 +22,5 @@ class Hex{
     }
 
 }
+
+export { Hex };

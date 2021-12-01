@@ -22,3 +22,5 @@ class Mancala{
     }
 
 }
+
+export { Mancala };

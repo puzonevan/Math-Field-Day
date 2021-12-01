@@ -27,8 +27,21 @@ class Capture{
         this._player1 = player1;
         this._player2 = player2;
         this._gameOver = false;
+
+
         this._board = [[]];
+        for(let i = 0; i < 6; i++){
+            for(let j = 0; j < 6; j++){
+                this._board[i][j] = "";
+            }
+        }
+
         this._domBoard = [[]];
+        for(let i = 0; i < 6; i++){
+            for(let j = 0; j < 6; j++){
+                
+            }
+        }
     }
 
     get player1(){
@@ -60,6 +73,8 @@ class Capture{
 /////////////////////////////////////////////////////////////////////
 
 /************* EXPORT *************/
+
+export { Capture };
 
 // Player p1 
 // Player p2

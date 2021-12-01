@@ -22,3 +22,5 @@ class TicTacToe3D{
     }
 
 }
+
+export { TicTacToe3D };
