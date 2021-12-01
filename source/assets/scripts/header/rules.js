@@ -4,16 +4,19 @@ import { menuLightbox } from "./menu.js";
 
 /////////////////////////////////////////////////////////////////////
 
+/************* BUTTON *************/
+
 const rulesButton = document.getElementById("rules-button");
 const rulesLightbox = document.getElementById("rules-lightbox");
 rulesLightbox.style.display = "none";
 
+// Button click DOM
 rulesButton.addEventListener('click', () =>{
 
     // Close
     if(rulesLightbox.style.display == "flex"){
-        rulesLightbox.style.display = "none";
         document.getElementById("board").style.filter = "blur(10px)";
+        rulesLightbox.style.display = "none";
     }
     // Open
     else if(rulesLightbox.style.display == "none"){

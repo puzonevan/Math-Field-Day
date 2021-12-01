@@ -4,16 +4,19 @@ import { menuLightbox } from "./menu.js";
 
 /////////////////////////////////////////////////////////////////////
 
+/************* BUTTON *************/
+
 const newGameButton = document.getElementById("new-game-button");
 const newGameLightbox = document.getElementById("new-game-lightbox");
 newGameLightbox.style.display = "none";
 
+// Button click DOM
 newGameButton.addEventListener('click', () =>{
 
     // Close
     if(newGameLightbox.style.display == "flex"){
-        newGameLightbox.style.display = "none";
         document.getElementById("board").style.filter = "blur(10px)";
+        newGameLightbox.style.display = "none";
     }
     // Open
     else if(newGameLightbox.style.display == "none"){
