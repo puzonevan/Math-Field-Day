@@ -83,22 +83,27 @@ const mancalaButton = document.getElementById("menu-mancala");
 
 fiveInARowButton.addEventListener("click", () =>{
     changeContent("Five in a Row");
+    removeBoard(document.getElementById("board"));
 });
 
 captureButton.addEventListener("click", () =>{
     changeContent("Capture");
+    removeBoard(document.getElementById("board"));
 });
 
 ticTacToeButton.addEventListener("click", () =>{
     changeContent("3D Tic Tac Toe");
+    removeBoard(document.getElementById("board"));
 });
 
 hexButton.addEventListener("click", () =>{
     changeContent("Hex");
+    removeBoard(document.getElementById("board"));
 });
 
 mancalaButton.addEventListener("click", () =>{
     changeContent("Mancala");
+    removeBoard(document.getElementById("board"));
 });
 
 /////////////////////////////////////////////////////////////////////
@@ -116,6 +121,12 @@ const changeContent = (name) =>{
     // Change to Rules lightbox 
     rulesLightbox.style.display = "flex";
     menuLightbox.style.display = "none";
+}
+
+const removeBoard = (parent) =>{
+    while(parent.firstElementChild){
+        parent.remove(parent.firstElementChild);
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
