@@ -66,6 +66,7 @@ header{
 }
 
 /* Lightbox Styles */
+
 .lightbox{
     position: absolute;
     bottom: 0;
@@ -79,7 +80,6 @@ header{
     justify-content: center;
     align-items: center;
     z-index: 2;
-    opacity: 0;
 }
 
 .lightbox-box{
@@ -93,6 +93,8 @@ header{
     justify-content: center;
     align-items: center;
 }
+
+
 
 /* New Game Lightbox Styles */
 .new-game-header{
