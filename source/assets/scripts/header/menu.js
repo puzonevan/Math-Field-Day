@@ -82,23 +82,23 @@ const hexButton = document.getElementById("menu-hex");
 const mancalaButton = document.getElementById("menu-mancala");
 
 fiveInARowButton.addEventListener("click", () =>{
-
+    changeContent("Five in a Row");
 });
 
 captureButton.addEventListener("click", () =>{
-    
+    changeContent("Capture");
 });
 
 ticTacToeButton.addEventListener("click", () =>{
-    
+    changeContent("3D Tic Tac Toe");
 });
 
 hexButton.addEventListener("click", () =>{
-    
+    changeContent("Hex");
 });
 
 mancalaButton.addEventListener("click", () =>{
-    
+    changeContent("Mancala");
 });
 
 /////////////////////////////////////////////////////////////////////
@@ -113,6 +113,9 @@ const changeContent = (name) =>{
     document.getElementById("game-name").innerHTML = name;
     document.getElementById("game-rules").innerHTML = rules[name];
 
+    // Change to Rules lightbox 
+    rulesLightbox.style.display = "flex";
+    menuLightbox.style.display = "none";
 }
 
 /////////////////////////////////////////////////////////////////////
