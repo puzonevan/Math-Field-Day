@@ -10,7 +10,7 @@ class Capture{
     }
 
     static createBoard(){
-
+        
     }
 }
 

@@ -2,6 +2,12 @@
 import { newGameLightbox } from "./new-game.js";
 import { rulesLightbox } from "./rules.js";
 
+import { Capture } from "../boards/capture.js";
+import { FiveInARow } from "../boards/five-in-a-row.js";
+import { Hex } from "../boards/hex.js";
+import { Mancala } from "../boards/mancala.js";
+import { TicTacToe3D } from "../boards/tic-tac-toe-3d.js";
+
 /////////////////////////////////////////////////////////////////////
 
 /************* GLOBALS *************/
@@ -84,26 +90,31 @@ const mancalaButton = document.getElementById("menu-mancala");
 fiveInARowButton.addEventListener("click", () =>{
     changeContent("Five in a Row");
     removeBoard(document.getElementById("board"));
+    FiveInARow.createBoard();
 });
 
 captureButton.addEventListener("click", () =>{
     changeContent("Capture");
     removeBoard(document.getElementById("board"));
+    Capture.createBoard();
 });
 
 ticTacToeButton.addEventListener("click", () =>{
     changeContent("3D Tic Tac Toe");
     removeBoard(document.getElementById("board"));
+    TicTacToe3D.createBoard();
 });
 
 hexButton.addEventListener("click", () =>{
     changeContent("Hex");
     removeBoard(document.getElementById("board"));
+    Hex.createBoard();
 });
 
 mancalaButton.addEventListener("click", () =>{
     changeContent("Mancala");
     removeBoard(document.getElementById("board"));
+    Mancala.createBoard();
 });
 
 /////////////////////////////////////////////////////////////////////
