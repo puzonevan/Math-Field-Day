@@ -20,8 +20,8 @@ class Player{
     set name(name){
         this._name = name
     }
-    set winner(){
-        this._winner = true;
+    set winner(winner){
+        this._winner = winner;
     }
 
 }
