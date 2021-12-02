@@ -64,12 +64,20 @@ const rules = {
 const player1 = new Player(document.getElementById("player-1-name"));
 const player2 = new Player(document.getElementById("player-2-name"));
 
+// Change player names on input
+document.getElementById("player-1-name").addEventListener("input", () =>{
+    player1.name = document.getElementById("player-1-name").value;
+});
+document.getElementById("player-2-name").addEventListener("input", () =>{
+    player2.name = document.getElementById("player-2-name").value;
+});
+
 // Boards
-const capture = new Capture();
 const fiveInARow = new FiveInARow();
-const mancala = new Mancala();
+const capture = new Capture();
 const tictactoe = new TicTacToe3D();
 const hex = new Hex();
+const mancala = new Mancala();
 
 fiveInARowButton.addEventListener("click", () =>{
     changeContent("Five in a Row");
