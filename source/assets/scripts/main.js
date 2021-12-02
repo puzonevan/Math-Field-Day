@@ -15,4 +15,19 @@ import { Player } from "./header/player.js";
 
 /////////////////////////////////////////////////////////////////////
 
-/************* CAPTURE CLASS *************/
+/************* MAIN PROGRAM *************/
+
+// Players 
+const player1 = new Player(document.getElementById("player-1-name"));
+const player2 = new Player(document.getElementById("player-2-name"));
+
+// Boards
+const capture = new Capture();
+const fiveInARow = new FiveInARow();
+const mancala = new Mancala();
+const tictactoe = new TicTacToe3D();
+const hex = new Hex();
+
+/////////////////////////////////////////////////////////////////////
+
+/************* HELPERS *************/
