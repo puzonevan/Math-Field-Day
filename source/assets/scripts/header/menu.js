@@ -64,12 +64,12 @@ menuButton.addEventListener("click", () =>{
     
     // Close
     if(menuLightbox.style.display == "flex"){        
-        document.getElementById("board").style.filter = "blur(10px)";
+        document.getElementById("board").style.filter = "blur(0px)";
         menuLightbox.style.display = "none";
     }
     // Open
     else if(menuLightbox.style.display == "none"){
-        document.getElementById("board").style.filter = "blur(0px)";
+        document.getElementById("board").style.filter = "blur(10px)";
         menuLightbox.style.display = "flex";
         newGameLightbox.style.display = "none";
         rulesLightbox.style.display = "none";
@@ -135,8 +135,8 @@ const changeContent = (name) =>{
 }
 
 const removeBoard = (parent) =>{
-    while(parent.firstElementChild){
-        parent.remove(parent.firstElementChild);
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
     }
 }
 

@@ -15,12 +15,12 @@ newGameButton.addEventListener('click', () =>{
 
     // Close
     if(newGameLightbox.style.display == "flex"){
-        document.getElementById("board").style.filter = "blur(10px)";
+        document.getElementById("board").style.filter = "blur(0px)";
         newGameLightbox.style.display = "none";
     }
     // Open
     else if(newGameLightbox.style.display == "none"){
-        document.getElementById("board").style.filter = "blur(0px)";
+        document.getElementById("board").style.filter = "blur(10px)";
         newGameLightbox.style.display = "flex";
         rulesLightbox.style.display = "none";
         menuLightbox.style.display = "none";
