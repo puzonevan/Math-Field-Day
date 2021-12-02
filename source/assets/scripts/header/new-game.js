@@ -27,6 +27,33 @@ newGameButton.addEventListener('click', () =>{
     }
 });
 
+// Cancel Button click DOM 
+document.getElementById("cancel").addEventListener("click", () =>{
+    if(newGameLightbox.style.display == "flex"){
+        document.getElementById("board").style.filter = "blur(0px)";
+        newGameLightbox.style.display = "none";
+    }
+});
+
+// Restart Button click DOM
+document.getElementById("restart").addEventListener("click", () =>{
+    removeBoard(document.getElementById("board"));
+    document.getElementById("board").style.filter = "blur(10px)";
+    menuLightbox.style.display = "flex";
+    newGameLightbox.style.display = "none";
+    rulesLightbox.style.display = "none";
+});
+
+/////////////////////////////////////////////////////////////////////
+
+/************* HELPERS *************/
+
+const removeBoard = (parent) =>{
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 /////////////////////////////////////////////////////////////////////
 
 export { newGameButton, newGameLightbox }
