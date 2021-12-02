@@ -60,58 +60,76 @@ const rules = {
 
 /************* MAIN PROGRAM *************/
 
-// Players 
-const player1 = new Player(document.getElementById("player-1-name"));
-const player2 = new Player(document.getElementById("player-2-name"));
+function main(){
+    // Players 
+    const player1 = new Player(document.getElementById("player-1-name"));
+    const player2 = new Player(document.getElementById("player-2-name"));
 
-// Change player names on input
-document.getElementById("player-1-name").addEventListener("input", () =>{
-    player1.name = document.getElementById("player-1-name").value;
-});
-document.getElementById("player-2-name").addEventListener("input", () =>{
-    player2.name = document.getElementById("player-2-name").value;
-});
+    // Change player names on input
+    document.getElementById("player-1-name").addEventListener("input", () =>{
+        player1.name = document.getElementById("player-1-name").value;
+    });
+    document.getElementById("player-2-name").addEventListener("input", () =>{
+        player2.name = document.getElementById("player-2-name").value;
+    });
 
-// Boards
-const fiveInARow = new FiveInARow();
-const capture = new Capture();
-const tictactoe = new TicTacToe3D();
-const hex = new Hex();
-const mancala = new Mancala();
+    // Boards
+    const fiveInARow = new FiveInARow();
+    const capture = new Capture();
+    const tictactoe = new TicTacToe3D();
+    const hex = new Hex();
+    const mancala = new Mancala();
 
-fiveInARowButton.addEventListener("click", () =>{
-    changeContent("Five in a Row");
-    removeBoard(document.getElementById("board"));
-    FiveInARow.createBoard();
-});
+    fiveInARowButton.addEventListener("click", () =>{
+        changeContent("Five in a Row");
+        removeBoard(document.getElementById("board"));
+        FiveInARow.createBoard();
+        callAsync();
+    });
 
-captureButton.addEventListener("click", () =>{
-    changeContent("Capture");
-    removeBoard(document.getElementById("board"));
-    Capture.createBoard();
-});
+    captureButton.addEventListener("click", () =>{
+        changeContent("Capture");
+        removeBoard(document.getElementById("board"));
+        Capture.createBoard();
+    });
 
-ticTacToeButton.addEventListener("click", () =>{
-    changeContent("3D Tic Tac Toe");
-    removeBoard(document.getElementById("board"));
-    TicTacToe3D.createBoard();
-});
+    ticTacToeButton.addEventListener("click", () =>{
+        changeContent("3D Tic Tac Toe");
+        removeBoard(document.getElementById("board"));
+        TicTacToe3D.createBoard();
+    });
 
-hexButton.addEventListener("click", () =>{
-    changeContent("Hex");
-    removeBoard(document.getElementById("board"));
-    Hex.createBoard();
-});
+    hexButton.addEventListener("click", () =>{
+        changeContent("Hex");
+        removeBoard(document.getElementById("board"));
+        Hex.createBoard();
+    });
 
-mancalaButton.addEventListener("click", () =>{
-    changeContent("Mancala");
-    removeBoard(document.getElementById("board"));
-    Mancala.createBoard();
-});
+    mancalaButton.addEventListener("click", () =>{
+        changeContent("Mancala");
+        removeBoard(document.getElementById("board"));
+        Mancala.createBoard();
+    });
+}
+
+main();
 
 /////////////////////////////////////////////////////////////////////
 
 /************* HELPER FUNCTIONS *************/
+async function callAsync(){
+    const result = await resolveAfter2Seconds();
+    console.log(result);
+}
+
+function resolveAfter2Seconds() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, 10000);
+    });
+}
+
 const changeContent = (name) =>{
 
     // Change game title in header
@@ -131,4 +149,6 @@ const removeBoard = (parent) =>{
         parent.removeChild(parent.firstChild);
     }
 }
+
+
 
