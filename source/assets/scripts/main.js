@@ -84,31 +84,35 @@ function main(){
         changeContent("Five in a Row");
         removeBoard(document.getElementById("board"));
         FiveInARow.createBoard();
-        callAsync();
+        startGame(fiveInARow);
     });
 
     captureButton.addEventListener("click", () =>{
         changeContent("Capture");
         removeBoard(document.getElementById("board"));
         Capture.createBoard();
+        startGame(capture);
     });
 
     ticTacToeButton.addEventListener("click", () =>{
         changeContent("3D Tic Tac Toe");
         removeBoard(document.getElementById("board"));
         TicTacToe3D.createBoard();
+        startGame(tictactoe);
     });
 
     hexButton.addEventListener("click", () =>{
         changeContent("Hex");
         removeBoard(document.getElementById("board"));
         Hex.createBoard();
+        startGame(hex);
     });
 
     mancalaButton.addEventListener("click", () =>{
         changeContent("Mancala");
         removeBoard(document.getElementById("board"));
         Mancala.createBoard();
+        startGame(mancala);
     });
 }
 
@@ -117,6 +121,9 @@ main();
 /////////////////////////////////////////////////////////////////////
 
 /************* HELPER FUNCTIONS *************/
+async function startGame(game){
+    
+}
 async function callAsync(){
     const result = await resolveAfter2Seconds();
     console.log(result);
