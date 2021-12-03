@@ -10,6 +10,7 @@ class FiveInARow{
         this._player1 = player1; 
         this._player2 = player2;
         this._board = this.initializeBoard();
+        this._flag = 0;
     }
 
     initializeBoard(){
@@ -28,21 +29,38 @@ class FiveInARow{
     
     start(){
         [...document.getElementsByTagName("td")].forEach((td) =>{
-            // td.addEventListener("mouseover", hoverX(td));
-            // td.addEventListener("mouseout", hoverNone(td));
-            // td.addEventListener("click", () =>{
-            //     // td.removeEventListener("mouseover", this.hoverO(td));
-            //     // td.removeEventListener("mouseout", this.hoverNone(td));
-            //     td.style.background = "center no-repeat url('source/assets/images/icons/o-icon.png')";
-            // });
-        });
-        
+            td.addEventListener("click", () =>{
+                if(this._flag === 0){
+                    td.setAttribute("class", "y-player");
+                    this._flag = 1;
+                }
+                else if(this._flag === 1){
+                    td.setAttribute("class", "x-player");
+                    this._flag = 0;
+                }
+            })
+        })
     }
 
     
 
     turn(player){
-
+        if(player === "x"){
+            [...document.getElementsByTagName("td")].forEach((td) =>{
+                td.setAttribute("class", "x-move");
+                td.addEventListener("click", () =>{
+                    return;
+                });
+            });
+        }
+        else if(player === "o"){
+            [...document.getElementsByTagName("td")].forEach((td) =>{
+                td.setAttribute("class", "y-move");
+                td.addEventListener("click", () =>{
+                    return;
+                });
+            });
+        }
     }
 
     static createBoard(){

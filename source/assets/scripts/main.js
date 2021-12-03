@@ -74,7 +74,7 @@ function main(){
     });
 
     // Boards
-    const fiveInARow = new FiveInARow();
+    const fiveInARow = new FiveInARow(player1, player2);
     const capture = new Capture();
     const tictactoe = new TicTacToe3D();
     const hex = new Hex();
@@ -84,7 +84,6 @@ function main(){
         changeContent("Five in a Row");
         removeBoard(document.getElementById("board"));
         FiveInARow.createBoard();
-        startGame(fiveInARow);
         fiveInARow.start();
     });
 
@@ -92,28 +91,28 @@ function main(){
         changeContent("Capture");
         removeBoard(document.getElementById("board"));
         Capture.createBoard();
-        startGame(capture);
+        
     });
 
     ticTacToeButton.addEventListener("click", () =>{
         changeContent("3D Tic Tac Toe");
         removeBoard(document.getElementById("board"));
         TicTacToe3D.createBoard();
-        startGame(tictactoe);
+        
     });
 
     hexButton.addEventListener("click", () =>{
         changeContent("Hex");
         removeBoard(document.getElementById("board"));
         Hex.createBoard();
-        startGame(hex);
+        
     });
 
     mancalaButton.addEventListener("click", () =>{
         changeContent("Mancala");
         removeBoard(document.getElementById("board"));
         Mancala.createBoard();
-        startGame(mancala);
+        
     });
 }
 
@@ -122,21 +121,7 @@ main();
 /////////////////////////////////////////////////////////////////////
 
 /************* HELPER FUNCTIONS *************/
-async function startGame(game){
-    
-}
-async function callAsync(){
-    const result = await resolveAfter2Seconds();
-    console.log(result);
-}
 
-function resolveAfter2Seconds() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve('resolved');
-      }, 10000);
-    });
-}
 
 const changeContent = (name) =>{
 

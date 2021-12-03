@@ -180,6 +180,28 @@ td{
     width: 20px;
 }
 
+.x-move{
+    background: none;
+}
+.x-move:hover{
+    background: center no-repeat url('../images/icons/x-icon.png');
+}
+
+.x-player{
+    background: center no-repeat url('../images/icons/x-icon.png');
+}
+
+.y-move{
+    background: none;
+}
+.y-move:hover{
+    background: center no-repeat url('../images/icons/o-icon.png');
+}
+.y-player{
+    background: center no-repeat url('../images/icons/o-icon.png');
+}
+
+
 
 .board table{
     margin: 3em auto;
