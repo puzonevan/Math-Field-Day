@@ -1,5 +1,5 @@
 /************* IMPORTS *************/
-import { createTable, createRow, createCol, hoverNone, hoverX} from "./board.js"
+import { createTable, createRow, createCol} from "./board.js"
 
 /////////////////////////////////////////////////////////////////////
 
@@ -27,15 +27,14 @@ class FiveInARow{
     
     
     start(){
-        
         [...document.getElementsByTagName("td")].forEach((td) =>{
-            td.addEventListener("mouseover", hoverX(td));
-            td.addEventListener("mouseout", hoverNone(td));
-            td.addEventListener("click", () =>{
-                // td.removeEventListener("mouseover", this.hoverO(td));
-                // td.removeEventListener("mouseout", this.hoverNone(td));
-                td.style.background = "center no-repeat url('source/assets/images/icons/o-icon.png')";
-            });
+            // td.addEventListener("mouseover", hoverX(td));
+            // td.addEventListener("mouseout", hoverNone(td));
+            // td.addEventListener("click", () =>{
+            //     // td.removeEventListener("mouseover", this.hoverO(td));
+            //     // td.removeEventListener("mouseout", this.hoverNone(td));
+            //     td.style.background = "center no-repeat url('source/assets/images/icons/o-icon.png')";
+            // });
         });
         
     }
