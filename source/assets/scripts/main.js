@@ -85,6 +85,7 @@ function main(){
         removeBoard(document.getElementById("board"));
         FiveInARow.createBoard();
         startGame(fiveInARow);
+        fiveInARow.start();
     });
 
     captureButton.addEventListener("click", () =>{

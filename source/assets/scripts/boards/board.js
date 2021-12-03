@@ -46,8 +46,19 @@ const createCol = (game, col) =>{
     return newCol;
 }
 
+const hoverX = (elem) =>{
+    elem.style.backgroundColor = "blue";
+    // elem.style.background = "center no-repeat url('source/assets/images/icons/x-icon.png')";
+}
+
+const hoverNone = (elem) =>{
+    elem.style.backgroundColor = "white";
+
+    // elem.style.background = "none";
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /********** EXPORTS **********/
 
-export { createTable, createRow, createCol }
+export { createTable, createRow, createCol, hoverNone, hoverX }
