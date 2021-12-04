@@ -28,39 +28,49 @@ class FiveInARow{
     
     
     start(){
-        [...document.getElementsByTagName("td")].forEach((td) =>{
+        let move = () =>{
+            if(this._flag === 0){
+                td.setAttribute("class", "y-player");
+                this.xMove(index);
+                this._flag = 1;
+            }
+            else if(this._flag === 1){
+                td.setAttribute("class", "x-player");
+                this.xMove(index);
+                this._flag = 0;
+            }
+        }
+
+        [...document.getElementsByTagName("td")].forEach((td, index) =>{
             td.addEventListener("click", () =>{
+
+                // Do nothing if there is already an X or O
+                if(td.className === "y-player" || td.className === "x-player"){
+                    return;
+                }
+
                 if(this._flag === 0){
                     td.setAttribute("class", "y-player");
+                    this.xMove(index);
                     this._flag = 1;
                 }
                 else if(this._flag === 1){
                     td.setAttribute("class", "x-player");
+                    this.xMove(index);
                     this._flag = 0;
                 }
             })
         })
     }
 
-    
+    xMove(index){
+        let row = Math.floor(index / 50);
+        let col = index % 50;
+        this._board[row][col] = "X";
+        console.log(this._board);
+    }
+    yMove(index){
 
-    turn(player){
-        if(player === "x"){
-            [...document.getElementsByTagName("td")].forEach((td) =>{
-                td.setAttribute("class", "x-move");
-                td.addEventListener("click", () =>{
-                    return;
-                });
-            });
-        }
-        else if(player === "o"){
-            [...document.getElementsByTagName("td")].forEach((td) =>{
-                td.setAttribute("class", "y-move");
-                td.addEventListener("click", () =>{
-                    return;
-                });
-            });
-        }
     }
 
     static createBoard(){
