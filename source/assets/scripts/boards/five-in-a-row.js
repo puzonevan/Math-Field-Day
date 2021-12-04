@@ -51,27 +51,26 @@ class FiveInARow{
 
                 if(this._flag === 0){
                     td.setAttribute("class", "y-player");
-                    this.xMove(index);
+                    this.move("O", index);
                     this._flag = 1;
                 }
                 else if(this._flag === 1){
                     td.setAttribute("class", "x-player");
-                    this.xMove(index);
+                    this.move("X",index);
                     this._flag = 0;
                 }
+
             })
         })
     }
 
-    xMove(index){
+    move(move, index){
         let row = Math.floor(index / 50);
         let col = index % 50;
-        this._board[row][col] = "X";
+        move === "O" ? this._board[row][col] = "O" : this._board[row][col] = "X"; 
         console.log(this._board);
     }
-    yMove(index){
-
-    }
+    
 
     static createBoard(){
         // Five in a Row Table
