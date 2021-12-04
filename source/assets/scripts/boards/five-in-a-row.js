@@ -28,38 +28,31 @@ class FiveInARow{
     
     
     start(){
-        let move = () =>{
-            if(this._flag === 0){
-                td.setAttribute("class", "y-player");
-                this.xMove(index);
-                this._flag = 1;
-            }
-            else if(this._flag === 1){
-                td.setAttribute("class", "x-player");
-                this.xMove(index);
-                this._flag = 0;
-            }
-        }
-
-        [...document.getElementsByTagName("td")].forEach((td, index) =>{
-            td.addEventListener("click", () =>{
+        // Loop through each square 
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
+            square.addEventListener("click", () =>{
 
                 // Do nothing if there is already an X or O
-                if(td.className === "y-player" || td.className === "x-player"){
+                if(square.className === "y-player" || square.className === "x-player"){
                     return;
                 }
 
                 if(this._flag === 0){
-                    td.setAttribute("class", "y-player");
+                    square.setAttribute("class", "y-player");
                     this.move("O", index);
+                    if(this._player1.winner){
+                        console.log("Player 1 wins");
+                    }
                     this._flag = 1;
                 }
                 else if(this._flag === 1){
-                    td.setAttribute("class", "x-player");
+                    square.setAttribute("class", "x-player");
                     this.move("X",index);
+                    if(this._player2.winner){
+                        console.log("Player 2 wins");
+                    }
                     this._flag = 0;
                 }
-
             })
         })
     }
@@ -68,9 +61,45 @@ class FiveInARow{
         let row = Math.floor(index / 50);
         let col = index % 50;
         move === "O" ? this._board[row][col] = "O" : this._board[row][col] = "X"; 
-        console.log(this._board);
+        this.checkWinner(move, row, col);
     }
     
+    checkWinner(move, row, col){
+        let pointer1;
+        row - 1 > -1 ? pointer1 = this._board[row - 1][col] : pointer1 = "";
+        let pointer2; 
+        row + 1 < 25 ? pointer2 = this._board[row + 1][col] : pointer2 = "";
+        let pointer1Count = 1;
+        let pointer2Count = 1;
+        let counter = 1;
+
+        while(pointer1 === move || pointer2 === move){
+            if(pointer1 === move){
+                console.log("up");
+                counter++;
+                pointer1Count++;
+                row - pointer1Count > -1 ? pointer1 = this._board[row - pointer1Count][col] : pointer1 = "";
+            }
+            if(pointer2 === move){
+                console.log("down");
+                counter++;
+                pointer2Count++;
+                row + pointer2Count < 25 ? pointer2 = this._board[row + pointer2Count][col] : pointer2 = ""; 
+            }
+        }
+        
+        console.log(counter);
+        if(counter === 5){
+            move === "O" ? this._player1.winner = true : this._player2.winner = true;
+        }
+        return;
+    }
+
+    clearInput(){
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
+            square.addEventListener("click", () =>{});
+        });
+    }
 
     static createBoard(){
         // Five in a Row Table
