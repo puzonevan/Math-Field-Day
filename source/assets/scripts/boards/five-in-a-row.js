@@ -65,33 +65,116 @@ class FiveInARow{
     }
     
     checkWinner(move, row, col){
-        let pointer1;
-        row - 1 > -1 ? pointer1 = this._board[row - 1][col] : pointer1 = "";
-        let pointer2; 
-        row + 1 < 25 ? pointer2 = this._board[row + 1][col] : pointer2 = "";
-        let pointer1Count = 1;
-        let pointer2Count = 1;
-        let counter = 1;
 
-        while(pointer1 === move || pointer2 === move){
-            if(pointer1 === move){
+        let pointerup;
+        row - 1 > -1 ? pointerup = this._board[row - 1][col] : pointerup = "";
+        let pointerdown; 
+        row + 1 < 25 ? pointerdown = this._board[row + 1][col] : pointerdown = "";
+        let pointerupCount = 1;
+        let pointerdownCount = 1;
+
+        let pointerleft;
+        col - 1 > -1 ? pointerleft = this._board[row][col - 1] : pointerleft = "";
+        let pointerright;
+        col + 1 < 50 ? pointerright = this._board[row][col + 1] : pointerright = "";
+        let pointerleftOffset = 1;
+        let pointerrightOffset = 1;
+
+        let pointertopright;
+        col + 1 < 50 && row - 1 > -1 ? pointertopright = this._board[row - 1][col + 1] : pointertopright = "";
+        let pointerbotleft;
+        col - 1 > -1 && row + 1 < 25 ? pointerbotleft = this._board[row + 1][col - 1] : pointerbotleft = "";
+        let pointertoprightOffset = 1;
+        let pointerbotleftOffset = 1;
+
+        let pointertopleft;
+        col - 1 > -1 && row - 1 > -1 ? pointertopleft = this._board[row - 1][col - 1] : pointertopleft = "";
+        let pointerbotright;
+        col + 1 < 50 && row + 1 < 25 ? pointerbotright = this._board[row + 1][col + 1] : pointerbotright = "";
+        let pointertopleftOffset = 1;
+        let pointerbotrightOffset = 1;
+
+        let counterHorizontal = 1;
+        let counterDiagonalRight = 1;
+        let counterDiagonalLeft = 1;
+        let counterVertical = 1;
+
+        while(pointerup === move || pointerdown === move || pointerleft === move || pointerright === move
+            || pointertopright === move || pointerbotleft === move || pointertopleft === move || pointerbotright === move){
+
+            if(counterVertical === 5 || counterHorizontal === 5 || counterDiagonalLeft === 5 || counterDiagonalRight === 5){
+                move === "O" ? this._player1.winner = true : this._player2.winner = true;
+                break;
+            }
+
+            if(pointerup === move){
                 console.log("up");
-                counter++;
-                pointer1Count++;
-                row - pointer1Count > -1 ? pointer1 = this._board[row - pointer1Count][col] : pointer1 = "";
+                counterVertical++;
+                pointerupCount++;
+                row - pointerupCount > -1 ? pointerup = this._board[row - pointerupCount][col] : pointerup = "";
             }
-            if(pointer2 === move){
+            if(pointerdown === move){
                 console.log("down");
-                counter++;
-                pointer2Count++;
-                row + pointer2Count < 25 ? pointer2 = this._board[row + pointer2Count][col] : pointer2 = ""; 
+                counterVertical++;
+                pointerdownCount++;
+                row + pointerdownCount < 25 ? pointerdown = this._board[row + pointerdownCount][col] : pointerdown = ""; 
             }
+
+            if(pointerleft === move){
+                console.log("left");
+                counterHorizontal++;
+                pointerleftOffset++;
+                col - pointerleftOffset > -1 ? pointerleft = this._board[row][col - pointerleftOffset] : pointerleft = "";
+            }
+
+            if(pointerright === move){
+                console.log("right");
+                counterHorizontal++;
+                pointerrightOffset++;
+                col + pointerrightOffset < 50 ? pointerright = this._board[row][col + pointerrightOffset] : pointerright = "";
+            }
+
+            if(pointertopright === move){
+                console.log("top right");
+                counterDiagonalRight++;
+                pointertoprightOffset++;
+                col + pointertoprightOffset < 50 && row - pointertoprightOffset > -1 ? pointertopright = this._board[row - pointertoprightOffset][col + pointertoprightOffset] : pointertopright = "";
+            }
+
+            if(pointerbotleft === move){
+                console.log("bot left");
+                counterDiagonalRight++;
+                pointerbotleftOffset++;
+                col - pointerbotleftOffset > -1 && row + pointerbotleftOffset < 25 ? pointerbotleft = this._board[row + pointerbotleftOffset][col - pointerbotleftOffset] : pointerbotleft = "";
+            }
+            
+            if(pointertopleft === move){
+                console.log("top left");
+                counterDiagonalLeft++;
+                pointertopleftOffset++;
+                col - pointertopleftOffset > -1 && row - pointertopleftOffset > -1 ? pointertopleft = this._board[row - pointertopleftOffset][col - pointertopleftOffset] : pointertopleft = "";
+            }
+
+            if(pointerbotright === move){
+                console.log(pointerbotright)
+                console.log("bot right");
+                counterDiagonalLeft++;
+                pointerbotrightOffset++;
+                col + pointerbotrightOffset < 50 && row + pointerbotrightOffset < 25 ? pointerbotright = this._board[row + pointerbotrightOffset][col + pointerbotrightOffset] : pointerbotright = "";
+            }
+            
         }
         
-        console.log(counter);
-        if(counter === 5){
+        if(counterVertical >= 5 || counterHorizontal >= 5 || counterDiagonalLeft >= 5 || counterDiagonalRight >= 5){
             move === "O" ? this._player1.winner = true : this._player2.winner = true;
         }
+        console.log(`Up and down ${counterVertical}`);
+        console.log(`left and right ${counterHorizontal}`);
+        console.log(`Diagonal Right ${counterDiagonalRight}`);
+        console.log(`Diagonal Left ${counterDiagonalLeft}`);
+        // if(counterVertical === 5){
+        //     move === "O" ? this._player1.winner = true : this._player2.winner = true;
+        // }
         return;
     }
 
