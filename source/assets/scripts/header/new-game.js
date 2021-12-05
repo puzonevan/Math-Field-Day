@@ -37,14 +37,4 @@ document.getElementById("cancel").addEventListener("click", () =>{
 
 /////////////////////////////////////////////////////////////////////
 
-/************* HELPERS *************/
-
-const removeBoard = (parent) =>{
-    while(parent.firstChild){
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-/////////////////////////////////////////////////////////////////////
-
 export { newGameButton, newGameLightbox }
