@@ -35,15 +35,6 @@ document.getElementById("cancel").addEventListener("click", () =>{
     }
 });
 
-// Restart Button click DOM
-document.getElementById("restart").addEventListener("click", () =>{
-    removeBoard(document.getElementById("board"));
-    document.getElementById("board").style.filter = "blur(10px)";
-    menuLightbox.style.display = "flex";
-    newGameLightbox.style.display = "none";
-    rulesLightbox.style.display = "none";
-});
-
 /////////////////////////////////////////////////////////////////////
 
 /************* HELPERS *************/

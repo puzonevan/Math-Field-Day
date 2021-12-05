@@ -80,6 +80,16 @@ function main(){
     const hex = new Hex();
     const mancala = new Mancala();
 
+    // Restart Button click DOM
+    document.getElementById("restart").addEventListener("click", () =>{
+        removeBoard(document.getElementById("board"));
+        document.getElementById("board").style.filter = "blur(10px)";
+        menuLightbox.style.display = "flex";
+        newGameLightbox.style.display = "none";
+        rulesLightbox.style.display = "none";
+        
+    });
+
     fiveInARowButton.addEventListener("click", () =>{
         changeContent("Five in a Row");
         removeBoard(document.getElementById("board"));
