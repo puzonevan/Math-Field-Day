@@ -169,6 +169,12 @@ header{
     border: 5px solid #276FBF;
 }
 
+/* Winner Lightbox */
+.winner-name{
+    font-size: 3em;
+    padding: 2.5em 0em;
+}
+
 /* Table Styles */
 table, td{
     border: 1px solid #11151C;
