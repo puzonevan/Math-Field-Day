@@ -194,7 +194,8 @@ td{
 }
 
 .x-player{
-    background: center no-repeat url('../images/icons/x-icon.png');
+    background: center no-repeat url('../images/icons/mushroom.png');
+    background-size: contain;
 }
 
 .y-move{
@@ -204,7 +205,8 @@ td{
     background: center no-repeat url('../images/icons/o-icon.png');
 }
 .y-player{
-    background: center no-repeat url('../images/icons/o-icon.png');
+    background: center no-repeat url('../images/icons/dick.png');
+    background-size: contain;
 }
 
 
