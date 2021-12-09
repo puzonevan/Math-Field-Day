@@ -16,6 +16,9 @@ class FiveInARow{
         this._flag = 0;
     }
 
+    /**
+     * initialize the behind the scenes board 
+     */
     initializeBoard(){
         let board = [];
         for (let row = 0; row < 25; row++){
@@ -28,9 +31,14 @@ class FiveInARow{
         this._board = board;
     }
     
+    /**
+     * start the game 
+     */
     start(){
         // Loop through each square 
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
+
+            // Each square listens for a player move(click)
             square.addEventListener("click", () =>{
 
                 // Do nothing if there is already an X or O
@@ -38,12 +46,23 @@ class FiveInARow{
                     return;
                 }
 
+                // O Player's move 
                 if(this._flag === 0){
+
+                    // Display the Y player's icon
                     square.setAttribute("class", "y-player");
+
+                    // Player's move
                     this.move("O", index);
+
+                    // After player moves, check if they won
                     if(this._player1.winner){
+
+                        // Display the winner lightbox
                         document.getElementById("board").style.filter = "blur(10px)";
-                        winnerLightbox.style.display = "flex";                        
+                        winnerLightbox.style.display = "flex";   
+
+                        // Change the name to player 1's name
                         if(typeof this._player1.name !== "string"){
                             document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
                         }
@@ -51,14 +70,27 @@ class FiveInARow{
                             document.getElementById("winner-name").innerHTML = `${this._player1.name} wins!`; 
                         }
                     }
+
+                    // X player's turn
                     this._flag = 1;
                 }
+                // X Player's move 
                 else if(this._flag === 1){
+
+                    // Display the X Player's icon 
                     square.setAttribute("class", "x-player");
+
+                    // Player X move
                     this.move("X",index);
+
+                    // After Player moves, check if they won
                     if(this._player2.winner){
+                        
+                        // Display the winner lightbox
                         document.getElementById("board").style.filter = "blur(10px)";
                         winnerLightbox.style.display = "flex";
+
+                        // Change the name to Player 2's name
                         if(typeof this._player1.name !== "string"){
                             document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
                         }
@@ -66,19 +98,40 @@ class FiveInARow{
                             document.getElementById("winner-name").innerHTML = `${this._player2.name} wins!`; 
                         }
                     }
+
+                    // Y Player's turn
                     this._flag = 0;
                 }
             })
         })
     }
 
+    /**
+     * player move updates board and checks if winner 
+     * @param {String} move - either O or X depending on whos move
+     * @param {Number} index - players move based on square number
+     */
     move(move, index){
+
+        // Row is position divide 50 since each row is 50 squares long
         let row = Math.floor(index / 50);
+        // Col is position remainder 50 since this value should only be 0-49
         let col = index % 50;
+
+        // Add O or X to the board
         move === "O" ? this._board[row][col] = "O" : this._board[row][col] = "X"; 
+
+        // Check if the move made was a winning move
         this.checkWinner(move, row, col);
     }
     
+    /**
+     * checks the winner using 8 pointers exploring 8 different directions
+     * @param {String} move - either O or X depending on the whos move
+     * @param {Number} row - players move row
+     * @param {Number} col - players move column
+     * @returns 
+     */
     checkWinner(move, row, col){
 
         // Pointers for up and down 
@@ -218,13 +271,18 @@ class FiveInARow{
         return;
     }
 
+    /**
+     * Reset the game
+     */
     reset(){
         this.initializeBoard();
         this._flag = 0;
-
         this.start();
     }
 
+    /**
+     * Create the board in the DOM 
+     */
     static createBoard(){
         // Five in a Row Table
         const fiveInARowTable = createTable("five-in-a-row");
