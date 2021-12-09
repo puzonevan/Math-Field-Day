@@ -87,13 +87,15 @@ function main(){
         menuLightbox.style.display = "flex";
         newGameLightbox.style.display = "none";
         rulesLightbox.style.display = "none";
-        
+        player1.reset();
+        player2.reset();
     });
 
     fiveInARowButton.addEventListener("click", () =>{
         changeContent("Five in a Row");
         removeBoard(document.getElementById("board"));
         FiveInARow.createBoard();
+        fiveInARow.initializeBoard();
         fiveInARow.start();
     });
 

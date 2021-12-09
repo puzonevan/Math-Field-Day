@@ -9,7 +9,8 @@ class FiveInARow{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
-        this._board = this.initializeBoard();
+        this._board = [[]];
+        this.initializeBoard();
         this._flag = 0;
     }
 
@@ -22,7 +23,7 @@ class FiveInARow{
             }
             board.push(row);
         }
-        return board;
+        this._board = board;
     }
 
     

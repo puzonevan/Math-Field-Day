@@ -24,6 +24,10 @@ class Player{
         this._winner = winner;
     }
 
+    reset(){
+        this._winner = false;
+    }
+
 }
 
 /////////////////////////////////////////////////////////////////////
