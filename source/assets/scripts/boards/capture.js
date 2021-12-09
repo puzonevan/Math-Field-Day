@@ -35,7 +35,7 @@ class Capture{
      */
     start(){
         // Loop through each square
-        [...document.getElementById("td")].forEach((square, index) =>{
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
             // Each square listens for a player move(click)
             square.addEventListener("click", () =>{
@@ -66,7 +66,11 @@ class Capture{
         });
     }
 
-
+    reset(){
+        this.initializeBoard();
+        this._flag = 0;
+        this.start();
+    }
 
     static createBoard(){
         // Capture Table

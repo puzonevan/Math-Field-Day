@@ -95,6 +95,10 @@ function main(){
                 FiveInARow.createBoard();
                 fiveInARow.reset();
                 break;
+            case "capture": 
+                Capture.createBoard();
+                capture.reset();
+                break;
         }
         player1.reset();
         player2.reset();
@@ -112,6 +116,8 @@ function main(){
         changeContent("Capture");
         removeBoard(document.getElementById("board"));
         Capture.createBoard();
+        capture.initializeBoard();
+        capture.start();
         
     });
 
