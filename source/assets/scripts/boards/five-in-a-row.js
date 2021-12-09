@@ -43,8 +43,13 @@ class FiveInARow{
                     this.move("O", index);
                     if(this._player1.winner){
                         document.getElementById("board").style.filter = "blur(10px)";
-                        winnerLightbox.style.display = "flex";
-                        document.getElementById("winner-name").innerHTML = `${this._player1.name} wins!`;
+                        winnerLightbox.style.display = "flex";                        
+                        if(typeof this._player1.name !== "string"){
+                            document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+                        }
+                        else{
+                            document.getElementById("winner-name").innerHTML = `${this._player1.name} wins!`; 
+                        }
                     }
                     this._flag = 1;
                 }
@@ -54,7 +59,12 @@ class FiveInARow{
                     if(this._player2.winner){
                         document.getElementById("board").style.filter = "blur(10px)";
                         winnerLightbox.style.display = "flex";
-                        document.getElementById("winner-name").innerHTML = `${this._player2.name} wins!`;
+                        if(typeof this._player1.name !== "string"){
+                            document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+                        }
+                        else{
+                            document.getElementById("winner-name").innerHTML = `${this._player2.name} wins!`; 
+                        }
                     }
                     this._flag = 0;
                 }
