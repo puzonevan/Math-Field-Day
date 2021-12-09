@@ -27,8 +27,6 @@ class FiveInARow{
         }
         this._board = board;
     }
-
-    
     
     start(){
         // Loop through each square 
@@ -210,10 +208,11 @@ class FiveInARow{
         return;
     }
 
-    clearInput(){
-        [...document.getElementsByTagName("td")].forEach((square, index) =>{
-            square.addEventListener("click", () =>{});
-        });
+    reset(){
+        this.initializeBoard();
+        this._flag = 0;
+
+        this.start();
     }
 
     static createBoard(){

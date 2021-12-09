@@ -82,11 +82,20 @@ function main(){
 
     // Restart Button click DOM
     document.getElementById("restart").addEventListener("click", () =>{
+
+        let game = document.getElementById("board").firstElementChild.className;
+
         removeBoard(document.getElementById("board"));
-        document.getElementById("board").style.filter = "blur(10px)";
-        menuLightbox.style.display = "flex";
+        document.getElementById("board").style.filter = "blur(0px)";
         newGameLightbox.style.display = "none";
         rulesLightbox.style.display = "none";
+
+        switch(game){
+            case "five-in-a-row": 
+                FiveInARow.createBoard();
+                fiveInARow.reset();
+                break;
+        }
         player1.reset();
         player2.reset();
     });
@@ -145,7 +154,7 @@ const changeContent = (name) =>{
     document.getElementById("game-rules").innerHTML = rules[name];
 
     // Change to Rules lightbox 
-    rulesLightbox.style.display = "flex";
+    document.getElementById("board").style.filter = "blur(0px)";
     menuLightbox.style.display = "none";
 }
 
