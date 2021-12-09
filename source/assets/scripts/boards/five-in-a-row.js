@@ -1,5 +1,7 @@
 /************* IMPORTS *************/
-import { createTable, createRow, createCol} from "./board.js"
+import { createTable, createRow, createCol} from "./board.js";
+import { winnerLightbox } from "../header/winner.js";
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -42,7 +44,9 @@ class FiveInARow{
                     square.setAttribute("class", "y-player");
                     this.move("O", index);
                     if(this._player1.winner){
-                        console.log("Player 1 wins");
+                        document.getElementById("board").style.filter = "blur(10px)";
+                        winnerLightbox.style.display = "flex";
+                        document.getElementById("winner-name").innerHTML = `${this._player1.name} wins!`;
                     }
                     this._flag = 1;
                 }
@@ -50,7 +54,9 @@ class FiveInARow{
                     square.setAttribute("class", "x-player");
                     this.move("X",index);
                     if(this._player2.winner){
-                        console.log("Player 2 wins");
+                        document.getElementById("board").style.filter = "blur(10px)";
+                        winnerLightbox.style.display = "flex";
+                        document.getElementById("winner-name").innerHTML = `${this._player2.name} wins!`;
                     }
                     this._flag = 0;
                 }
