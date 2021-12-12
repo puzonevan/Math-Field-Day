@@ -81,8 +81,8 @@ class Capture{
         this.currentMove = index;
 
         // Last move position
-        let lastMoveRow = 0;
-        let lastMoveCol = 0;
+        let lastMoveRow;
+        let lastMoveCol;
 
         // Last move position
         if(this.lastMove !== -1){
@@ -94,6 +94,12 @@ class Capture{
         let currMoveRow = Math.floor(this.currentMove / 6);
         let currMoveCol = this.currentMove % 6;
 
+        if(move === "O"){
+            document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#0000FF";
+        }
+        else if(move === "X"){
+            document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#FF0000";
+        }
         console.log(`${lastMoveRow}${lastMoveCol}`);
         console.log(`${currMoveRow}${currMoveCol}`);
 

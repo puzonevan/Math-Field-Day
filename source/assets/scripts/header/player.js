@@ -8,6 +8,8 @@ class Player{
     constructor(name){
         this._name = name;
         this._winner = false;
+        this._currentMove;
+        this._lastMove;
     }
 
     get name(){
@@ -16,12 +18,24 @@ class Player{
     get winner(){
         return this._winner;
     }
+    get currentMove(){
+        return this._currentMove;
+    }
+    get lastMove(){
+        return this._lastMove;
+    }
 
     set name(name){
         this._name = name
     }
     set winner(winner){
         this._winner = winner;
+    }
+    set currentMove(move){
+        this._currentMove = move;
+    }
+    set lastMove(move){
+        this._lastMove = move;
     }
 
     reset(){
