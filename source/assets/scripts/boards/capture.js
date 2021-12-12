@@ -10,6 +10,8 @@ class Capture{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
+        this.currentMove = -1;
+        this.lastMove = -1;
         this._board = [[]];
         this.initializeBoard();
         this._flag = 0;
@@ -51,6 +53,9 @@ class Capture{
                     // Display the Y player's icon
                     square.setAttribute("class", "y-player");
 
+                    // Player's Move 
+                    this.move("O", index);
+
                     // X player's turn
                     this._flag = 1;
                 }
@@ -59,6 +64,9 @@ class Capture{
                     // Display the X Player's icon 
                     square.setAttribute("class", "x-player");
 
+                    // Player's Move 
+                    this.move("X", index);
+
                     // Y Player's turn
                     this._flag = 0;
                 }
@@ -66,6 +74,34 @@ class Capture{
         });
     }
 
+    move(move, index){
+
+        // Change the moves
+        this.lastMove = this.currentMove;
+        this.currentMove = index;
+
+        // Last move position
+        let lastMoveRow = 0;
+        let lastMoveCol = 0;
+
+        // Last move position
+        if(this.lastMove !== -1){
+            lastMoveRow = Math.floor(this.lastMove / 6);
+            lastMoveCol = this.lastMove % 6;
+        }
+        
+        // Current move position 
+        let currMoveRow = Math.floor(this.currentMove / 6);
+        let currMoveCol = this.currentMove % 6;
+
+        console.log(`${lastMoveRow}${lastMoveCol}`);
+        console.log(`${currMoveRow}${currMoveCol}`);
+
+    }
+
+    /**
+     * Reset the game
+     */
     reset(){
         this.initializeBoard();
         this._flag = 0;
