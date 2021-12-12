@@ -8,8 +8,8 @@ class Player{
     constructor(name){
         this._name = name;
         this._winner = false;
-        this._currentMove;
-        this._lastMove;
+        this._currentMove = -1;
+        this._lastMove = -1;
     }
 
     get name(){

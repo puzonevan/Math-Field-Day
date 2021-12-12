@@ -75,7 +75,7 @@ function main(){
 
     // Boards
     const fiveInARow = new FiveInARow(player1, player2);
-    const capture = new Capture();
+    const capture = new Capture(player1, player2);
     const tictactoe = new TicTacToe3D();
     const hex = new Hex();
     const mancala = new Mancala();

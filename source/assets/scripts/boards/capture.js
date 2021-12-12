@@ -10,8 +10,6 @@ class Capture{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
-        this.currentMove = -1;
-        this.lastMove = -1;
         this._board = [[]];
         this.initializeBoard();
         this._flag = 0;
@@ -76,35 +74,70 @@ class Capture{
 
     move(move, index){
 
-        // Change the moves
-        this.lastMove = this.currentMove;
-        this.currentMove = index;
-
-        // Last move position
-        let lastMoveRow;
         let lastMoveCol;
-
-        // Last move position
-        if(this.lastMove !== -1){
-            lastMoveRow = Math.floor(this.lastMove / 6);
-            lastMoveCol = this.lastMove % 6;
-        }
-        
-        // Current move position 
-        let currMoveRow = Math.floor(this.currentMove / 6);
-        let currMoveCol = this.currentMove % 6;
+        let lastMoveRow;
+        let currMoveRow;
+        let currMoveCol;
 
         if(move === "O"){
-            document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#0000FF";
+            this._player1.lastMove = this._player1.currentMove;
+            this._player1.currentMove = index;
+
+
+            this.changeLastmove(this._player1.lastMove, "#0000FF");
+
+            currMoveRow = Math.floor(this._player1.currentMove / 6);
+            currMoveCol = this._player1.currentMove % 6;
+
+
         }
         else if(move === "X"){
-            document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#FF0000";
+            this._player2.lastMove = this._player2.currentMove;
+            this._player2.currentMove = index;
+
+            this.changeLastmove(this._player2.lastMove, "#FF0000");
+
+            currMoveRow = Math.floor(this._player2.currentMove / 6);
+            currMoveCol = this._player2.currentMove % 6;
+
         }
-        console.log(`${lastMoveRow}${lastMoveCol}`);
-        console.log(`${currMoveRow}${currMoveCol}`);
+        // // Change the moves
+
+        // this.lastMove = this.currentMove;
+        // this.currentMove = index;
+
+        // // Last move position
+        // let lastMoveRow;
+        // let lastMoveCol;
+
+        // // Last move position
+        // if(this.lastMove !== -1){
+        //     lastMoveRow = Math.floor(this.lastMove / 6);
+        //     lastMoveCol = this.lastMove % 6;
+        // }
+        
+        // // Current move position 
+        // let currMoveRow = Math.floor(this.currentMove / 6);
+        // let currMoveCol = this.currentMove % 6;
+
+        // if(move === "O"){
+        //     document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#0000FF";
+        // }
+        // else if(move === "X"){
+        //     document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#FF0000";
+        // }
+        // console.log(`${lastMoveRow}${lastMoveCol}`);
+        // console.log(`${currMoveRow}${currMoveCol}`);
 
     }
 
+    changeLastmove(lastMove, color){
+        if(lastMove !== -1){
+            let lastMoveRow = Math.floor(lastMove / 6);
+            let lastMoveCol = lastMove % 6;
+            document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = `${color}`;
+        }
+    }
     /**
      * Reset the game
      */
