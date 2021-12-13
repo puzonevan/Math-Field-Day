@@ -86,7 +86,9 @@ class Capture{
         let isInEnemyRange = false;
         
         let player;
+        let enemy; 
         this._flag === 1 ? player = this._player2 : player = this._player1;
+        this._flag === 1 ? enemy = this._player1 : enemy = this._player2;
 
         if(player.currentMove === -1 && player.lastMove === -1){
             return true;
@@ -207,6 +209,9 @@ class Capture{
         
 
         isInEnemyRange = false;
+    
+        // Return if new move is in range 
+        // and not blocked by wall and not in enemy range
         return isInRange && !isBlockedByWall && !isInEnemyRange;
 
     }
