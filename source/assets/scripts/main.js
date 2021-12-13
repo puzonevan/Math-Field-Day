@@ -118,7 +118,6 @@ function main(){
         Capture.createBoard();
         capture.initializeBoard();
         capture.start();
-        
     });
 
     ticTacToeButton.addEventListener("click", () =>{

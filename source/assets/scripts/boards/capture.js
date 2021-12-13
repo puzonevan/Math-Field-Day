@@ -74,8 +74,6 @@ class Capture{
 
     move(move, index){
 
-        let lastMoveCol;
-        let lastMoveRow;
         let currMoveRow;
         let currMoveCol;
 
@@ -86,8 +84,9 @@ class Capture{
 
             this.changeLastmove(this._player1.lastMove, "#0000FF");
 
-            currMoveRow = Math.floor(this._player1.currentMove / 6);
-            currMoveCol = this._player1.currentMove % 6;
+            this.updateBoard(this._player1.currentMove, this._player1.lastMove, "O");
+
+            console.log(this._board);
 
 
         }
@@ -97,8 +96,9 @@ class Capture{
 
             this.changeLastmove(this._player2.lastMove, "#FF0000");
 
-            currMoveRow = Math.floor(this._player2.currentMove / 6);
-            currMoveCol = this._player2.currentMove % 6;
+            this.updateBoard(this._player2.currentMove, this._player2.lastMove, "X");
+
+            console.log(this._board);
 
         }
         // // Change the moves
@@ -138,6 +138,20 @@ class Capture{
             document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = `${color}`;
         }
     }
+
+    updateBoard(currentMove, lastMove, move){
+        if(lastMove !== -1){
+            let lastMoveRow = Math.floor(lastMove / 6);
+            let lastMoveCol = lastMove % 6;
+            this._board[lastMoveRow][lastMoveCol] = "|";
+        }
+        let currMoveRow = Math.floor(currentMove / 6);
+        let currMoveCol = currentMove % 6;
+
+        this._board[currMoveRow][currMoveCol] = move;
+        
+    }
+
     /**
      * Reset the game
      */
