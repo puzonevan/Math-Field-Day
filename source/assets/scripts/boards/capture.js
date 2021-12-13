@@ -62,7 +62,7 @@ class Capture{
                     }
                 }
                 else if(this._flag === 1){
-                    if(this.isValidMove("O", index)){
+                    if(this.isValidMove("O", index, this._player2)){
                         // Display the X Player's icon 
                         square.setAttribute("class", "x-player");
                         // Player's Move 
@@ -78,7 +78,13 @@ class Capture{
         });
     }
 
-    isValidMove(move, index){
+    isValidMove(move, index, player){
+
+        // Check if new move is in range of Last Move
+        
+
+        // Check if new move is in range of enemy's current move 
+
         let row = Math.floor(index / 6);
         let col = index % 6;
 
