@@ -112,6 +112,8 @@ class Capture{
         return false;
     }
 
+    
+
     isValidMove(index){
 
         let move;
@@ -270,6 +272,8 @@ class Capture{
             
             for(let col = 0; col < 6; col++){
                 const nCol = createCol("capture", col);
+                nCol.style.height = "40px";
+                nCol.style.width = "40px";
                 nRow.appendChild(nCol);
             }
             captureTable.appendChild(nRow);
