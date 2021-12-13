@@ -141,7 +141,10 @@ class Capture{
         if(newMoveCol === lastMoveCol){
             return true;
         }
-
+        // Check Diagonals
+        if(Math.abs(newMoveCol - lastMoveCol) === Math.abs(newMoveRow - lastMoveRow)){
+            return true;
+        }
         
         return false;
         
