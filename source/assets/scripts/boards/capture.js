@@ -47,36 +47,99 @@ class Capture{
 
                 // O Player's move 
                 if(this._flag === 0){
+                    if(this.isValidMove("X", index)){
+                        // Display the Y player's icon
+                        square.setAttribute("class", "y-player");
 
-                    // Display the Y player's icon
-                    square.setAttribute("class", "y-player");
+                        // Player's Move 
+                        this.move("O", index);
 
-                    // Player's Move 
-                    this.move("O", index);
-
-                    // X player's turn
-                    this._flag = 1;
+                        // X player's turn
+                        this._flag = 1;
+                    }
+                    else{
+                        alert("Invalid move");
+                    }
                 }
                 else if(this._flag === 1){
-
-                    // Display the X Player's icon 
-                    square.setAttribute("class", "x-player");
-
-                    // Player's Move 
-                    this.move("X", index);
-
-                    // Y Player's turn
-                    this._flag = 0;
+                    if(this.isValidMove("O", index)){
+                        // Display the X Player's icon 
+                        square.setAttribute("class", "x-player");
+                        // Player's Move 
+                        this.move("X", index);
+                        // Y Player's turn
+                        this._flag = 0;
+                    }
+                    else{
+                        alert("Invalid Move");
+                    }
                 }
             });
         });
     }
 
+    isValidMove(move, index){
+        let row = Math.floor(index / 6);
+        let col = index % 6;
+
+        // Check Up Direction
+        let offset = 1;
+        while(row - offset > -1){
+            if(this._board[row - offset][col] === move){
+                return false;
+            }
+            else if(this._board[row - offset][col] === "|"){
+                break;
+            }else{
+                offset++;
+            }
+        }
+        
+        // Check Down Direction
+        offset = 1;
+        while(row + offset < 6){
+            if(this._board[row + offset][col] === move){
+                return false;
+            }
+            else if(this._board[row + offset][col] === "|"){
+                break;
+            }else{
+                offset++;
+            }
+        }
+
+        // Check Left Direction
+        offset = 1;
+        while(col - offset > -1){
+            if(this._board[row][col - offset] === move){
+                return false;
+            }
+            else if(this._board[row][col - offset] === "|"){
+                break;
+            }else{
+                offset++;
+            }
+        }
+
+        // Check Right Direction
+        offset = 1;
+        while(col + offset < 6){
+            if(this._board[row][col + offset] === move){
+                return false;
+            }
+            else if(this._board[row][col + offset] === "|"){
+                break;
+            }else{
+                offset++;
+            }
+        }
+
+        
+        return true;
+
+    }
+
     move(move, index){
-
-        let currMoveRow;
-        let currMoveCol;
-
         if(move === "O"){
             this._player1.lastMove = this._player1.currentMove;
             this._player1.currentMove = index;
@@ -87,8 +150,6 @@ class Capture{
             this.updateBoard(this._player1.currentMove, this._player1.lastMove, "O");
 
             console.log(this._board);
-
-
         }
         else if(move === "X"){
             this._player2.lastMove = this._player2.currentMove;
@@ -101,34 +162,6 @@ class Capture{
             console.log(this._board);
 
         }
-        // // Change the moves
-
-        // this.lastMove = this.currentMove;
-        // this.currentMove = index;
-
-        // // Last move position
-        // let lastMoveRow;
-        // let lastMoveCol;
-
-        // // Last move position
-        // if(this.lastMove !== -1){
-        //     lastMoveRow = Math.floor(this.lastMove / 6);
-        //     lastMoveCol = this.lastMove % 6;
-        // }
-        
-        // // Current move position 
-        // let currMoveRow = Math.floor(this.currentMove / 6);
-        // let currMoveCol = this.currentMove % 6;
-
-        // if(move === "O"){
-        //     document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#0000FF";
-        // }
-        // else if(move === "X"){
-        //     document.getElementById("capture").children[lastMoveRow].children[lastMoveCol].style.background = "#FF0000";
-        // }
-        // console.log(`${lastMoveRow}${lastMoveCol}`);
-        // console.log(`${currMoveRow}${currMoveCol}`);
-
     }
 
     changeLastmove(lastMove, color){
