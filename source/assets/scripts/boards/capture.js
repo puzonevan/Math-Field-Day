@@ -47,7 +47,7 @@ class Capture{
 
                 // O Player's move 
                 if(this._flag === 0){
-                    // if(this.isValidMove(index)){
+                    if(this.isValidMove(index)){
                         // Display the Y player's icon
                         square.setAttribute("class", "y-player");
 
@@ -56,10 +56,10 @@ class Capture{
 
                         // X player's turn
                         this._flag = 1;
-                    // }
-                    // else{
-                        // alert("Invalid move");
-                    // }
+                    }
+                    else{
+                        alert("Invalid move");
+                    }
                 }
                 else if(this._flag === 1){
                     if(this.isValidMove(index)){
@@ -77,54 +77,21 @@ class Capture{
             });
         });
     }
-
-    checkDirection(direction, check, row, col){
-        let offset = 1;
-        let condition
-        let rowCondition;
-        let colCondition;
-        switch(direction){
-            case "up":
-                condition = row - offset > -1;
-                rowCondition = row - offset;
-                colCondition = col;
-                break;
-        }
-
-        while(condition){
-            if(this._board[rowCondition][colCondition] === check){
-                return true;
-            }
-            else if(this._board[rowCondition][colCondition] === "|"){
-                return false;
-            }
-            else{
-                offset++;
-                switch(direction){
-                    case "up":
-                        condition = row - offset > -1;
-                        rowCondition = row - offset;
-                        colCondition = col;
-                        break;
-                }
-            }
-        }
-        return false;
-    }
-
     
 
     isValidMove(index){
 
         let move;
-        this._flag === 1 ? move = "X" : move = "O";
         let enemy;
+        let player;
+        this._flag === 1 ? move = "X" : move = "O";
         this._flag === 1 ? enemy = "O" : enemy = "X";
-        let player; 
         this._flag === 1 ? player = this._player2 : player = this._player1;
 
         // Check if new move is in range of Last Move
         console.log(`${move}${enemy}|${player.currentMove}|${player.lastMove}`);
+
+        
         if(player.currentMove === -1 && player.lastMove === -1){
             return true;
         }
@@ -135,15 +102,38 @@ class Capture{
         let lastMoveRow = Math.floor(lastMove / 6);
         let lastMoveCol = lastMove % 6;
 
-        // Check Left and Right 
+        // Check Left and Right Ranges
         if(newMoveRow === lastMoveRow){
+
+            // If the new move is on the right of the last move
+            if(newMoveCol > lastMoveCol){
+                // Check each square from last move to new move
+                for(let i = lastMoveCol + 1; i < newMoveCol; i++){
+                    // If there is a wall, return false 
+                    if(this._board[lastMoveRow][i] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            // If the new move is on the left of the last move
+            if(newMoveCol < lastMoveCol){
+                // Check each square from last move to new move
+                for(let i = lastMoveCol - 1; i > newMoveCol; i--){
+                    // If there is a wall, return false
+                    if(this._board[lastMoveRow][i] === "|"){
+                        return false;
+                    }
+                }
+            }
+            
             return true;
         }
-        // Check Up and Down
-        if(newMoveCol === lastMoveCol){
+        // Check Up and Down Ranges
+        if(newMoveCol === lastMoveCol){  
             return true;
         }
-        // Check Diagonals
+        // Check Diagonal Ranges
         if(Math.abs(newMoveCol - lastMoveCol) === Math.abs(newMoveRow - lastMoveRow)){
             return true;
         }
