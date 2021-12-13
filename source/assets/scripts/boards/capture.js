@@ -208,67 +208,6 @@ class Capture{
 
         isInEnemyRange = false;
         return isInRange && !isBlockedByWall && !isInEnemyRange;
-        
-
-        // // Check if new move is in range of enemy's current move 
-        // let row = Math.floor(index / 6);
-        // let col = index % 6;
-       
-
-        // // Check Up Direction
-        // let offset = 1;
-        // while(row - offset > -1){
-        //     if(this._board[row - offset][col] === move){
-        //         return false;
-        //     }
-        //     else if(this._board[row - offset][col] === "|"){
-        //         break;
-        //     }else{
-        //         offset++;
-        //     }
-        // }
-        
-        // // Check Down Direction
-        // offset = 1;
-        // while(row + offset < 6){
-        //     if(this._board[row + offset][col] === move){
-        //         return false;
-        //     }
-        //     else if(this._board[row + offset][col] === "|"){
-        //         break;
-        //     }else{
-        //         offset++;
-        //     }
-        // }
-
-        // // Check Left Direction
-        // offset = 1;
-        // while(col - offset > -1){
-        //     if(this._board[row][col - offset] === move){
-        //         return false;
-        //     }
-        //     else if(this._board[row][col - offset] === "|"){
-        //         break;
-        //     }else{
-        //         offset++;
-        //     }
-        // }
-
-        // // Check Right Direction
-        // offset = 1;
-        // while(col + offset < 6){
-        //     if(this._board[row][col + offset] === move){
-        //         return false;
-        //     }
-        //     else if(this._board[row][col + offset] === "|"){
-        //         break;
-        //     }else{
-        //         offset++;
-        //     }
-        // }
-
-        
-        // return true;
 
     }
 
