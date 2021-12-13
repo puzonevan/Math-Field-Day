@@ -214,15 +214,51 @@ class Capture{
         // Check Left and Right Ranges 
         if(enemyMoveRow === newMoveRow){
             console.log("Enemy is in left or right");
-            
+            // If enemy is to the right of the new move
+            if(enemyMoveCol > newMoveCol){
+                
+            }
+            // If enemy is to the left of the new move 
+            if(enemyMoveCol < newMoveCol){
+
+            }
         }
         // Check Up and Down Ranges
         if(enemyMoveCol === newMoveCol){
             console.log("Enemy is up or down")
+            // If enemy is above the new move 
+            if(enemyMoveRow < newMoveRow){
+
+            }
+
+            // If enemy is below the new move
+            if(enemyMoveRow > newMoveRow){
+
+            }
         }
         // Check Diagonal Ranges
         if(Math.abs(enemyMoveCol - newMoveCol) === Math.abs(enemyMoveRow - newMoveRow)){
-            console.log("Enemy is in some diagonal")
+            console.log("Enemy is in some diagonal");
+
+            // If enemy is above and right of the new move 
+            if(enemyMoveRow < newMoveRow && enemyMoveCol > newMoveCol){
+
+            }
+
+            // If enemy is above and left of the new move
+            if(enemyMoveRow < newMoveRow && enemyMoveCol < newMoveCol){
+
+            }
+            
+            // If enemy is below and right of the new move
+            if(enemyMoveRow > newMoveRow && enemyMoveCol > newMoveCol){
+
+            }
+
+            // If enemy is below and left of the new move 
+            if(enemyMoveRow > newMoveRow && enemyMoveCol < newMoveCol){
+                
+            }
         }
         
 
