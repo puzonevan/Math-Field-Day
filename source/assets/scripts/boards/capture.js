@@ -130,11 +130,80 @@ class Capture{
             return true;
         }
         // Check Up and Down Ranges
-        if(newMoveCol === lastMoveCol){  
+        if(newMoveCol === lastMoveCol){ 
+            
+            // If the new move is below the last move 
+            if(newMoveRow > lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = lastMoveRow + 1; i < newMoveRow; i++){
+                    // If there is a wall, return false
+                    if(this._board[i][lastMoveCol] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            // If the new move is above the last move
+            if(newMoveRow < lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = lastMoveRow - 1; i > newMoveRow; i--){
+                    // If there is a wall, return false
+                    if(this._board[i][lastMoveCol] === "|"){
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
         // Check Diagonal Ranges
         if(Math.abs(newMoveCol - lastMoveCol) === Math.abs(newMoveRow - lastMoveRow)){
+
+            // If the new move is diagonal up right to the last move
+            if(newMoveCol > lastMoveCol && newMoveRow < lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = 1; i + lastMoveCol < newMoveCol; i++){
+                    // If there is a wall, return false
+                    if(this._board[lastMoveRow - i][lastMoveCol + i] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            // If the new move is diagonal up left to the last move
+            if(newMoveCol < lastMoveCol && newMoveRow < lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = 1; lastMoveCol - i > newMoveCol; i++){
+                    // If there is a wall, return false
+                    if(this._board[lastMoveRow - i][lastMoveCol - i] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            // If the new move is diagonal down right to the last move
+            if(newMoveCol > lastMoveCol && newMoveRow > lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = 1; i + lastMoveCol < newMoveCol; i++){
+                    // If there is a wall, return false
+                    if(this._board[lastMoveRow + i][lastMoveCol + i] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            // If the new move is diagonal down left to the last move 
+            if(newMoveCol < lastMoveCol && newMoveRow > lastMoveRow){
+                // Check each square from last move to new move
+                for(let i = 1; lastMoveCol - i > newMoveCol; i++){
+                    // If there is a wall, return false
+                    if(this._board[lastMoveRow + i][lastMoveCol - i] === "|"){
+                        return false;
+                    }
+                }
+            }
+
+            
             return true;
         }
         
