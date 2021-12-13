@@ -81,21 +81,18 @@ class Capture{
 
     isValidMove(index){
 
-        let move;
-        let enemy;
+        let isInRange; 
+        let isBlockedByWall;
+        let isInEnemyRange;
+        
         let player;
-        this._flag === 1 ? move = "X" : move = "O";
-        this._flag === 1 ? enemy = "O" : enemy = "X";
         this._flag === 1 ? player = this._player2 : player = this._player1;
 
-        // Check if new move is in range of Last Move
-        console.log(`${move}${enemy}|${player.currentMove}|${player.lastMove}`);
-
-        
         if(player.currentMove === -1 && player.lastMove === -1){
             return true;
         }
 
+        // Check if new move is in range of Last Move
         let lastMove = player.currentMove;
         let newMoveRow = Math.floor(index / 6);
         let newMoveCol = index % 6;
@@ -206,6 +203,9 @@ class Capture{
             
             return true;
         }
+
+        
+
         
         return false;
         
