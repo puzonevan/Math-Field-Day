@@ -206,6 +206,24 @@ class Capture{
             isInRange = true;
         }
 
+        // Check if the new move is in range of Enemy Move
+        let enemyMove = enemy.currentMove;
+        let enemyMoveRow = Math.floor(enemyMove / 6);
+        let enemyMoveCol = enemyMove % 6;
+
+        // Check Left and Right Ranges 
+        if(enemyMoveRow === newMoveRow){
+            console.log("Enemy is in left or right");
+            
+        }
+        // Check Up and Down Ranges
+        if(enemyMoveCol === newMoveCol){
+            console.log("Enemy is up or down")
+        }
+        // Check Diagonal Ranges
+        if(Math.abs(enemyMoveCol - newMoveCol) === Math.abs(enemyMoveRow - newMoveRow)){
+            console.log("Enemy is in some diagonal")
+        }
         
 
         isInEnemyRange = false;
