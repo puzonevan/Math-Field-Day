@@ -47,7 +47,7 @@ class Capture{
 
                 // O Player's move 
                 if(this._flag === 0){
-                    if(this.isValidMove("X", index)){
+                    // if(this.isValidMove(index)){
                         // Display the Y player's icon
                         square.setAttribute("class", "y-player");
 
@@ -56,13 +56,13 @@ class Capture{
 
                         // X player's turn
                         this._flag = 1;
-                    }
-                    else{
-                        alert("Invalid move");
-                    }
+                    // }
+                    // else{
+                        // alert("Invalid move");
+                    // }
                 }
                 else if(this._flag === 1){
-                    if(this.isValidMove("O", index, this._player2)){
+                    if(this.isValidMove(index)){
                         // Display the X Player's icon 
                         square.setAttribute("class", "x-player");
                         // Player's Move 
@@ -78,70 +78,133 @@ class Capture{
         });
     }
 
-    isValidMove(move, index, player){
+    checkDirection(direction, check, row, col){
+        let offset = 1;
+        let condition
+        let rowCondition;
+        let colCondition;
+        switch(direction){
+            case "up":
+                condition = row - offset > -1;
+                rowCondition = row - offset;
+                colCondition = col;
+                break;
+        }
+
+        while(condition){
+            if(this._board[rowCondition][colCondition] === check){
+                return true;
+            }
+            else if(this._board[rowCondition][colCondition] === "|"){
+                return false;
+            }
+            else{
+                offset++;
+                switch(direction){
+                    case "up":
+                        condition = row - offset > -1;
+                        rowCondition = row - offset;
+                        colCondition = col;
+                        break;
+                }
+            }
+        }
+        return false;
+    }
+
+    isValidMove(index){
+
+        let move;
+        this._flag === 1 ? move = "X" : move = "O";
+        let enemy;
+        this._flag === 1 ? enemy = "O" : enemy = "X";
+        let player; 
+        this._flag === 1 ? player = this._player2 : player = this._player1;
 
         // Check if new move is in range of Last Move
-        
-
-        // Check if new move is in range of enemy's current move 
-
-        let row = Math.floor(index / 6);
-        let col = index % 6;
-
-        // Check Up Direction
-        let offset = 1;
-        while(row - offset > -1){
-            if(this._board[row - offset][col] === move){
-                return false;
-            }
-            else if(this._board[row - offset][col] === "|"){
-                break;
-            }else{
-                offset++;
-            }
-        }
-        
-        // Check Down Direction
-        offset = 1;
-        while(row + offset < 6){
-            if(this._board[row + offset][col] === move){
-                return false;
-            }
-            else if(this._board[row + offset][col] === "|"){
-                break;
-            }else{
-                offset++;
-            }
+        console.log(`${move}${enemy}|${player.currentMove}|${player.lastMove}`);
+        if(player.currentMove === -1 && player.lastMove === -1){
+            return true;
         }
 
-        // Check Left Direction
-        offset = 1;
-        while(col - offset > -1){
-            if(this._board[row][col - offset] === move){
-                return false;
-            }
-            else if(this._board[row][col - offset] === "|"){
-                break;
-            }else{
-                offset++;
-            }
-        }
+        let lastMove = player.currentMove;
+        let newMoveRow = Math.floor(index / 6);
+        let newMoveCol = index % 6;
+        let lastMoveRow = Math.floor(lastMove / 6);
+        let lastMoveCol = lastMove % 6;
 
-        // Check Right Direction
-        offset = 1;
-        while(col + offset < 6){
-            if(this._board[row][col + offset] === move){
-                return false;
-            }
-            else if(this._board[row][col + offset] === "|"){
-                break;
-            }else{
-                offset++;
-            }
+        // Check Left and Right 
+        if(newMoveRow === lastMoveRow){
+            return true;
+        }
+        // Check Up and Down
+        if(newMoveCol === lastMoveCol){
+            return true;
         }
 
         
-        return true;
+        return false;
+        
+
+        // // Check if new move is in range of enemy's current move 
+        // let row = Math.floor(index / 6);
+        // let col = index % 6;
+       
+
+        // // Check Up Direction
+        // let offset = 1;
+        // while(row - offset > -1){
+        //     if(this._board[row - offset][col] === move){
+        //         return false;
+        //     }
+        //     else if(this._board[row - offset][col] === "|"){
+        //         break;
+        //     }else{
+        //         offset++;
+        //     }
+        // }
+        
+        // // Check Down Direction
+        // offset = 1;
+        // while(row + offset < 6){
+        //     if(this._board[row + offset][col] === move){
+        //         return false;
+        //     }
+        //     else if(this._board[row + offset][col] === "|"){
+        //         break;
+        //     }else{
+        //         offset++;
+        //     }
+        // }
+
+        // // Check Left Direction
+        // offset = 1;
+        // while(col - offset > -1){
+        //     if(this._board[row][col - offset] === move){
+        //         return false;
+        //     }
+        //     else if(this._board[row][col - offset] === "|"){
+        //         break;
+        //     }else{
+        //         offset++;
+        //     }
+        // }
+
+        // // Check Right Direction
+        // offset = 1;
+        // while(col + offset < 6){
+        //     if(this._board[row][col + offset] === move){
+        //         return false;
+        //     }
+        //     else if(this._board[row][col + offset] === "|"){
+        //         break;
+        //     }else{
+        //         offset++;
+        //     }
+        // }
+
+        
+        // return true;
 
     }
 
@@ -150,23 +213,15 @@ class Capture{
             this._player1.lastMove = this._player1.currentMove;
             this._player1.currentMove = index;
 
-
             this.changeLastmove(this._player1.lastMove, "#0000FF");
-
             this.updateBoard(this._player1.currentMove, this._player1.lastMove, "O");
-
-            console.log(this._board);
         }
         else if(move === "X"){
             this._player2.lastMove = this._player2.currentMove;
             this._player2.currentMove = index;
 
             this.changeLastmove(this._player2.lastMove, "#FF0000");
-
             this.updateBoard(this._player2.currentMove, this._player2.lastMove, "X");
-
-            console.log(this._board);
-
         }
     }
 
