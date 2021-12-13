@@ -81,9 +81,9 @@ class Capture{
 
     isValidMove(index){
 
-        let isInRange; 
-        let isBlockedByWall;
-        let isInEnemyRange;
+        let isInRange = false; 
+        let isBlockedByWall = false;
+        let isInEnemyRange = false;
         
         let player;
         this._flag === 1 ? player = this._player2 : player = this._player1;
@@ -108,7 +108,7 @@ class Capture{
                 for(let i = lastMoveCol + 1; i < newMoveCol; i++){
                     // If there is a wall, return false 
                     if(this._board[lastMoveRow][i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
@@ -119,12 +119,12 @@ class Capture{
                 for(let i = lastMoveCol - 1; i > newMoveCol; i--){
                     // If there is a wall, return false
                     if(this._board[lastMoveRow][i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
             
-            return true;
+            isInRange = true;
         }
         // Check Up and Down Ranges
         if(newMoveCol === lastMoveCol){ 
@@ -135,7 +135,7 @@ class Capture{
                 for(let i = lastMoveRow + 1; i < newMoveRow; i++){
                     // If there is a wall, return false
                     if(this._board[i][lastMoveCol] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
@@ -146,12 +146,12 @@ class Capture{
                 for(let i = lastMoveRow - 1; i > newMoveRow; i--){
                     // If there is a wall, return false
                     if(this._board[i][lastMoveCol] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
 
-            return true;
+            isInRange = true;
         }
         // Check Diagonal Ranges
         if(Math.abs(newMoveCol - lastMoveCol) === Math.abs(newMoveRow - lastMoveRow)){
@@ -162,7 +162,7 @@ class Capture{
                 for(let i = 1; i + lastMoveCol < newMoveCol; i++){
                     // If there is a wall, return false
                     if(this._board[lastMoveRow - i][lastMoveCol + i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
@@ -173,7 +173,7 @@ class Capture{
                 for(let i = 1; lastMoveCol - i > newMoveCol; i++){
                     // If there is a wall, return false
                     if(this._board[lastMoveRow - i][lastMoveCol - i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
@@ -184,7 +184,7 @@ class Capture{
                 for(let i = 1; i + lastMoveCol < newMoveCol; i++){
                     // If there is a wall, return false
                     if(this._board[lastMoveRow + i][lastMoveCol + i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
@@ -195,19 +195,19 @@ class Capture{
                 for(let i = 1; lastMoveCol - i > newMoveCol; i++){
                     // If there is a wall, return false
                     if(this._board[lastMoveRow + i][lastMoveCol - i] === "|"){
-                        return false;
+                        isBlockedByWall = true;
                     }
                 }
             }
 
             
-            return true;
+            isInRange = true;
         }
 
         
 
-        
-        return false;
+        isInEnemyRange = false;
+        return isInRange && !isBlockedByWall && !isInEnemyRange;
         
 
         // // Check if new move is in range of enemy's current move 
