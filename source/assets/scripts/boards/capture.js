@@ -90,9 +90,14 @@ class Capture{
         this._flag === 1 ? player = this._player2 : player = this._player1;
         this._flag === 1 ? enemy = this._player1 : enemy = this._player2;
 
+        // If first player's first turn 
+        // -> any move is valid, return true
         if(player.currentMove === -1 && player.lastMove === -1 && enemy.currentMove === -1 && enemy.lastMove === -1){
             return true;
         }
+        
+        // If second player's first turn
+        // -> is in range true because can move anywhere
         if(player.currentMove === -1 && player.lastMove === -1){
             isInRange = true;
         }
