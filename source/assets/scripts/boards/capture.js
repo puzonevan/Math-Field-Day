@@ -95,7 +95,7 @@ class Capture{
         if(player.currentMove === -1 && player.lastMove === -1 && enemy.currentMove === -1 && enemy.lastMove === -1){
             return true;
         }
-        
+
         // If second player's first turn
         // -> is in range true because can move anywhere
         if(player.currentMove === -1 && player.lastMove === -1){
@@ -320,21 +320,81 @@ class Capture{
             // If enemy is above and right of the new move 
             if(enemyMoveRow < newMoveRow && enemyMoveCol > newMoveCol){
                 console.log("Enemy is above and on the right");
+                // Check each square from new move to enemy move 
+                for(let i = 1; i + newMoveCol <= enemyMoveCol; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow - i][newMoveCol + i] === "|"){
+                        console.log("Top Right wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow - i][newMoveCol + i] === opposite){
+                        console.log("Enemy found top right");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
 
             // If enemy is above and left of the new move
             if(enemyMoveRow < newMoveRow && enemyMoveCol < newMoveCol){
                 console.log("Enemy is above and on the left");
+                // Check each square from new move to enemy move
+                for(let i = 1; newMoveRow - i >= enemyMoveRow; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow - i][newMoveCol - i] === "|"){
+                        console.log("Top left block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow - i][newMoveCol - i] === opposite){
+                        console.log("Enemy found top left");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
             
             // If enemy is below and right of the new move
             if(enemyMoveRow > newMoveRow && enemyMoveCol > newMoveCol){
                 console.log("Enemy is below and on the right");
+                // Check each square from new move to enemy move 
+                for(let i = 1; i + newMoveCol <= enemyMoveCol; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow + i][newMoveCol + i] === "|"){
+                        console.log("Bottom Right wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow + i][newMoveCol + i] === opposite){
+                        console.log("Enemy found bot right");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
 
             // If enemy is below and left of the new move 
             if(enemyMoveRow > newMoveRow && enemyMoveCol < newMoveCol){
                 console.log("Enemy is below and on the left");
+                // Check each square from new move to enemy move
+                for(let i = 1; newMoveCol - i >= enemyMoveCol; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow + i][newMoveCol - i] === "|"){
+                        console.log("Bottom left block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow + i][newMoveCol - i] === opposite){
+                        console.log("Enemy found bottom left");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
         }
         
