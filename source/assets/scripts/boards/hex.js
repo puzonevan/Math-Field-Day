@@ -17,9 +17,17 @@ class Hex{
         // Hex loop: 12x12
         for (let row = 0; row < 12; row++){
             const nRow = createRow("hex", row);
-            for(let col = 0; col < 12; col++){
+            const firstCol = createCol("hex", 0);
+            firstCol.style.marginLeft = `${row*19}px `;
+            const firstDiv = document.createElement("div");
+            firstCol.appendChild(firstDiv);
+            nRow.appendChild(firstCol);
+            for(let col = 1; col < 11; col++){
                 const nCol = createCol("hex", col);
+                const firstDiv = document.createElement("div");
+                nCol.appendChild(firstDiv);
                 nRow.appendChild(nCol);
+                
             }
             hexTable.appendChild(nRow);
         }

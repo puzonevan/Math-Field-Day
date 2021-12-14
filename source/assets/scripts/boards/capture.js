@@ -397,11 +397,10 @@ class Capture{
                 }
             }
         }
-        
-
     
         // Return if new move is in range 
-        // and not blocked by wall and not in enemy range
+        // and not blocked by wall and 
+        // not in enemy range
         return isInRange && !isBlockedByWall && !isInEnemyRange;
 
     }

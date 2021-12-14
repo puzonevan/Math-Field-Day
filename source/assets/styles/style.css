@@ -221,3 +221,31 @@ td{
 
 
 /* Different Board Styles */
+.hex{
+    --s: 30px;  /* size  */
+    --m: 5px;    /* margin */
+}
+.hex tr div{
+    font-size: 0; /* disable white space between inline block element */
+}
+
+.hex td {
+    background: black;
+    width: var(--s);
+    margin: -1.8px;
+    height: calc(var(--s) * 1.1547);
+    display: inline-block;
+    font-size:initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    margin-bottom: calc(var(--m) - var(--s) * .49);
+}
+
+.hex td div{
+    background: white;
+    width: var(--s);
+    height: calc(var(--s) * 1.1547);
+    display: inline-block;
+    font-size:initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    margin-bottom: calc(var(--m) - var(--s) * .4);
+}
