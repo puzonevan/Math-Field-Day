@@ -208,6 +208,8 @@ class Capture{
 
         // Check if the new move is in range of Enemy Move
         let enemyMove = enemy.currentMove;
+        let opposite;
+        this._flag === 1 ? opposite = "O" : opposite  = "X";
         let enemyMoveRow = Math.floor(enemyMove / 6);
         let enemyMoveCol = enemyMove % 6;
 
@@ -216,24 +218,49 @@ class Capture{
             console.log("Enemy is in left or right");
             // If enemy is to the right of the new move
             if(enemyMoveCol > newMoveCol){
-                
+                console.log("Enemy is on the right");
+                for(let i = newMoveCol + 1; i <= enemyMoveCol; i++){
+                    if(this._board[newMoveRow][i] === "|"){
+                        console.log("Right wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    else if(this._board[newMoveRow][i] === opposite){
+                        console.log("Enemy found greater");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
             // If enemy is to the left of the new move 
             if(enemyMoveCol < newMoveCol){
-
+                console.log("enemy is on the left");
+                for(let i = 1; newMoveCol - i >= enemyMoveCol; i++){
+                    if(this._board[newMoveRow][newMoveCol - i] === "|"){
+                        console.log("Left wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    else if(this._board[newMoveRow][newMoveCol - i] === opposite){
+                        console.log("Enemy found lesser");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
+            
         }
         // Check Up and Down Ranges
         if(enemyMoveCol === newMoveCol){
             console.log("Enemy is up or down")
             // If enemy is above the new move 
             if(enemyMoveRow < newMoveRow){
-
+                console.log("Enemy is above");
             }
 
             // If enemy is below the new move
             if(enemyMoveRow > newMoveRow){
-
+                console.log("Enemy is below");
             }
         }
         // Check Diagonal Ranges
@@ -242,27 +269,26 @@ class Capture{
 
             // If enemy is above and right of the new move 
             if(enemyMoveRow < newMoveRow && enemyMoveCol > newMoveCol){
-
+                console.log("Enemy is above and on the right");
             }
 
             // If enemy is above and left of the new move
             if(enemyMoveRow < newMoveRow && enemyMoveCol < newMoveCol){
-
+                console.log("Enemy is above and on the left");
             }
             
             // If enemy is below and right of the new move
             if(enemyMoveRow > newMoveRow && enemyMoveCol > newMoveCol){
-
+                console.log("Enemy is below and on the right");
             }
 
             // If enemy is below and left of the new move 
             if(enemyMoveRow > newMoveRow && enemyMoveCol < newMoveCol){
-                
+                console.log("Enemy is below and on the left");
             }
         }
         
 
-        isInEnemyRange = false;
     
         // Return if new move is in range 
         // and not blocked by wall and not in enemy range
