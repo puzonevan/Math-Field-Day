@@ -90,8 +90,11 @@ class Capture{
         this._flag === 1 ? player = this._player2 : player = this._player1;
         this._flag === 1 ? enemy = this._player1 : enemy = this._player2;
 
-        if(player.currentMove === -1 && player.lastMove === -1){
+        if(player.currentMove === -1 && player.lastMove === -1 && enemy.currentMove === -1 && enemy.lastMove === -1){
             return true;
+        }
+        if(player.currentMove === -1 && player.lastMove === -1){
+            isInRange = true;
         }
 
         // Check if new move is in range of Last Move
