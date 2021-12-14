@@ -215,18 +215,25 @@ class Capture{
 
         // Check Left and Right Ranges 
         if(enemyMoveRow === newMoveRow){
+
             console.log("Enemy is in left or right");
+
             // If enemy is to the right of the new move
             if(enemyMoveCol > newMoveCol){
+
                 console.log("Enemy is on the right");
+
+                // Check each square from new move to enemy move 
                 for(let i = newMoveCol + 1; i <= enemyMoveCol; i++){
+                    // If the square is a wall -> in enemy range false
                     if(this._board[newMoveRow][i] === "|"){
                         console.log("Right wall block");
                         isInEnemyRange = false;
                         break;
                     }
+                    // If the square is the enemy -> in enemy range true
                     else if(this._board[newMoveRow][i] === opposite){
-                        console.log("Enemy found greater");
+                        console.log("Enemy found on the right");
                         isInEnemyRange = true;
                         break;
                     }
@@ -234,15 +241,20 @@ class Capture{
             }
             // If enemy is to the left of the new move 
             if(enemyMoveCol < newMoveCol){
+
                 console.log("enemy is on the left");
+
+                // Check each square from new move to enemy move
                 for(let i = 1; newMoveCol - i >= enemyMoveCol; i++){
+                    // If the square is a wall -> in enemy range false
                     if(this._board[newMoveRow][newMoveCol - i] === "|"){
                         console.log("Left wall block");
                         isInEnemyRange = false;
                         break;
                     }
+                    // If the square is the enemy -> in enemy range true
                     else if(this._board[newMoveRow][newMoveCol - i] === opposite){
-                        console.log("Enemy found lesser");
+                        console.log("Enemy found on the left");
                         isInEnemyRange = true;
                         break;
                     }
@@ -256,11 +268,41 @@ class Capture{
             // If enemy is above the new move 
             if(enemyMoveRow < newMoveRow){
                 console.log("Enemy is above");
+                // Check each square from new move to enemy move
+                for(let i = 1; newMoveRow - i >= enemyMoveRow; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow - i][newMoveCol] === "|"){
+                        console.log("Above wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow - i][newMoveCol] === opposite){
+                        console.log("Enemy found above");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
 
             // If enemy is below the new move
             if(enemyMoveRow > newMoveRow){
                 console.log("Enemy is below");
+                // Check each square from new move to enemy move 
+                for(let i = newMoveRow + 1; i <= enemyMoveRow; i++){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[i][newMoveCol] === "|"){
+                        console.log("Bottom wall block");
+                        isInEnemyRange = false;
+                        break;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[i][newMoveCol] === opposite){
+                        console.log("Enemy found below");
+                        isInEnemyRange = true;
+                        break;
+                    }
+                }
             }
         }
         // Check Diagonal Ranges
