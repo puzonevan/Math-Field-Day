@@ -65,8 +65,10 @@ class Capture{
                     if(this.isValidMove(index)){
                         // Display the X Player's icon 
                         square.setAttribute("class", "x-player");
+
                         // Player's Move 
                         this.move("X", index);
+
                         // Y Player's turn
                         this._flag = 0;
                     }
@@ -102,12 +104,17 @@ class Capture{
             isInRange = true;
         }
 
+
         // Check if new move is in range of Last Move
         let lastMove = player.currentMove;
         let newMoveRow = Math.floor(index / 6);
         let newMoveCol = index % 6;
         let lastMoveRow = Math.floor(lastMove / 6);
         let lastMoveCol = lastMove % 6;
+
+        console.log(`Is in range of last move: ${this.isInRangeOf(index, lastMove)}`);
+        console.log(`Is in range of enemy move: ${this.isInRangeOf(index, enemy.currentMove)}`);
+
 
         // Check Left and Right Ranges
         if(newMoveRow === lastMoveRow){
@@ -403,6 +410,64 @@ class Capture{
         // not in enemy range
         return isInRange && !isBlockedByWall && !isInEnemyRange;
 
+    }
+
+    isInRangeOf(newMove, otherMove){
+        
+        let current; 
+        this._flag === 1 ? current = "X" : current = "O";
+        let opposite;
+        this._flag === 1 ? opposite = "O" : opposite  = "X";
+
+        let newMoveRow = Math.floor(newMove / 6);
+        let newMoveCol = newMove % 6;
+        let otherMoveRow = Math.floor(otherMove / 6);
+        let otherMoveCol = otherMove % 6;
+
+        if(newMoveRow === otherMoveRow){
+            // Check Left
+            if(otherMoveCol > newMoveCol){
+                // Check each square from new move to enemy move 
+                for(let i = newMoveCol + 1; i <= otherMoveCol; i++){
+                    // If the square is a wall -> some wall block, range = false
+                    if(this._board[newMoveRow][i] === "|"){
+                        return false;
+                    }
+                    // If the square is the current move -> is in range of last move
+                    else if(this._board[newMoveRow][i] === current){
+                        return true;
+                    }
+                    // If the square is the enemy -> is in range of enemy move
+                    else if(this._board[newMoveRow][i] === opposite){
+                        return true;
+                    }
+                }
+            }
+            // Check Right
+            if(otherMoveCol < newMoveCol){
+                for(let i = newMoveCol - 1; i >= otherMoveCol; i--){
+                    // If the square is a wall -> in enemy range false
+                    if(this._board[newMoveRow][i] === "|"){
+                        return false;
+                    }
+                    else if(this._board[newMoveRow][i] === current){
+                        return true;
+                    }
+                    // If the square is the enemy -> in enemy range true
+                    else if(this._board[newMoveRow][newMoveCol - i] === opposite){
+                        return true;
+                    }
+                }
+            }
+        }
+        if(newMoveCol === otherMoveCol){
+
+        }
+        if(Math.abs(newMoveCol - otherMoveCol) === Math.abs(newMoveRow - otherMoveRow)){
+
+        }
+
+        return false;
     }
 
     move(move, index){
