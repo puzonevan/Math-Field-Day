@@ -130,8 +130,8 @@ class Capture{
         if(newMoveRow === otherMoveRow){
             // Check Left
             if(otherMoveCol > newMoveCol){
-                // Check each square from new move to enemy move 
-                for(let i = newMoveCol + 1; i <= otherMoveCol; i++){
+                // Check each square from new move to other move 
+                for(let i = newMoveCol + 1; i < otherMoveCol; i++){
                     if(checkWall(newMoveRow, i)){
                         return false;
                     }
@@ -140,71 +140,71 @@ class Capture{
             }
             // Check Right
             if(otherMoveCol < newMoveCol){
-                for(let i = newMoveCol - 1; i >= otherMoveCol; i--){
-                    let check = checkWallOrPlayer(newMoveRow, i);
-                    if(typeof check === "boolean"){
-                        return check;
+                for(let i = newMoveCol - 1; i > otherMoveCol; i--){
+                    if(checkWall(newMoveRow, i)){
+                        return false;
                     }
                 }
+                return true;
             }
         }
         else if(newMoveCol === otherMoveCol){
             // Check Below
             if(otherMoveRow > newMoveRow){
                 // Check each square from new move to enemy move 
-                for(let i = newMoveRow + 1; i <= otherMoveRow; i++){
-                    let check = checkWallOrPlayer(i, newMoveCol);
-                    if(typeof check === "boolean"){
-                        return check;
+                for(let i = newMoveRow + 1; i < otherMoveRow; i++){
+                    if(checkWall(i, newMoveCol)){
+                        return false;
                     }
                 }
+                return true;
             }
             // Check Above
             if(otherMoveRow < newMoveRow){
-                for(let i = newMoveRow - 1; i >= otherMoveRow; i--){
-                    let check = checkWallOrPlayer(i, newMoveCol);
-                    if(typeof check === "boolean"){
-                        return check;
+                for(let i = newMoveRow - 1; i > otherMoveRow; i--){
+                    if(checkWall(i, newMoveCol)){
+                        return false;
                     }
                 }
+                return true;
             }
         }
         else if(Math.abs(newMoveCol - otherMoveCol) === Math.abs(newMoveRow - otherMoveRow)){
             // Other move is on the bot right
             if(otherMoveCol > newMoveCol && otherMoveRow > newMoveRow){
                 for(let i = 1; newMoveCol + i <= otherMoveCol; i++){
-                    let check = checkWallOrPlayer(newMoveRow + i, newMoveCol + i);
-                    if(typeof check === "boolean"){
-                        return check;
+                    if(checkWall(newMoveRow + i, newMoveCol + i)){
+                        return false;
                     }
                 }
+                return true;
             }
             // Other move is on the top left
             if(otherMoveCol < newMoveCol && otherMoveRow < newMoveRow){
                 for(let i = 1; newMoveCol - i >= otherMoveCol; i++){
-                    let check = checkWallOrPlayer(newMoveRow - i, newMoveCol - i);
-                    if(typeof check === "boolean"){
-                        return check;
+                    if(checkWall(newMoveRow - i, newMoveCol - i)){
+                        return false;
                     }
                 }
+                return true;
             }
             // Other move is top right 
             if(otherMoveCol > newMoveCol && otherMoveRow < newMoveRow){
                 for(let i = 1; i + newMoveCol <= otherMoveCol; i++){
-                    let check = checkWallOrPlayer(newMoveRow - i, newMoveCol + i);
-                    if(typeof check === "boolean"){
-                        return check;
+                    if(checkWall(newMoveRow - i, newMoveCol + i)){
+                        return false;
                     }
                 }
+                return true;
             }
             // Other move is bot left
             if(otherMoveCol < newMoveCol && otherMoveRow > newMoveRow){
                 for(let i = 1; newMoveCol - i >= otherMoveCol; i++){
-                    let check = checkWallOrPlayer(newMoveRow + i, newMoveCol - i);
-                    if(typeof check === "boolean"){
-                        return check;
+                    if(checkWall(newMoveRow + i, newMoveCol - i)){
+                        return false;
                     }
                 }
+                return true;
             }
         }
 
