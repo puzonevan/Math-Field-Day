@@ -95,27 +95,26 @@ class Capture{
         }
 
         // If second player's first turn
-        // -> is in range true because can move anywhere
+        // -> only check if in range of enemy, should be false
         if(player.currentMove === -1 && player.lastMove === -1){
             return !this.isInRangeOf(index, enemy.currentMove);
         }
 
+        // when player is moving, we need to check two things
+        // 1. Their new move is in range of the last move 
+        // 2. Their new move is not in range of the current enemy move
         let inRangeLastMove = this.isInRangeOf(index, player.currentMove);
         let inRangeEnemy = this.isInRangeOf(index, enemy.currentMove);
         
-        console.log(`Is in range of last move: ${inRangeLastMove}`);
-        console.log(`Is in range of enemy move: ${inRangeEnemy}`);
+        // Debugging 
+        // console.log(`Is in range of last move: ${inRangeLastMove}`);
+        // console.log(`Is in range of enemy move: ${inRangeEnemy}`);
 
         return inRangeLastMove && !inRangeEnemy;
 
     }
 
     isInRangeOf(newMove, otherMove){
-
-        let current; 
-        this._flag === 1 ? current = "X" : current = "O";
-        let opposite;
-        this._flag === 1 ? opposite = "O" : opposite  = "X";
         let newMoveRow = Math.floor(newMove / 6);
         let newMoveCol = newMove % 6;
         let otherMoveRow = Math.floor(otherMove / 6);
@@ -210,8 +209,6 @@ class Capture{
 
         return false;
     }
-
-    isWallor
 
     move(move, index){
         if(move === "O"){
