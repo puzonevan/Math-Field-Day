@@ -80,7 +80,11 @@ class Capture{
         });
     }
     
-
+    /**
+     * check if player's move is valid
+     * @param {Number} index - player's desired move
+     * @returns true if valid move, false otherwise
+     */
     isValidMove(index){
         
         let player;
@@ -115,6 +119,12 @@ class Capture{
 
     }
 
+    /**
+     * check if a move is in range of another move
+     * @param {Number} newMove - player's new move 
+     * @param {Number} otherMove - another move to be compared with
+     * @returns 
+     */
     isInRangeOf(newMove, otherMove){
 
         // Positions of new move and other move
@@ -261,6 +271,20 @@ class Capture{
         return false;
     }
 
+    
+    isTrapped(index){
+
+    }
+
+    declareWinner(player){
+
+    }
+
+    /**
+     * player's move
+     * @param {String} move - X or O depending on flag
+     * @param {Number} index - player's move 
+     */
     move(move, index){
         if(move === "O"){
             this._player1.lastMove = this._player1.currentMove;
@@ -268,6 +292,9 @@ class Capture{
 
             this.changeLastmove(this._player1.lastMove, "#0000FF");
             this.updateBoard(this._player1.currentMove, this._player1.lastMove, "O");
+            if(this.isTrapped(this._player1.currentMove)){
+                this.declareWinner(this._player2);
+            }
         }
         else if(move === "X"){
             this._player2.lastMove = this._player2.currentMove;
@@ -278,6 +305,11 @@ class Capture{
         }
     }
 
+    /**
+     * change last move of the player to a wall
+     * @param {Number} lastMove - player's last move
+     * @param {Hexadecimal} color - color to be changed as a wall 
+     */
     changeLastmove(lastMove, color){
         if(lastMove !== -1){
             let lastMoveRow = Math.floor(lastMove / 6);
@@ -286,6 +318,12 @@ class Capture{
         }
     }
 
+    /**
+     * update board attribute accordingly
+     * @param {*} currentMove 
+     * @param {*} lastMove 
+     * @param {*} move 
+     */
     updateBoard(currentMove, lastMove, move){
         if(lastMove !== -1){
             let lastMoveRow = Math.floor(lastMove / 6);
@@ -296,8 +334,8 @@ class Capture{
         let currMoveCol = currentMove % 6;
 
         this._board[currMoveRow][currMoveCol] = move;
-        
     }
+
 
     /**
      * Reset the game
@@ -305,6 +343,8 @@ class Capture{
     reset(){
         this.initializeBoard();
         this._flag = 0;
+        this._player1.reset();
+        this._player2.reset();
         this.start();
     }
 

@@ -40,6 +40,8 @@ class Player{
 
     reset(){
         this._winner = false;
+        this._currentMove = -1;
+        this._lastMove = -1;
     }
 
 }
