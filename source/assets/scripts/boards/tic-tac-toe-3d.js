@@ -26,7 +26,41 @@ class TicTacToe3D{
     }
 
     start(){
+        // Loop through each square 
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
+            
+            // Each square listens for a player move(click)
+            square.addEventListener("click", () =>{
 
+                // Do nothing if there is already an X or O
+                if(square.className === "y-player" || square.className === "x-player"){
+                    return;
+                }
+
+                // O player's move
+                if(this._flag === 0){
+
+                    // Display the Y player's icon
+                    square.setAttribute("class", "y-player");
+
+                    // Check code
+
+                    // X player's turn
+                    this._flag = 1;
+                }
+                else if(this._flag === 1){
+
+                    // Display the X Player's icon 
+                    square.setAttribute("class", "x-player");
+
+                    // Check code
+
+                    // O Player's turn
+                    this._flag = 0;
+                }
+                
+            });
+        });
     }
 
     reset(){
@@ -40,6 +74,7 @@ class TicTacToe3D{
     createBoard(){
         // Create tables for 3 tables
         const tables = document.createElement('div');
+        tables.style.display = "flex";
 
         // Create 3 tables 
         const table1 = createTable("tic-tac-toe-3d");

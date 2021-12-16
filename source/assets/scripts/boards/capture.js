@@ -447,8 +447,6 @@ class Capture{
         either by forcing the opponent to no longer have any more usable spots to move \
         or \" CAPTURES \" the opponent by moving in the straight or diagonal line of \
         the opponent's occupied space.";
-
-    
         
     }
 }
