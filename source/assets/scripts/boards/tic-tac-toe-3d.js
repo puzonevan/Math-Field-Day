@@ -17,10 +17,10 @@ class TicTacToe3D{
     initializeBoard(){
         let boards = [[], [], []];
         boards.forEach((board) =>{
-            let tictactoe = ["","",""];
-            board.push(tictactoe);
-            board.push(tictactoe);
-            board.push(tictactoe);
+            for(let i = 0; i < 3; i++){
+                let tictactoe = ["","",""];
+                board.push(tictactoe);
+            }
         });
         this._board = boards;
     }
@@ -43,7 +43,7 @@ class TicTacToe3D{
                     // Display the Y player's icon
                     square.setAttribute("class", "y-player");
 
-                    // Check code
+                    this.move(index);
 
                     // X player's turn
                     this._flag = 1;
@@ -54,6 +54,7 @@ class TicTacToe3D{
                     square.setAttribute("class", "x-player");
 
                     // Check code
+                    this.move(index);
 
                     // O Player's turn
                     this._flag = 0;
@@ -61,6 +62,20 @@ class TicTacToe3D{
                 
             });
         });
+    }
+
+    move(index){
+        let boardPosition = Math.floor(index / 9);
+        let row = Math.floor(index / 3) - 3*(boardPosition);
+        let col = index % 3;
+
+        this._flag == 0 ? this._board[boardPosition][row][col] = "O" : this._board[boardPosition][row][col] = "X";
+
+        console.log(`board: ${boardPosition}`);
+        console.log(`row: ${row}`);
+        console.log(`col: ${col}`);
+
+        console.log(this._board);
     }
 
     reset(){
