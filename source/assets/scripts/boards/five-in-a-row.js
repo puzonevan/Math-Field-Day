@@ -277,6 +277,8 @@ class FiveInARow{
     reset(){
         this.initializeBoard();
         this._flag = 0;
+        this._player1.reset();
+        this._player2.reset();
         this.start();
     }
 
