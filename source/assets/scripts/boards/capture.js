@@ -1,12 +1,17 @@
 /************* IMPORTS *************/
-import { Player } from "../header/player.js";
-import { createTable, createRow, createCol } from "./board.js"
+import { createTable, createRow, createCol } from "./board.js";
+import { winnerLightbox } from "../header/winner.js";
 
 /////////////////////////////////////////////////////////////////////
 
 /************* CAPTURE CLASS *************/
 class Capture{
     
+    /**
+     * Capture constructor
+     * @param {Object} player1 - first player
+     * @param {Object} player2 - second player
+     */
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
@@ -57,9 +62,6 @@ class Capture{
                         // X player's turn
                         this._flag = 1;
                     }
-                    else{
-                        alert("Invalid move");
-                    }
                 }
                 else if(this._flag === 1){
                     if(this.isValidMove(index)){
@@ -71,9 +73,6 @@ class Capture{
 
                         // Y Player's turn
                         this._flag = 0;
-                    }
-                    else{
-                        alert("Invalid Move");
                     }
                 }
             });
@@ -109,6 +108,10 @@ class Capture{
         // 2. Their new move is not in range of the current enemy move
         let inRangeLastMove = this.isInRangeOf(index, player.currentMove);
         let inRangeEnemy = this.isInRangeOf(index, enemy.currentMove);
+
+        if(inRangeEnemy){
+            this.declareWinner(enemy);
+        }
         
         // Debugging 
         // console.log(`Is in range of last move: ${inRangeLastMove}`);
@@ -271,13 +274,64 @@ class Capture{
         return false;
     }
 
-    
+    /**
+     * check if player's move is surrounded by walls(trapped)
+     * @param {Number} index - position 
+     * @returns true if all surrounding is walls, false otherwise
+     */
     isTrapped(index){
+        let row = Math.floor(index / 6);
+        let col = index % 6;
+        
+        if(row - 1 > -1 && this._board[row - 1][col] !== "|"){
+            return false;
+        }
+        if(col - 1 > -1 && this._board[row][col - 1] !== "|"){
+            return false;
+        }
+        if(row - 1 > -1 && col - 1 > -1 && this._board[row - 1][col - 1] !== "|"){
+            return false
+        }
+        if(row + 1 < 6 && this._board[row + 1][col] !== "|"){
+            return false;
+        }
+        if(col + 1 < 6 && this._board[row][col + 1] !== "|"){
+            return false;
+        }
+        if(row + 1 < 6 && col + 1 < 6 && this._board[row + 1][col + 1] !== "|"){
+            return false;
+        }
+        if(row - 1 > -1 && col + 1 < 6 && this._board[row - 1][col + 1] !== "|"){
+            return false;
+        }
+        if(row + 1 < 6 && col - 1 > -1 && this._board[row + 1][col - 1] !== "|"){
+            return false;
+        }
 
+        return true;
     }
 
+    /**
+     * create the winner lightbox and display
+     * @param {Object} player - player to be the winner
+     */
     declareWinner(player){
+        // Display the winner lightbox
+        document.getElementById("board").style.filter = "blur(10px)";
+        winnerLightbox.style.display = "flex";
 
+        // Change the name to Player 2's name
+        if(typeof player.name !== "string"){
+            if(player === this._player2){
+                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+            }
+            else if(player === this._player1){
+                document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+            }
+        }
+        else{
+            document.getElementById("winner-name").innerHTML = `${player.name} wins!`; 
+        }
     }
 
     /**
@@ -302,6 +356,9 @@ class Capture{
 
             this.changeLastmove(this._player2.lastMove, "#FF0000");
             this.updateBoard(this._player2.currentMove, this._player2.lastMove, "X");
+            if(this.isTrapped(this._player1.currentMove)){
+                this.declareWinner(this._player2);
+            }
         }
     }
 
@@ -320,9 +377,9 @@ class Capture{
 
     /**
      * update board attribute accordingly
-     * @param {*} currentMove 
-     * @param {*} lastMove 
-     * @param {*} move 
+     * @param {Number} currentMove - player's current move 
+     * @param {Number} lastMove - player's last move 
+     * @param {String} move - X or O depending on flag
      */
     updateBoard(currentMove, lastMove, move){
         if(lastMove !== -1){
