@@ -35,11 +35,6 @@ const rules = {
                 The player can also not move at all when this happens. \
                 Whenever a player lands in an empty hole on their side, their turn is over.", 
 
-    "3D Tic Tac Toe": "Players take turns placing their marks(X or O). There are 3 grids that \
-                        are each 3x3. The game works similarly to tic tac toe where the winner \
-                        is decided by getting 3 marks in a row horizontally, vertically, or \
-                        diagonally. However, the winner can also win by getting three in a row \
-                        in the same spot of the 3 boards."
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -64,7 +59,7 @@ function main(){
     // Boards
     const fiveInARow = new FiveInARow(player1, player2);
     const capture = new Capture(player1, player2);
-    const tictactoe = new TicTacToe3D();
+    const tictactoe = new TicTacToe3D(player1, player2);
     const hex = new Hex();
     const mancala = new Mancala();
 
@@ -89,15 +84,16 @@ function main(){
         gameToChange.createBoard();
         gameToChange.reset();
         currentGame = gameToChange;
-    })
+    });
+    
 
     fiveInARowButton.addEventListener("click", () =>{
+        closeLightbox(menuLightbox);
         if(document.getElementById("board").firstElementChild){
             gameToChange = fiveInARow;
-            closeLightbox(menuLightbox);
             openLightbox(newGameLightbox);
-        }else{      
-            closeLightbox(menuLightbox);
+        }
+        else{      
             fiveInARow.createBoard();
             fiveInARow.changeRules();
             fiveInARow.start();
@@ -107,13 +103,12 @@ function main(){
     });
 
     captureButton.addEventListener("click", () =>{
+        closeLightbox(menuLightbox);
         if(document.getElementById("board").firstElementChild){
             gameToChange = capture;
-            closeLightbox(menuLightbox);
             openLightbox(newGameLightbox);
         }
         else{
-            closeLightbox(menuLightbox);
             capture.changeRules();
             capture.createBoard();
             capture.start();
@@ -123,10 +118,18 @@ function main(){
     });
 
     ticTacToeButton.addEventListener("click", () =>{
-        changeContent("3D Tic Tac Toe");
-        removeBoard(document.getElementById("board"));
-        TicTacToe3D.createBoard();
-        
+        closeLightbox(menuLightbox);
+        if(document.getElementById("board").firstElementChild){
+            gameToChange = tictactoe;
+            openLightbox(newGameLightbox);
+        }
+        else{
+            tictactoe.changeRules();
+            tictactoe.createBoard();
+            tictactoe.start();
+            currentGame = tictactoe;
+            gameToChange = tictactoe;
+        }
     });
 
     hexButton.addEventListener("click", () =>{
