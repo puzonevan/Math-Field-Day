@@ -17,25 +17,6 @@ import { Player } from "./header/player.js";
 /////////////////////////////////////////////////////////////////////
 
 /************* GLOBALS *************/
-const rules = {
-    "Hex": "Players take turns placing their marks (X or O) in the hexagons \
-            of their choosing. The winner must form a continous path from their \
-            starting side to the opposite side by connecting the hexagons on their edges. \
-            The four corners of the hexagon can be considered to be part of either of the \
-            sides that they face.", 
-
-    "Mancala": "Choose which player starts. The player can choose any hole with beads on \
-                their side, scoops up the beads, and distributes them one bead to a hole \
-                moving to the right including the end holes. The winner of the game is the \
-                first person that gets rid of all the beads on their side. \
-                If a player's last bead lands in the end hole, they must go again. \
-                If a player's last bead lands in an empty hole on the opponent's side, \
-                the player can scoop and move the beads on the opposite hole(on his side) \
-                or scoop and place all the beads from the opposite hole to the landed hole. \
-                The player can also not move at all when this happens. \
-                Whenever a player lands in an empty hole on their side, their turn is over.", 
-
-}
 
 /////////////////////////////////////////////////////////////////////
 
@@ -60,8 +41,8 @@ function main(){
     const fiveInARow = new FiveInARow(player1, player2);
     const capture = new Capture(player1, player2);
     const tictactoe = new TicTacToe3D(player1, player2);
-    const hex = new Hex();
-    const mancala = new Mancala();
+    const hex = new Hex(player1, player2);
+    const mancala = new Mancala(player1, player2);
 
     let currentGame;
     let gameToChange;
@@ -80,12 +61,17 @@ function main(){
     document.getElementById("winner-new-game").addEventListener("click", () =>{
         removeBoard(document.getElementById("board"));
         closeLightbox(winnerLightbox);
-        gameToChange.changeRules();
-        gameToChange.createBoard();
-        gameToChange.reset();
-        currentGame = gameToChange;
+        currentGame.changeRules();
+        currentGame.createBoard();
+        currentGame.reset();
     });
     
+    // Menu Winner button click DOM
+    document.getElementById("winner-menu").addEventListener("click", () =>{
+        removeBoard(document.getElementById("board"));
+        closeLightbox(winnerLightbox);
+        openLightbox(menuLightbox);
+    })
 
     fiveInARowButton.addEventListener("click", () =>{
         closeLightbox(menuLightbox);
@@ -133,17 +119,33 @@ function main(){
     });
 
     hexButton.addEventListener("click", () =>{
-        changeContent("Hex");
-        removeBoard(document.getElementById("board"));
-        Hex.createBoard();
-        
+        closeLightbox(menuLightbox);
+        if(document.getElementById("board").firstElementChild){
+            gameToChange = hex;
+            openLightbox(newGameLightbox);
+        }
+        else{
+            hex.changeRules();
+            hex.createBoard();
+            hex.start();
+            currentGame = hex;
+            gameToChange = hex;
+        }
     });
 
     mancalaButton.addEventListener("click", () =>{
-        changeContent("Mancala");
-        removeBoard(document.getElementById("board"));
-        Mancala.createBoard();
-        
+        closeLightbox(menuLightbox);
+        if(document.getElementById("board").firstElementChild){
+            gameToChange = mancala;
+            openLightbox(newGameLightbox);
+        }
+        else{
+            mancala.changeRules();
+            mancala.createBoard();
+            mancala.start();
+            currentGame = mancala;
+            gameToChange = mancala;
+        }
     });
 }
 

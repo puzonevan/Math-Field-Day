@@ -12,7 +12,6 @@ class TicTacToe3D{
         this._board;
         this.initializeBoard();
         this._flag = 0;
-        console.log(this._board);
     }
 
     initializeBoard(){
@@ -27,7 +26,7 @@ class TicTacToe3D{
     }
 
     start(){
-        
+
     }
 
     reset(){
