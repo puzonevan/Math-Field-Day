@@ -11,6 +11,7 @@ import { TicTacToe3D } from "./boards/tic-tac-toe-3d.js";
 import { menuLightbox, fiveInARowButton, captureButton, ticTacToeButton, hexButton, mancalaButton } from "./header/menu.js";
 import { rulesLightbox } from "./header/rules.js";
 import { newGameLightbox } from "./header/new-game.js";
+import { winnerLightbox } from "./header/winner.js";
 import { Player } from "./header/player.js";
 
 /////////////////////////////////////////////////////////////////////
@@ -83,7 +84,7 @@ function main(){
     // New Game Winner Button click DOM 
     document.getElementById("winner-new-game").addEventListener("click", () =>{
         removeBoard(document.getElementById("board"));
-        closeLightbox(newGameLightbox);
+        closeLightbox(winnerLightbox);
         gameToChange.changeRules();
         gameToChange.createBoard();
         gameToChange.reset();
@@ -93,12 +94,10 @@ function main(){
     fiveInARowButton.addEventListener("click", () =>{
         if(document.getElementById("board").firstElementChild){
             gameToChange = fiveInARow;
-            document.getElementById("board").style.filter = "blur(10px)";
-            menuLightbox.style.display = "none";
-            newGameLightbox.style.display = "flex";
+            closeLightbox(menuLightbox);
+            openLightbox(newGameLightbox);
         }else{      
-            document.getElementById("board").style.filter = "blur(0px)";
-            menuLightbox.style.display = "none";      
+            closeLightbox(menuLightbox);
             fiveInARow.createBoard();
             fiveInARow.changeRules();
             fiveInARow.start();
@@ -110,13 +109,11 @@ function main(){
     captureButton.addEventListener("click", () =>{
         if(document.getElementById("board").firstElementChild){
             gameToChange = capture;
-            document.getElementById("board").style.filter = "blur(10px)";
-            menuLightbox.style.display = "none";
-            newGameLightbox.style.display = "flex";
+            closeLightbox(menuLightbox);
+            openLightbox(newGameLightbox);
         }
         else{
-            document.getElementById("board").style.filter = "blur(0px)";
-            menuLightbox.style.display = "none";
+            closeLightbox(menuLightbox);
             capture.changeRules();
             capture.createBoard();
             capture.start();
