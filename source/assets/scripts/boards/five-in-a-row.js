@@ -285,7 +285,7 @@ class FiveInARow{
     /**
      * Create the board in the DOM 
      */
-    static createBoard(){
+    createBoard(){
         // Five in a Row Table
         const fiveInARowTable = createTable("five-in-a-row");
 
@@ -308,6 +308,20 @@ class FiveInARow{
 
         // Append table to board div
         document.getElementById('board').appendChild(fiveInARowTable);
+    }
+
+    /**
+     * 
+     */
+    changeRules(){
+        // Change game title in header
+        document.getElementById("game-title-current").innerHTML = "Five in a Row";
+
+        // Change game rules in rules lightbox
+        document.getElementById("game-name").innerHTML = "Five in a Row";
+        document.getElementById("game-rules").innerHTML = "Players take turns placing their marks(X or O) in the squares. \
+        The first player to get 5 in a row in any direction is the winner.";
+
     }
 }
 

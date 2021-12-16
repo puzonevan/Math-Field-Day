@@ -17,21 +17,6 @@ import { Player } from "./header/player.js";
 
 /************* GLOBALS *************/
 const rules = {
-    "Capture": "Choose which player starts. This game is played on a 6x6 grid. \
-                The main objectuve of the game is to avoid placing your symbol(X or O) \
-                in a straight or diagonal course from the opponents. \
-                The starting player marks his symbol anywhere on the grid. The next player \
-                then add their symbol avoiding a hit described above. The first player can \
-                move their symbol anywhere diagonally, horizontally, or vertically to an unused \
-                space and shades in their previous mark. The opponent moves similarly. \
-                The players continue until there is a winner. The winner is determined \
-                either by forcing the opponent to no longer have any more usable spots to move \
-                or \" CAPTURES \" the opponent by moving in the straight or diagonal line of \
-                the opponent's occupied space.", 
-
-    "Five in a Row": "Players take turns placing their marks(X or O) in the squares. \
-                    The first player to get 5 in a row in any direction is the winner.", 
-
     "Hex": "Players take turns placing their marks (X or O) in the hexagons \
             of their choosing. The winner must form a continous path from their \
             starting side to the opposite side by connecting the hexagons on their edges. \
@@ -60,7 +45,9 @@ const rules = {
 
 /************* MAIN PROGRAM *************/
 
+
 function main(){
+
     // Players 
     const player1 = new Player(document.getElementById("player-1-name"));
     const player2 = new Player(document.getElementById("player-2-name"));
@@ -80,44 +67,62 @@ function main(){
     const hex = new Hex();
     const mancala = new Mancala();
 
-    // Restart Button click DOM
-    document.getElementById("restart").addEventListener("click", () =>{
+    let currentGame;
+    let gameToChange;
 
-        let game = document.getElementById("board").firstElementChild.className;
-
+    // New Game Restart Button click DOM
+    document.getElementById("restart").addEventListener("click", ()=>{
         removeBoard(document.getElementById("board"));
-        document.getElementById("board").style.filter = "blur(0px)";
-        newGameLightbox.style.display = "none";
-        rulesLightbox.style.display = "none";
-
-        switch(game){
-            case "five-in-a-row": 
-                FiveInARow.createBoard();
-                fiveInARow.reset();
-                break;
-            case "capture": 
-                Capture.createBoard();
-                capture.reset();
-                break;
-        }
-        player1.reset();
-        player2.reset();
+        closeLightbox(newGameLightbox);
+        gameToChange.changeRules();
+        gameToChange.createBoard();
+        gameToChange.reset();
+        currentGame = gameToChange;
     });
 
-    fiveInARowButton.addEventListener("click", () =>{
-        changeContent("Five in a Row");
+    // New Game Winner Button click DOM 
+    document.getElementById("winner-new-game").addEventListener("click", () =>{
         removeBoard(document.getElementById("board"));
-        FiveInARow.createBoard();
-        fiveInARow.initializeBoard();
-        fiveInARow.start();
+        closeLightbox(newGameLightbox);
+        gameToChange.changeRules();
+        gameToChange.createBoard();
+        gameToChange.reset();
+        currentGame = gameToChange;
+    })
+
+    fiveInARowButton.addEventListener("click", () =>{
+        if(document.getElementById("board").firstElementChild){
+            gameToChange = fiveInARow;
+            document.getElementById("board").style.filter = "blur(10px)";
+            menuLightbox.style.display = "none";
+            newGameLightbox.style.display = "flex";
+        }else{      
+            document.getElementById("board").style.filter = "blur(0px)";
+            menuLightbox.style.display = "none";      
+            fiveInARow.createBoard();
+            fiveInARow.changeRules();
+            fiveInARow.start();
+            currentGame = fiveInARow;
+            gameToChange = fiveInARow;
+        }
     });
 
     captureButton.addEventListener("click", () =>{
-        changeContent("Capture");
-        removeBoard(document.getElementById("board"));
-        Capture.createBoard();
-        capture.initializeBoard();
-        capture.start();
+        if(document.getElementById("board").firstElementChild){
+            gameToChange = capture;
+            document.getElementById("board").style.filter = "blur(10px)";
+            menuLightbox.style.display = "none";
+            newGameLightbox.style.display = "flex";
+        }
+        else{
+            document.getElementById("board").style.filter = "blur(0px)";
+            menuLightbox.style.display = "none";
+            capture.changeRules();
+            capture.createBoard();
+            capture.start();
+            currentGame = capture;
+            gameToChange = capture;
+        }
     });
 
     ticTacToeButton.addEventListener("click", () =>{
@@ -148,19 +153,14 @@ main();
 
 /************* HELPER FUNCTIONS *************/
 
+const openLightbox = (lightbox) =>{
+    document.getElementById("board").style.filter = "blur(10px)";
+    lightbox.style.display = "flex";
+}
 
-const changeContent = (name) =>{
-
-    // Change game title in header
-    document.getElementById("game-title-current").innerHTML = name;
-
-    // Change game rules in rules lightbox
-    document.getElementById("game-name").innerHTML = name;
-    document.getElementById("game-rules").innerHTML = rules[name];
-
-    // Change to Rules lightbox 
+const closeLightbox = (lightbox) =>{
     document.getElementById("board").style.filter = "blur(0px)";
-    menuLightbox.style.display = "none";
+    lightbox.style.display = "none";
 }
 
 const removeBoard = (parent) =>{
@@ -168,6 +168,3 @@ const removeBoard = (parent) =>{
         parent.removeChild(parent.firstChild);
     }
 }
-
-
-

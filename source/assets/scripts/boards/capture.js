@@ -405,7 +405,7 @@ class Capture{
         this.start();
     }
 
-    static createBoard(){
+    createBoard(){
         // Capture Table
         const captureTable = createTable("capture");
         
@@ -425,6 +425,31 @@ class Capture{
         }
 
         document.getElementById('board').appendChild(captureTable);
+    }
+
+    /**
+     * 
+     */
+    changeRules(){
+        // Change game title in header
+        document.getElementById("game-title-current").innerHTML = "Capture";
+
+        // Change game rules in rules lightbox
+        document.getElementById("game-name").innerHTML = "Capture";
+        document.getElementById("game-rules").innerHTML = "Choose which player starts. This game is played on a 6x6 grid. \
+        The main objectuve of the game is to avoid placing your symbol(X or O) \
+        in a straight or diagonal course from the opponents. \
+        The starting player marks his symbol anywhere on the grid. The next player \
+        then add their symbol avoiding a hit described above. The first player can \
+        move their symbol anywhere diagonally, horizontally, or vertically to an unused \
+        space and shades in their previous mark. The opponent moves similarly. \
+        The players continue until there is a winner. The winner is determined \
+        either by forcing the opponent to no longer have any more usable spots to move \
+        or \" CAPTURES \" the opponent by moving in the straight or diagonal line of \
+        the opponent's occupied space.";
+
+    
+        
     }
 }
 
