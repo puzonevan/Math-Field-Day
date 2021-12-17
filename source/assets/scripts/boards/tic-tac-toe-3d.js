@@ -1,7 +1,29 @@
 /************* IMPORTS *************/
 import { createTable, createRow, createCol } from "./board.js"
+import { winnerLightbox } from "../header/winner.js";
 
 /////////////////////////////////////////////////////////////////////
+const winningConditions2D = [
+    [0, 1, 2], 
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 6, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+]
+const winningConditions3D = [
+    [0, 0, 0], 
+    [1, 1, 1],
+    [2, 2, 2],
+    [3, 3, 3],
+    [4, 4, 4],
+    [5, 5, 5],
+    [6, 6, 6],
+    [7, 7, 7],
+    [8, 8, 8],
+]
 
 /************* CAPTURE CLASS *************/
 class TicTacToe3D{
@@ -76,6 +98,52 @@ class TicTacToe3D{
         console.log(`col: ${col}`);
 
         console.log(this._board);
+        if(this.checkWinner(boardPosition, row, col)){
+            this._flag == 0 ? this.declareWinner(this._player1) : this.declareWinner(this._player2);
+        }
+        
+    }
+
+    checkWinner(board, row, col){
+        let win = false;
+        winningConditions2D.forEach((condition) =>{
+            let a = this._board[board][Math.floor(condition[0] / 3)][condition[0] % 3];
+            let b = this._board[board][Math.floor(condition[1] / 3)][condition[1] % 3];
+            let c = this._board[board][Math.floor(condition[2] / 3)][condition[2] % 3];
+
+            let move;
+            this._flag == 0 ? move = "O" : move = "X";
+            console.log(`${a} | ${b} | ${c}`);
+
+            if(a === move && b === move && c === move){
+                win = true;
+            }
+        });
+
+        return win;
+    }
+
+    /**
+     * create the winner lightbox and display
+     * @param {Object} player - player to be the winner
+     */
+    declareWinner(player){
+        // Display the winner lightbox
+        document.getElementById("board").style.filter = "blur(10px)";
+        winnerLightbox.style.display = "flex";
+
+        // Change the name to Player 2's name
+        if(typeof player.name !== "string"){
+            if(player === this._player2){
+                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+            }
+            else if(player === this._player1){
+                document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+            }
+        }
+        else{
+            document.getElementById("winner-name").innerHTML = `${player.name} wins!`; 
+        }
     }
 
     reset(){
