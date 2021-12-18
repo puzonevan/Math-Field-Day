@@ -35,13 +35,19 @@ class TicTacToe3D{
      * initialize board attribute
      */
     initializeBoard(){
+
+        // 3 seperate boards
         let boards = [[], [], []];
+
+        // For each board, create a tic tac toe board
         boards.forEach((board) =>{
             for(let i = 0; i < 3; i++){
                 let tictactoe = ["","",""];
                 board.push(tictactoe);
             }
         });
+
+        // Assign to board attribute
         this._board = boards;
     }
 
@@ -66,6 +72,7 @@ class TicTacToe3D{
                     // Display the Y player's icon
                     square.setAttribute("class", "y-player");
 
+                    // Do the player's move
                     this.move(index);
 
                     // X player's turn
@@ -76,7 +83,7 @@ class TicTacToe3D{
                     // Display the X Player's icon 
                     square.setAttribute("class", "x-player");
 
-                    // Check code
+                    // Do the player's move
                     this.move(index);
 
                     // O Player's turn
@@ -92,18 +99,24 @@ class TicTacToe3D{
      * @param {Number} index - move number
      */
     move(index){
+
+        // Calculate board, row, and column positions
         let boardPosition = Math.floor(index / 9);
         let row = Math.floor(index / 3) - 3*(boardPosition);
         let col = index % 3;
 
+        // Assign board proper move
         this._flag == 0 ? this._board[boardPosition][row][col] = "O" : this._board[boardPosition][row][col] = "X";
 
+        // Debugging: 
         // console.log(`board: ${boardPosition}`);
         // console.log(`row: ${row}`);
         // console.log(`col: ${col}`);
-
         // console.log(this._board);
+
+        // Check if the move is a winning move
         if(this.checkWinner(boardPosition)){
+            // declare the appropriate winner
             this._flag == 0 ? this.declareWinner(this._player1) : this.declareWinner(this._player2);
         }
         
@@ -115,11 +128,14 @@ class TicTacToe3D{
      * @returns true if the winning move creates a 3 in a row, false otherwise
      */
     checkWinner(board){
+
         let win = false;
         let move;
         this._flag == 0 ? move = "O" : move = "X";
 
+        // Go through each winning condition
         winningConditions2D.forEach((condition) =>{
+
             // Check if 3 in a row in current board
             let a = this._board[board][Math.floor(condition[0] / 3)][condition[0] % 3];
             let b = this._board[board][Math.floor(condition[1] / 3)][condition[1] % 3];
@@ -129,6 +145,7 @@ class TicTacToe3D{
                 win = true;
             }
 
+            // Check three in a row, 1 per board 
             let d = this._board[0][Math.floor(condition[0] / 3)][condition[0] % 3];
             let e = this._board[1][Math.floor(condition[1] / 3)][condition[1] % 3];
             let f = this._board[2][Math.floor(condition[2] / 3)][condition[2] % 3];
@@ -137,6 +154,7 @@ class TicTacToe3D{
                 win = true;
             }
 
+            // Check three in a row, other direction
             d = this._board[0][Math.floor(condition[2] / 3)][condition[2] % 3];
             f = this._board[2][Math.floor(condition[0] / 3)][condition[0] % 3];
             if(d === move && e === move && f === move){
