@@ -18,6 +18,11 @@ const winningConditions2D = [
 /************* CAPTURE CLASS *************/
 class TicTacToe3D{
     
+    /**
+     * Class Constructor
+     * @param {Object} player1 - first player
+     * @param {Object} player2 - second player
+     */
     constructor(player1, player2){
         this._player1 = player1;
         this._player2 = player2;
@@ -26,6 +31,9 @@ class TicTacToe3D{
         this._flag = 0;
     }
 
+    /**
+     * initialize board attribute
+     */
     initializeBoard(){
         let boards = [[], [], []];
         boards.forEach((board) =>{
@@ -37,6 +45,9 @@ class TicTacToe3D{
         this._board = boards;
     }
 
+    /**
+     * start the game
+     */
     start(){
         // Loop through each square 
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
@@ -76,6 +87,10 @@ class TicTacToe3D{
         });
     }
 
+    /**
+     * change the board according to the move
+     * @param {Number} index - move number
+     */
     move(index){
         let boardPosition = Math.floor(index / 9);
         let row = Math.floor(index / 3) - 3*(boardPosition);
@@ -83,18 +98,23 @@ class TicTacToe3D{
 
         this._flag == 0 ? this._board[boardPosition][row][col] = "O" : this._board[boardPosition][row][col] = "X";
 
-        console.log(`board: ${boardPosition}`);
-        console.log(`row: ${row}`);
-        console.log(`col: ${col}`);
+        // console.log(`board: ${boardPosition}`);
+        // console.log(`row: ${row}`);
+        // console.log(`col: ${col}`);
 
-        console.log(this._board);
-        if(this.checkWinner(boardPosition, row, col)){
+        // console.log(this._board);
+        if(this.checkWinner(boardPosition)){
             this._flag == 0 ? this.declareWinner(this._player1) : this.declareWinner(this._player2);
         }
         
     }
 
-    checkWinner(board, row, col){
+    /**
+     * check if the current move just made is a winning move
+     * @param {Number} board - board number
+     * @returns true if the winning move creates a 3 in a row, false otherwise
+     */
+    checkWinner(board){
         let win = false;
         let move;
         this._flag == 0 ? move = "O" : move = "X";
@@ -135,8 +155,6 @@ class TicTacToe3D{
             }
         }
 
-
-
         return win;
     }
 
@@ -163,6 +181,9 @@ class TicTacToe3D{
         }
     }
 
+    /**
+     * Reset the game and players
+     */
     reset(){
         this.initializeBoard();
         this._flag = 0;
@@ -171,6 +192,9 @@ class TicTacToe3D{
         this.start();
     }
 
+    /**
+     * create the dom board 
+     */
     createBoard(){
         // Create tables for 3 tables
         const tables = document.createElement('div');
@@ -206,6 +230,9 @@ class TicTacToe3D{
         document.getElementById('board').appendChild(tables);
     }
 
+    /**
+     * change the title and rules according to game
+     */
     changeRules(){
         // Change game title in header
         document.getElementById("game-title-current").innerHTML = "3D Tic Tac Toe";
