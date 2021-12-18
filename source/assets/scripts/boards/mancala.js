@@ -9,16 +9,37 @@ class Mancala{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
-        this._board;
-        this.initializeBoard();
+        this._leftZone = 0;
+        this._rightZone = 0;
+        this._board = [];
         this._flag = 0;
     }
 
     initializeBoard(){
-
+        let boards = [];
+        for(let i = 0; i < 2; i++){
+            let zone = [];
+            for(let j = 0; j < 6; j++){
+                zone.appendChild("");
+            }
+            boards.appendChild(zone);
+        }
+        this._board = boards;
     }
 
     start(){
+
+    }
+
+    moveBeads(){
+
+    }
+
+    dumpBeads(){
+
+    }
+
+    checkWinner(){
 
     }
 
