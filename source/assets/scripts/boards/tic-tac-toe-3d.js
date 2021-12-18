@@ -13,17 +13,7 @@ const winningConditions2D = [
     [0, 4, 8],
     [2, 4, 6],
 ]
-const winningConditions3D = [
-    [0, 0, 0], 
-    [1, 1, 1],
-    [2, 2, 2],
-    [3, 3, 3],
-    [4, 4, 4],
-    [5, 5, 5],
-    [6, 6, 6],
-    [7, 7, 7],
-    [8, 8, 8],
-]
+
 
 /************* CAPTURE CLASS *************/
 class TicTacToe3D{
@@ -106,19 +96,46 @@ class TicTacToe3D{
 
     checkWinner(board, row, col){
         let win = false;
+        let move;
+        this._flag == 0 ? move = "O" : move = "X";
+
         winningConditions2D.forEach((condition) =>{
+            // Check if 3 in a row in current board
             let a = this._board[board][Math.floor(condition[0] / 3)][condition[0] % 3];
             let b = this._board[board][Math.floor(condition[1] / 3)][condition[1] % 3];
             let c = this._board[board][Math.floor(condition[2] / 3)][condition[2] % 3];
 
-            let move;
-            this._flag == 0 ? move = "O" : move = "X";
-            console.log(`${a} | ${b} | ${c}`);
+            if(a === move && b === move && c === move){
+                win = true;
+            }
+
+            let d = this._board[0][Math.floor(condition[0] / 3)][condition[0] % 3];
+            let e = this._board[1][Math.floor(condition[1] / 3)][condition[1] % 3];
+            let f = this._board[2][Math.floor(condition[2] / 3)][condition[2] % 3];
+
+            if(d === move && e === move && f === move){
+                win = true;
+            }
+
+            d = this._board[0][Math.floor(condition[2] / 3)][condition[2] % 3];
+            f = this._board[2][Math.floor(condition[0] / 3)][condition[0] % 3];
+            if(d === move && e === move && f === move){
+                win = true;
+            }
+        });
+
+        // Check if 3 in a row stacked in any 9 spots
+        for(let i = 0; i < 9; i++){
+            let a = this._board[0][Math.floor(i / 3)][i % 3];
+            let b = this._board[1][Math.floor(i / 3)][i % 3];
+            let c = this._board[2][Math.floor(i / 3)][i % 3];
 
             if(a === move && b === move && c === move){
                 win = true;
             }
-        });
+        }
+
+
 
         return win;
     }
