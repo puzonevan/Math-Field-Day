@@ -12,7 +12,9 @@ class Mancala{
         this._leftZone = 0;
         this._rightZone = 0;
         this._board = [];
+        this.initializeBoard();
         this._flag = 0;
+        console.log(this._board);
     }
 
     initializeBoard(){
@@ -20,9 +22,9 @@ class Mancala{
         for(let i = 0; i < 2; i++){
             let zone = [];
             for(let j = 0; j < 6; j++){
-                zone.appendChild("");
+                zone.push("");
             }
-            boards.appendChild(zone);
+            boards.push(zone);
         }
         this._board = boards;
     }
