@@ -30,7 +30,24 @@ class Mancala{
     }
 
     start(){
+        // Loop through each square
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
+            // Each square listens for a player move(click)
+            square.addEventListener("click", () =>{
+
+                // Do nothing if player clicks on either end zone
+                if(square.className === "left-zone" || square.className == "right-zone"){
+                    return;
+                }
+
+                // Do nothing if player clicks on empty zone 
+
+                // 
+
+                
+            });
+        });
     }
 
     moveBeads(){
@@ -62,6 +79,7 @@ class Mancala{
         // Insert First Col with row span 2 
         let col2 = document.createElement('td');
         col2.rowSpan = "2";
+        col2.setAttribute("class", "left-zone");
         row1.appendChild(col2);
 
         // Loop through six cols 
@@ -73,6 +91,7 @@ class Mancala{
         // Insert Second Col with row span 2 
         col2 = document.createElement('td');
         col2.rowSpan = "2";
+        col2.setAttribute("class", "right-zone");
         row1.appendChild(col2);
 
         mancalaTable.appendChild(row1);
