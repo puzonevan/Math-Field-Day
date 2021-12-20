@@ -55,6 +55,8 @@ class Mancala{
                     this._flag = 0;
                 }   
 
+                this.highlightZone();
+
                 
             });
         });
@@ -64,11 +66,26 @@ class Mancala{
         if(this._flag === 0){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
                 if(square.className == "o-zone"){
-                    square.style.background = "red";
+                    square.style.backgroundColor = "rgba(0, 0, 255, .2)";
                 }
             });
-
-            console.log(document.getElementById("mancala").children[0].children);
+            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
+                if(square.className == "x-zone"){
+                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+            });
+        }
+        else if(this._flag === 1){
+            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
+                if(square.className == "o-zone"){
+                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+            });
+            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
+                if(square.className == "x-zone"){
+                    square.style.backgroundColor = "rgba(255, 0, 0, .2)";
+                }
+            });
         }
     }
 
