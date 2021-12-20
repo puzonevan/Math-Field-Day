@@ -22,7 +22,7 @@ class Mancala{
         for(let i = 0; i < 2; i++){
             let zone = [];
             for(let j = 0; j < 6; j++){
-                zone.push("");
+                zone.push(4);
             }
             boards.push(zone);
         }
@@ -30,6 +30,8 @@ class Mancala{
     }
 
     start(){
+
+        this.highlightZone();
         // Loop through each square
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
@@ -44,10 +46,30 @@ class Mancala{
                 // Do nothing if player clicks on empty zone 
 
                 // 
+                if(this._flag === 0 && square.className == "o-zone"){
+                    console.log("x move");
+                    this._flag = 1;
+                }
+                else if(this._flag === 1 && square.className == "x-zone"){
+                    console.log("o move");
+                    this._flag = 0;
+                }   
 
                 
             });
         });
+    }
+
+    highlightZone(){
+        if(this._flag === 0){
+            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
+                if(square.className == "o-zone"){
+                    square.style.background = "red";
+                }
+            });
+
+            console.log(document.getElementById("mancala").children[0].children);
+        }
     }
 
     moveBeads(){
@@ -85,6 +107,7 @@ class Mancala{
         // Loop through six cols 
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
+            nCol.setAttribute("class", "o-zone");
             row1.appendChild(nCol);
         }
 
@@ -100,6 +123,7 @@ class Mancala{
         const row2 = document.createElement('tr');
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
+            nCol.setAttribute("class", "x-zone");
             row2.appendChild(nCol);
         }
         mancalaTable.appendChild(row2);
