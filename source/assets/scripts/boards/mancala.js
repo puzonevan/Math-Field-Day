@@ -48,10 +48,12 @@ class Mancala{
                 // 
                 if(this._flag === 0 && square.className == "o-zone"){
                     console.log("x move");
+                    this.moveBeads(index);
                     this._flag = 1;
                 }
                 else if(this._flag === 1 && square.className == "x-zone"){
                     console.log("o move");
+                    this.moveBeads(index);
                     this._flag = 0;
                 }   
 
@@ -89,7 +91,24 @@ class Mancala{
         }
     }
 
-    moveBeads(){
+    moveBeads(index){
+        let zone; 
+        let position; 
+        if(this._flag === 0){
+            zone = 0;
+            position = index;
+        }
+        else if(this._flag === 1){
+            zone = 1;
+            position = index - 8;
+        }
+
+        let square = document.getElementById("mancala").children[zone].children[position];
+        let numberOfBeads = parseInt(square.innerHTML);
+
+        while(numberOfBeads > 0){
+            
+        }
 
     }
 
@@ -125,6 +144,7 @@ class Mancala{
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "o-zone");
+            nCol.innerHTML = "4";
             row1.appendChild(nCol);
         }
 
@@ -141,6 +161,7 @@ class Mancala{
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "x-zone");
+            nCol.innerHTML = "4";
             row2.appendChild(nCol);
         }
         mancalaTable.appendChild(row2);
