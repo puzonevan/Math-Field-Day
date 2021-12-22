@@ -105,10 +105,38 @@ class Mancala{
 
         let square = document.getElementById("mancala").children[zone].children[position];
         let numberOfBeads = parseInt(square.innerHTML);
+        square.innerHTML = "0";
+        console.log(position);
 
         while(numberOfBeads > 0){
-            
+            if(zone === 0){
+                if(position - 1 > 0){
+                    position--;
+                }
+                else{
+                    zone = 1;
+                    position = 0;
+                }
+                square = document.getElementById("mancala").children[zone].children[position];
+                square.innerHTML = parseInt(square.innerHTML) + 1;
+            }
+            else if(zone === 1){
+                if(position + 1 < 6){
+                    position++;
+                }
+                else{
+                    zone = 0;
+                    position = 6;
+                }
+                square = document.getElementById("mancala").children[zone].children[position];
+                square.innerHTML = parseInt(square.innerHTML) + 1;
+            }
+            numberOfBeads--;
         }
+
+    }
+
+    landOnZone(){
 
     }
 
@@ -117,7 +145,7 @@ class Mancala{
     }
 
     checkWinner(){
-
+        let sum = this._board[this._flag ]
     }
 
     reset(){
@@ -138,6 +166,7 @@ class Mancala{
         let col2 = document.createElement('td');
         col2.rowSpan = "2";
         col2.setAttribute("class", "left-zone");
+        col2.innerHTML = "0";
         row1.appendChild(col2);
 
         // Loop through six cols 
@@ -152,6 +181,7 @@ class Mancala{
         col2 = document.createElement('td');
         col2.rowSpan = "2";
         col2.setAttribute("class", "right-zone");
+        col2.innerHTML = "0";
         row1.appendChild(col2);
 
         mancalaTable.appendChild(row1);

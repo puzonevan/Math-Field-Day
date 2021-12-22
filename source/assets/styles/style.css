@@ -222,8 +222,8 @@ td{
 
 /* Different Board Styles */
 .hex{
-    --s: 30px;  /* size  */
-    --m: 5px;    /* margin */
+    --s: 60px;  /* size  */
+    --m: 15px;    /* margin */
 }
 .hex tr div{
     font-size: 0; /* disable white space between inline block element */
@@ -237,7 +237,7 @@ td{
     display: inline-block;
     font-size:initial;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-    margin-bottom: calc(var(--m) - var(--s) * .49);
+    margin-bottom: calc(var(--m) - var(--s) * .6);
 }
 
 .hex td div{

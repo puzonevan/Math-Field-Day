@@ -47,7 +47,7 @@ class Hex{
             const firstCol = createCol("hex", 0);
 
             // Offset amount
-            firstCol.style.marginLeft = `${row*19}px `;
+            firstCol.style.marginLeft = `${row*31}px `;
 
             // Inner Div
             const firstDiv = document.createElement("div");
