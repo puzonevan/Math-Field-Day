@@ -57,7 +57,10 @@ class Mancala{
                     this.moveBeads(index);
                 }   
                 
+                console.log(this._board);
             });
+
+            
         });
     }
 
@@ -146,33 +149,40 @@ class Mancala{
                     position++;
                 }
             }
+
+            // Update Board
+            if(zone === 0 && position > 0 && position < 7){
+                this._board[zone][position - 1]++;
+            }
+            else if(zone === 1 && position >= 0 && position <= 5){
+                this._board[zone][position]++;
+            }
             
-            zone == 0 ? this._board[zone][position - 1]++ : this._board[zone][position]++;
             square = document.getElementById("mancala").children[zone].children[position];
             square.innerHTML = parseInt(square.innerHTML) + 1;
             numberOfBeads--;
 
             console.log(`Remaining Beads: ${numberOfBeads}`);
 
-            if(numberOfBeads === 0 && zone === 0 && position === 0){
-                clearInterval(move);
-            }
-            else if(numberOfBeads === 0 && zone === 0 && position === 7){
-                clearInterval(move);
-            }
-            else if(numberOfBeads === 0 && this._flag === 0 && zone === 0 && parseInt(square.innerHTML) > 1){
-                numberOfBeads = parseInt(square.innerHTML);
-                square.innerHTML = "0";
-                zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
-            }
-            else if(numberOfBeads === 0 && this._flag === 1 && zone === 1 && parseInt(square.innerHTML) > 1){
-                numberOfBeads = parseInt(square.innerHTML);
-                square.innerHTML = "0";
-                zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
-            }
-            else if(numberOfBeads === 0){
-                clearInterval(move);
-                this.changeTurns();
+            // If beads are 0 
+            if(numberOfBeads === 0){
+                // If last bead was placed on an end zone, clear and don't change turns
+                if((zone === 0 && position === 0) || (zone === 0 && position === 0)){
+                    clearInterval(move);
+                    this.checkWinner();
+                }
+                // If last bead was placed in the same zone as the player, grab beads and continue moving
+                else if((this._flag === 0 && zone === 0 && parseInt(square.innerHTML) > 1) || 
+                (this._flag === 1 && zone === 1 && parseInt(square.innerHTML) > 1)){
+                    numberOfBeads = parseInt(square.innerHTML);
+                    square.innerHTML = "0";
+                    zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
+                }
+                else{
+                    clearInterval(move);
+                    this.checkWinner();
+                    this.changeTurns();
+                }
             }
             
         }, 500);
@@ -184,16 +194,15 @@ class Mancala{
         this.highlightZone();
     }
 
-    landOnZone(){
-
-    }
-
     dumpBeads(){
 
     }
 
     checkWinner(){
-        let sum = this._board[this._flag ]
+        let sum = this._board[this._flag].reduce((acc, curr) =>{
+            return acc + curr;
+        });
+        console.log(sum);
     }
 
     reset(){
