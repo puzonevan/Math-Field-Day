@@ -122,6 +122,7 @@ class Mancala{
         // Every .5 seconds, keep moving beads until no more to move
         var move = setInterval(() =>{
 
+            // Update zone and position 
             if(zone === 0){
                 if(position === 1 && this._flag === 0){
                     zone = 0; 
@@ -158,10 +159,14 @@ class Mancala{
                 this._board[zone][position]++;
             }
             
+            // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
             square.innerHTML = parseInt(square.innerHTML) + 1;
+
+            // Remove a Bead
             numberOfBeads--;
 
+            // Log remaining beads
             console.log(`Remaining Beads: ${numberOfBeads}`);
 
             // If beads are 0 
