@@ -160,10 +160,21 @@ class Mancala{
             else if(numberOfBeads === 0 && zone === 0 && position === 7){
                 clearInterval(move);
             }
+            else if(numberOfBeads === 0 && this._flag === 0 && zone === 0 && parseInt(square.innerHTML) > 1){
+                numberOfBeads = parseInt(square.innerHTML);
+                square.innerHTML = "0";
+                zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
+            }
+            else if(numberOfBeads === 0 && this._flag === 1 && zone === 1 && parseInt(square.innerHTML) > 1){
+                numberOfBeads = parseInt(square.innerHTML);
+                square.innerHTML = "0";
+                zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
+            }
             else if(numberOfBeads === 0){
                 clearInterval(move);
                 this.changeTurns();
             }
+            
         }, 500);
 
     }
