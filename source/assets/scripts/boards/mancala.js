@@ -108,49 +108,108 @@ class Mancala{
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
         console.log(position);
 
-        while(numberOfBeads > 0){
-            // If moving beads on top zone
-            if(zone === 0){
 
-                if(position - 1 > 0){
+        var move = setInterval(() =>{
+            
+            if(zone === 0){
+                if(position === 1){
+                    zone = 0; 
+                    position = 0;
+                }
+                else if(position === 0){
+                    zone = 1; 
+                    position = 0;
+                }
+                else{
                     position--;
                 }
-                else if(this._flag === 0){
-                    square = document.getElementById("mancala").children[0].children[0];
-                    square.innerHTML = parseInt(square.innerHTML) + 1;
-                    this._leftZone++;
-                    zone = 1;
-                    position = 0;
-                    numberOfBeads--;
+            }
+            else if(zone === 1){
+                if(position === 5){
+                    zone = 0; 
+                    position = 7;
+                }
+                else if(position === 7){
+                    zone = 0;
+                    position = 6;
                 }
                 else{
-                    zone = 1;
-                    position = 0;
-                }
-            }
-            // If moving bead on the bottom zone
-            else if(zone === 1){
-                if(position + 1 < 6){
                     position++;
                 }
-                else if(this._flag === 1){
-                    square = document.getElementById("mancala").children[0].children[7];
-                    square.innerHTML = parseInt(square.innerHTML) + 1;
-                    zone = 0;
-                    position = 6;
-                    numberOfBeads--;
-                    this._rightZone++;
-                }
-                else{
-                    zone = 0;
-                    position = 6;
-                }
             }
+            
             zone == 0 ? this._board[zone][position - 1]++ : this._board[zone][position]++;
             square = document.getElementById("mancala").children[zone].children[position];
             square.innerHTML = parseInt(square.innerHTML) + 1;
             numberOfBeads--;
-        }
+            console.log(numberOfBeads);
+
+            if(numberOfBeads === 0){
+                clearInterval(move);
+            }
+        }, 1000);
+        // while(numberOfBeads > 0){
+        //     // If moving beads on top zone
+        //     if(zone === 0){
+        //         if(position - 1 > 0){
+        //             position--;
+        //         }
+        //         else if(this._flag === 0){
+        //             square = document.getElementById("mancala").children[0].children[0];
+        //             square.innerHTML = parseInt(square.innerHTML) + 1;
+        //             this._leftZone++;
+        //             zone = 1;
+        //             position = 0;
+        //             numberOfBeads--;
+        //         }
+        //         else{
+        //             zone = 1;
+        //             position = 0;
+        //         }
+        //     }
+        //     // If moving bead on the bottom zone
+        //     else if(zone === 1){
+
+        //         if(position + 1 < 6){
+        //             position++;
+        //         }
+        //         else if(this._flag === 1){
+        //             square = document.getElementById("mancala").children[0].children[7];
+        //             square.innerHTML = parseInt(square.innerHTML) + 1;
+        //             zone = 0;
+        //             position = 6;
+        //             numberOfBeads--;
+        //             this._rightZone++;
+        //         }
+        //         else{
+        //             zone = 0;
+        //             position = 6;
+        //         }
+        //     }
+
+
+        //     if(numberOfBeads === 1 && zone === 1 && this._board[zone][position] !== 0){
+        //         numberOfBeads += this._board[zone][position];
+        //         this._board[zone][position] = 0;
+        //         square = document.getElementById("mancala").children[zone].children[position];
+        //         square.innerHTML = "0";
+        //     }
+        //     else if(numberOfBeads === 1 && zone === 0 && this._board[zone][position - 1] !== 0){
+        //         numberOfBeads += this._board[zone][position - 1];
+        //         this._board[zone][position] = 0;
+        //         square = document.getElementById("mancala").children[zone].children[position];
+        //         square.innerHTML = "0";
+        //     }
+        //     else{
+        //         zone == 0 ? this._board[zone][position - 1]++ : this._board[zone][position]++;
+        //         square = document.getElementById("mancala").children[zone].children[position];
+        //         square.innerHTML = parseInt(square.innerHTML) + 1;
+        //         numberOfBeads--;
+        //     }
+
+            
+            
+        // }
         console.log(this._board);
 
     }
