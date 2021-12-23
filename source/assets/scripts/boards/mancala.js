@@ -44,20 +44,18 @@ class Mancala{
                 }
 
                 // Do nothing if player clicks on empty zone 
+                if(parseInt(square.innerHTML) === 0){
+                    return;
+                }
 
                 if(this._flag === 0 && square.className == "o-zone"){
                     console.log("x move");
                     this.moveBeads(index);
-                    this._flag = 1;
                 }
                 else if(this._flag === 1 && square.className == "x-zone"){
                     console.log("o move");
                     this.moveBeads(index);
-                    this._flag = 0;
                 }   
-
-                this.highlightZone();
-
                 
             });
         });
@@ -108,11 +106,11 @@ class Mancala{
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
         console.log(position);
 
-
+        
         var move = setInterval(() =>{
-            
             if(zone === 0){
-                if(position === 1){
+                
+                if(position === 1 && this._flag === 0){
                     zone = 0; 
                     position = 0;
                 }
@@ -125,15 +123,19 @@ class Mancala{
                 }
             }
             else if(zone === 1){
-                if(position === 5){
+                
+                if(position === 5 && this._flag === 1){
+                    console.log("a");
                     zone = 0; 
                     position = 7;
                 }
-                else if(position === 7){
+                else if(position === 5){
+                    console.log("b");
                     zone = 0;
                     position = 6;
                 }
                 else{
+                    console.log("c");
                     position++;
                 }
             }
@@ -146,8 +148,9 @@ class Mancala{
 
             if(numberOfBeads === 0){
                 clearInterval(move);
+                this.changeTurns();
             }
-        }, 1000);
+        }, 500);
         // while(numberOfBeads > 0){
         //     // If moving beads on top zone
         //     if(zone === 0){
@@ -212,6 +215,11 @@ class Mancala{
         // }
         console.log(this._board);
 
+    }
+
+    changeTurns(){
+        this._flag === 1 ? this._flag = 0 : this._flag = 1;
+        this.highlightZone();
     }
 
     landOnZone(){
