@@ -47,13 +47,13 @@ class Mancala{
                 if(parseInt(square.innerHTML) === 0){
                     return;
                 }
-
+                
+                // If player 1's turn and square is player's zone
                 if(this._flag === 0 && square.className == "o-zone"){
-                    console.log("x move");
                     this.moveBeads(index);
                 }
+                // If player 2's turn and square is player's zone
                 else if(this._flag === 1 && square.className == "x-zone"){
-                    console.log("o move");
                     this.moveBeads(index);
                 }   
                 
@@ -62,6 +62,9 @@ class Mancala{
     }
 
     highlightZone(){
+        // If player 1's turn
+        // highlight their zone blue 
+        // highlight other zone clear
         if(this._flag === 0){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
                 if(square.className == "o-zone"){
@@ -74,6 +77,9 @@ class Mancala{
                 }
             });
         }
+        // Player 2's turn 
+        // highlight their zone red 
+        // highlight other zone clear
         else if(this._flag === 1){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
                 if(square.className == "o-zone"){
@@ -89,6 +95,8 @@ class Mancala{
     }
 
     moveBeads(index){
+
+        // Initialize zone and position
         let zone; 
         let position; 
         if(this._flag === 0){
@@ -100,16 +108,18 @@ class Mancala{
             position = index - 8;
         }
 
+        // Initialize square and number of beads
         let square = document.getElementById("mancala").children[zone].children[position];
         let numberOfBeads = parseInt(square.innerHTML);
+
+        // Change the square to 0 
         square.innerHTML = "0";
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
-        console.log(position);
 
-        
+        // Every .5 seconds, keep moving beads until no more to move
         var move = setInterval(() =>{
+
             if(zone === 0){
-                
                 if(position === 1 && this._flag === 0){
                     zone = 0; 
                     position = 0;
@@ -125,17 +135,14 @@ class Mancala{
             else if(zone === 1){
                 
                 if(position === 5 && this._flag === 1){
-                    console.log("a");
                     zone = 0; 
                     position = 7;
                 }
                 else if(position === 5){
-                    console.log("b");
                     zone = 0;
                     position = 6;
                 }
                 else{
-                    console.log("c");
                     position++;
                 }
             }
@@ -144,76 +151,20 @@ class Mancala{
             square = document.getElementById("mancala").children[zone].children[position];
             square.innerHTML = parseInt(square.innerHTML) + 1;
             numberOfBeads--;
-            console.log(numberOfBeads);
 
-            if(numberOfBeads === 0){
+            console.log(`Remaining Beads: ${numberOfBeads}`);
+
+            if(numberOfBeads === 0 && zone === 0 && position === 0){
+                clearInterval(move);
+            }
+            else if(numberOfBeads === 0 && zone === 0 && position === 7){
+                clearInterval(move);
+            }
+            else if(numberOfBeads === 0){
                 clearInterval(move);
                 this.changeTurns();
             }
         }, 500);
-        // while(numberOfBeads > 0){
-        //     // If moving beads on top zone
-        //     if(zone === 0){
-        //         if(position - 1 > 0){
-        //             position--;
-        //         }
-        //         else if(this._flag === 0){
-        //             square = document.getElementById("mancala").children[0].children[0];
-        //             square.innerHTML = parseInt(square.innerHTML) + 1;
-        //             this._leftZone++;
-        //             zone = 1;
-        //             position = 0;
-        //             numberOfBeads--;
-        //         }
-        //         else{
-        //             zone = 1;
-        //             position = 0;
-        //         }
-        //     }
-        //     // If moving bead on the bottom zone
-        //     else if(zone === 1){
-
-        //         if(position + 1 < 6){
-        //             position++;
-        //         }
-        //         else if(this._flag === 1){
-        //             square = document.getElementById("mancala").children[0].children[7];
-        //             square.innerHTML = parseInt(square.innerHTML) + 1;
-        //             zone = 0;
-        //             position = 6;
-        //             numberOfBeads--;
-        //             this._rightZone++;
-        //         }
-        //         else{
-        //             zone = 0;
-        //             position = 6;
-        //         }
-        //     }
-
-
-        //     if(numberOfBeads === 1 && zone === 1 && this._board[zone][position] !== 0){
-        //         numberOfBeads += this._board[zone][position];
-        //         this._board[zone][position] = 0;
-        //         square = document.getElementById("mancala").children[zone].children[position];
-        //         square.innerHTML = "0";
-        //     }
-        //     else if(numberOfBeads === 1 && zone === 0 && this._board[zone][position - 1] !== 0){
-        //         numberOfBeads += this._board[zone][position - 1];
-        //         this._board[zone][position] = 0;
-        //         square = document.getElementById("mancala").children[zone].children[position];
-        //         square.innerHTML = "0";
-        //     }
-        //     else{
-        //         zone == 0 ? this._board[zone][position - 1]++ : this._board[zone][position]++;
-        //         square = document.getElementById("mancala").children[zone].children[position];
-        //         square.innerHTML = parseInt(square.innerHTML) + 1;
-        //         numberOfBeads--;
-        //     }
-
-            
-            
-        // }
-        console.log(this._board);
 
     }
 
