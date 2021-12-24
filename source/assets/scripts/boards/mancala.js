@@ -236,6 +236,26 @@ class Mancala{
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "o-zone");
             nCol.innerHTML = "4";
+
+            for(let j = 0; j < 4; j++){
+                const nMarble = document.createElement("img");
+                nMarble.setAttribute("class", "marble-img");
+                let marble = Math.random(); 
+                if(marble <= .5){
+                    nMarble.src = "source/assets/images/icons/bluemarble.png";
+                    nMarble.alt = "blue marble";
+                }
+                else{
+                    nMarble.src = "source/assets/images/icons/redmarble.png";
+                    nMarble.alt = "red marble";
+                }
+                marble = Math.random();
+                nMarble.style.top = `${marble * 40}px`;
+                marble = Math.random();
+                nMarble.style.left = `${marble * 20}px`;
+                nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+                nCol.appendChild(nMarble);
+            }
             row1.appendChild(nCol);
         }
 
@@ -254,7 +274,30 @@ class Mancala{
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "x-zone");
             nCol.innerHTML = "4";
+
+            for(let j = 0; j < 4; j++){
+                const nMarble = document.createElement("img");
+                nMarble.setAttribute("class", "marble-img");
+                let marble = Math.random(); 
+                if(marble <= .5){
+                    nMarble.src = "source/assets/images/icons/bluemarble.png";
+                    nMarble.alt = "blue marble";
+                }
+                else{
+                    nMarble.src = "source/assets/images/icons/redmarble.png";
+                    nMarble.alt = "red marble";
+                }
+                marble = Math.random();
+                nMarble.style.top = `${marble * 40}px`;
+                marble = Math.random();
+                nMarble.style.left = `${marble * 20}px`;
+                nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+                nCol.appendChild(nMarble);
+            }
+            
             row2.appendChild(nCol);
+
+
         }
         mancalaTable.appendChild(row2);
         document.getElementById('board').appendChild(mancalaTable);
