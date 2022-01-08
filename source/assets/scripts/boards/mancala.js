@@ -116,8 +116,10 @@ class Mancala{
         let numberOfBeads = parseInt(square.innerHTML);
 
         // Change the square to 0 
-        square.innerHTML = "0";
+        removeBeads(square);
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
+        // this.changeBeads(square, 0);
+        square.innerHTML = "0";
 
         // Every .5 seconds, keep moving beads until no more to move
         var move = setInterval(() =>{
@@ -161,6 +163,7 @@ class Mancala{
             
             // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
+            
             square.innerHTML = parseInt(square.innerHTML) + 1;
 
             // Remove a Bead
@@ -320,6 +323,30 @@ class Mancala{
         or scoop and place all the beads from the opposite hole to the landed hole. \
         The player can also not move at all when this happens. \
         Whenever a player lands in an empty hole on their side, their turn is over.";
+    }
+}
+
+const createMarble = () =>{
+    const nMarble = document.createElement("img");
+    nMarble.setAttribute("class", "marble-img");
+    let marble = Math.random(); 
+    if(marble <= .5){
+        nMarble.src = "source/assets/images/icons/bluemarble.png";
+        nMarble.alt = "blue marble";
+    }
+    else{
+        nMarble.src = "source/assets/images/icons/redmarble.png";
+        nMarble.alt = "red marble";
+    }
+    marble = Math.random();
+    nMarble.style.top = `${marble * 40}px`;
+    marble = Math.random();
+    nMarble.style.left = `${marble * 20}px`;
+    nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+}
+const removeBeads = (parent) =>{
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
     }
 }
 
