@@ -24,4 +24,21 @@ describe('Five in a Row', () =>{
         });
     });
     
+    // Start function 
+    describe('start function', () =>{
+
+    });
+
+    // Move function 
+    describe('move function', () =>{
+        it('updates board correctly', () =>{
+
+        });
+    });
+
+    // Check Winner function 
+    describe('check winner function', () =>{
+
+    })
+    
 });
