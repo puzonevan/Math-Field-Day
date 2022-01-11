@@ -118,7 +118,6 @@ class Mancala{
         // Change the square to 0 
         removeBeads(square);
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
-        // this.changeBeads(square, 0);
         square.innerHTML = "0";
 
         // Every .5 seconds, keep moving beads until no more to move
@@ -163,9 +162,9 @@ class Mancala{
             
             // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
-            
-            square.innerHTML = parseInt(square.innerHTML) + 1;
+            this.changeBeads(square,square.childElementCount,  parseInt(square.innerHTML) + 1);
 
+            
             // Remove a Bead
             numberOfBeads--;
 
@@ -195,6 +194,24 @@ class Mancala{
             
         }, 500);
 
+    }
+
+    changeBeads(square,amount,  number){
+        square.innerHTML = number;
+        let childrenAmount = amount;
+        if(childrenAmount < number){
+            for(let i = childrenAmount; i < number; i++){
+                square.appendChild(createMarble());
+            }
+        }
+        else{
+            while(childrenAmount > number){
+                square.removeChild(square.children[0]);
+                childrenAmount--;
+            }
+        }
+        
+        
     }
 
     changeTurns(){
@@ -241,22 +258,7 @@ class Mancala{
             nCol.innerHTML = "4";
 
             for(let j = 0; j < 4; j++){
-                const nMarble = document.createElement("img");
-                nMarble.setAttribute("class", "marble-img");
-                let marble = Math.random(); 
-                if(marble <= .5){
-                    nMarble.src = "source/assets/images/icons/bluemarble.png";
-                    nMarble.alt = "blue marble";
-                }
-                else{
-                    nMarble.src = "source/assets/images/icons/redmarble.png";
-                    nMarble.alt = "red marble";
-                }
-                marble = Math.random();
-                nMarble.style.top = `${marble * 40}px`;
-                marble = Math.random();
-                nMarble.style.left = `${marble * 20}px`;
-                nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+                const nMarble = createMarble();
                 nCol.appendChild(nMarble);
             }
             row1.appendChild(nCol);
@@ -279,22 +281,7 @@ class Mancala{
             nCol.innerHTML = "4";
 
             for(let j = 0; j < 4; j++){
-                const nMarble = document.createElement("img");
-                nMarble.setAttribute("class", "marble-img");
-                let marble = Math.random(); 
-                if(marble <= .5){
-                    nMarble.src = "source/assets/images/icons/bluemarble.png";
-                    nMarble.alt = "blue marble";
-                }
-                else{
-                    nMarble.src = "source/assets/images/icons/redmarble.png";
-                    nMarble.alt = "red marble";
-                }
-                marble = Math.random();
-                nMarble.style.top = `${marble * 40}px`;
-                marble = Math.random();
-                nMarble.style.left = `${marble * 20}px`;
-                nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+                const nMarble = createMarble();
                 nCol.appendChild(nMarble);
             }
             
@@ -343,6 +330,7 @@ const createMarble = () =>{
     marble = Math.random();
     nMarble.style.left = `${marble * 20}px`;
     nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
+    return nMarble;
 }
 const removeBeads = (parent) =>{
     while(parent.firstChild){
