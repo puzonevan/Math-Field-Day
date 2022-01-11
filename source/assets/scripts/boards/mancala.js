@@ -56,6 +56,8 @@ class Mancala{
                 else if(this._flag === 1 && square.className == "x-zone"){
                     this.moveBeads(index);
                 }   
+
+                 
                 
                 console.log(this._board);
             });
@@ -190,7 +192,7 @@ class Mancala{
                 (this._flag === 1 && zone === 0 && parseInt(square.innerHTML) === 1)){
                     clearInterval(move);
                     this.checkWinner();
-                    this.changeTurns();
+                    square.style.backgroundColor = "rgba(0, 255, 0, .2)";
                     console.log('Landed on empty other player zone');
                 }
                 else{
