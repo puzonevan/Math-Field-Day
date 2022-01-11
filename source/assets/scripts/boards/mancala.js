@@ -193,6 +193,7 @@ class Mancala{
                     clearInterval(move);
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
+                    square.setAttribute("class", `${square.className} green-zone`);
                     console.log('Landed on empty other player zone');
                 }
                 else{
