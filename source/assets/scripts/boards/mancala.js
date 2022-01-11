@@ -185,6 +185,14 @@ class Mancala{
                     square.innerHTML = "0";
                     zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
                 }
+                // If last bead was placed in other players zone, choose to dump, move, or nothing
+                else if((this._flag === 0 && zone === 1 && parseInt(square.innerHTML) === 1) || 
+                (this._flag === 1 && zone === 0 && parseInt(square.innerHTML) === 1)){
+                    clearInterval(move);
+                    this.checkWinner();
+                    this.changeTurns();
+                    console.log('Landed on empty other player zone');
+                }
                 else{
                     clearInterval(move);
                     this.checkWinner();
