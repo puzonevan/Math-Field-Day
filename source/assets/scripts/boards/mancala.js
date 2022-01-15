@@ -68,15 +68,22 @@ class Mancala{
                 console.log(this._board);
             });
 
-            square.addEventListener('dblclick', this.test);
-
-            
+            // Green Zone (land on other zone)
+            square.addEventListener('dblclick', () =>{
+                if(this._greenZone){
+                    square.classList.remove("green-zone");
+                    this.changeTurns();
+                }
+            });
+            square.addEventListener('dragstart', () =>{
+                if(this._greenZone){
+                    square.classList.remove("green-zone");
+                    this.moveBeads(index);
+                }
+            });
         });
     }
 
-    test(){
-        console.log("hello");
-    }
 
     highlightZone(){
         // If player 1's turn
