@@ -47,6 +47,13 @@ class Mancala{
                 if(parseInt(square.innerHTML) === 0){
                     return;
                 }
+
+                if(this._flag === 3 && square.className.includes("green-zone")){
+                    console.log("Player 1 clicks on green zone");
+                }
+                else if(this._flag === 4 && square.className.includes("green-zone")){
+                    console.log("Player 2 clicks on greens zone");
+                }
                 
                 // If player 1's turn and square is player's zone
                 if(this._flag === 0 && square.className == "o-zone"){
@@ -195,6 +202,7 @@ class Mancala{
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
                     square.setAttribute("class", `${square.className} green-zone`);
                     console.log('Landed on empty other player zone');
+                    this._flag === 1 ? this._flag = 3 : this._flag = 4;
                 }
                 else{
                     clearInterval(move);
