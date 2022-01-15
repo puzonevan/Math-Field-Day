@@ -11,6 +11,7 @@ class Mancala{
         this._player2 = player2;
         this._leftZone = 0;
         this._rightZone = 0;
+        this._greenZone = false;
         this._board = [];
         this.initializeBoard();
         this._flag = 0;
@@ -48,11 +49,9 @@ class Mancala{
                     return;
                 }
 
-                if(this._flag === 3 && square.className.includes("green-zone")){
-                    console.log("Player 1 clicks on green zone");
-                }
-                else if(this._flag === 4 && square.className.includes("green-zone")){
-                    console.log("Player 2 clicks on greens zone");
+                if(this._greenZone && square.className.includes("green-zone")){
+                    console.log("Player clicks on green zone");
+                    square.removeEventListener("dblclick", this.test);
                 }
                 
                 // If player 1's turn and square is player's zone
@@ -69,8 +68,14 @@ class Mancala{
                 console.log(this._board);
             });
 
+            square.addEventListener('dblclick', this.test);
+
             
         });
+    }
+
+    test(){
+        console.log("hello");
     }
 
     highlightZone(){
@@ -202,7 +207,7 @@ class Mancala{
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
                     square.setAttribute("class", `${square.className} green-zone`);
                     console.log('Landed on empty other player zone');
-                    this._flag === 1 ? this._flag = 3 : this._flag = 4;
+                    this._greenZone = true;
                 }
                 else{
                     clearInterval(move);
@@ -340,10 +345,12 @@ const createMarble = () =>{
     nMarble.style.zIndex = `${Math.floor(marble * 4)}`;
     return nMarble;
 }
+
 const removeBeads = (parent) =>{
     while(parent.firstChild){
         parent.removeChild(parent.firstChild);
     }
 }
+
 
 export { Mancala };
