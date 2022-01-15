@@ -48,10 +48,14 @@ class Mancala{
                 if(parseInt(square.innerHTML) === 0){
                     return;
                 }
+                
 
                 if(this._greenZone && square.className.includes("green-zone")){
                     console.log("Player clicks on green zone");
                     square.removeEventListener("dblclick", this.test);
+                }
+                else if(this._greenZone && !square.className.includes("green-zone")){
+                    return;
                 }
                 
                 // If player 1's turn and square is player's zone
