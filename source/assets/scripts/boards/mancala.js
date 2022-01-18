@@ -49,7 +49,7 @@ class Mancala{
                     return;
                 }
                 
-
+                // Check for green zone 
                 if(this._greenZone && square.className.includes("green-zone")){
                     console.log("Player clicks on green zone");
                     square.removeEventListener("dblclick", this.test);
