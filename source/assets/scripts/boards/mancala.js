@@ -245,8 +245,8 @@ class Mancala{
         this.highlightZone();
     }
 
-    dumpBeads(){
-
+    dumpBeads(index){
+        
     }
 
     checkWinner(){
