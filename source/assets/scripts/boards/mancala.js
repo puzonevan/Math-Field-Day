@@ -246,7 +246,13 @@ class Mancala{
     }
 
     dumpBeads(index){
-        
+        // Find opposite square of the green
+
+        // Find green square 
+
+        // Get value at green square and add it to opposite square
+
+        // Update the beads
     }
 
     checkWinner(){
