@@ -72,13 +72,15 @@ class Mancala{
                 console.log(this._board);
             });
 
-            // Green Zone (land on other zone)
+            // These only listen when green zone is true
+            // Double Click changes turns
             square.addEventListener('dblclick', () =>{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
                     this.changeTurns();
                 }
             });
+            // Drag dumps the beads
             square.addEventListener('dragstart', () =>{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
