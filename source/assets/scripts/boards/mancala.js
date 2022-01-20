@@ -30,19 +30,23 @@ class Mancala{
 
     start(){
 
+        // Highlight Player 1 Zone
         this.highlightZone();
+
         // Loop through each square
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
-            // Each square listens for a player move(click)
+            // Square 'click' listen: move beads
             square.addEventListener("click", () =>{
 
-                // Do nothing if player clicks on either end zone
+                // Do nothing 
+                // If player clicked on the left or right zone
                 if(square.className === "left-zone" || square.className == "right-zone"){
                     return;
                 }
 
-                // Do nothing if player clicks on empty zone 
+                // Do nothing 
+                // if player clicks on empty zone 
                 if(parseInt(square.innerHTML) === 0){
                     return;
                 }
@@ -70,15 +74,16 @@ class Mancala{
                 console.log(this._board);
             });
 
-            // These only listen when green zone is true
-            // Double Click changes turns
+            // Square 'dblclick' listen: change turns 
+            // Only if green zone is true
             square.addEventListener('dblclick', () =>{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
                     this.changeTurns();
                 }
             });
-            // Drag dumps the beads
+            // Square 'dragstart' listen: dump beads
+            // Only if green zone is true 
             square.addEventListener('dragstart', () =>{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
