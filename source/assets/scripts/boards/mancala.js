@@ -84,7 +84,7 @@ class Mancala{
             square.addEventListener('dragstart', () =>{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
-                    this.moveBeads(index);
+                    this.dumpBeads(index);
                 }
             });
         });
@@ -242,17 +242,30 @@ class Mancala{
 
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
+        if(this._greenZone){
+            this._greenZone = 0;
+        }
         this.highlightZone();
     }
 
     dumpBeads(index){
         // Find opposite square of the green
-
+        let rowOpp = this._flag === 1 ? 1 : 0;
+        let colOpp = this._flag === 1 ? index - 1 : index - 7;
+        let squareOpp = document.getElementById("mancala").children[rowOpp].children[colOpp];
         // Find green square 
-
+        
         // Get value at green square and add it to opposite square
 
         // Update the beads
+
+        console.log(rowOpp);
+        console.log(colOpp);
+        console.log(squareOpp);
+        this.changeTurns();
+        if(this._greenZone){
+            this._greenZone = 0;
+        }
     }
 
     checkWinner(){
