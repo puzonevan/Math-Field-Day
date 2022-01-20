@@ -12,10 +12,8 @@ class Mancala{
         this._leftZone = 0;
         this._rightZone = 0;
         this._greenZone = false;
-        this._board = [];
-        this.initializeBoard();
+        this._board = this.initializeBoard();
         this._flag = 0;
-        console.log(this._board);
     }
 
     initializeBoard(){
@@ -27,7 +25,7 @@ class Mancala{
             }
             boards.push(zone);
         }
-        this._board = boards;
+        return boards;
     }
 
     start(){
@@ -280,6 +278,7 @@ class Mancala{
         this._flag = 0;
         this._player1.reset();
         this._player2.reset();
+        this._greenZone = false;
         this.start();
     }
 
@@ -356,6 +355,8 @@ class Mancala{
         The player can also not move at all when this happens. \
         Whenever a player lands in an empty hole on their side, their turn is over.";
     }
+
+    
 }
 
 const createMarble = () =>{
