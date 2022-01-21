@@ -14,6 +14,7 @@ class Mancala{
         this._greenZone = false;
         this._board = this.initializeBoard();
         this._flag = 0;
+        this._moving = false;
     }
 
     initializeBoard(){
@@ -61,11 +62,13 @@ class Mancala{
                 }
                 
                 // If player 1's turn and square is player's zone
-                if(this._flag === 0 && square.className == "o-zone"){
+                if(this._flag === 0 && square.className == "o-zone" && !this._moving){
+                    this._moving = true;
                     this.moveBeads(index);
                 }
                 // If player 2's turn and square is player's zone
-                else if(this._flag === 1 && square.className == "x-zone"){
+                else if(this._flag === 1 && square.className == "x-zone" && !this._moving){
+                    this._moving = true;
                     this.moveBeads(index);
                 }   
 
@@ -140,7 +143,7 @@ class Mancala{
         // Change the square to 0 
         removeBeads(square);
         zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
-        square.innerHTML = "0";
+        square.appendChild(createBeadValue(0));
 
         // Every .5 seconds, keep moving beads until no more to move
         var move = setInterval(() =>{
@@ -184,7 +187,7 @@ class Mancala{
             
             // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
-            this.changeBeads(square,  parseInt(square.innerHTML) + 1);
+            this.changeBeads(square,  parseInt(square.children[0].innerHTML) + 1);
 
             
             // Remove a Bead
@@ -197,19 +200,21 @@ class Mancala{
             if(numberOfBeads === 0){
                 // If last bead was placed on an end zone, clear and don't change turns
                 if((zone === 0 && position === 0) || (zone === 0 && position === 7)){
+                    this._moving = false;
                     clearInterval(move);
                     this.checkWinner();
                 }
                 // If last bead was placed in the same zone as the player, grab beads and continue moving
-                else if((this._flag === 0 && zone === 0 && parseInt(square.innerHTML) > 1) || 
-                (this._flag === 1 && zone === 1 && parseInt(square.innerHTML) > 1)){
-                    numberOfBeads = parseInt(square.innerHTML);
-                    square.innerHTML = "0";
+                else if((this._flag === 0 && zone === 0 && parseInt(square.children[0].innerHTML) > 1) || 
+                (this._flag === 1 && zone === 1 && parseInt(square.children[0].innerHTML) > 1)){
+                    numberOfBeads = parseInt(square.children[0].innerHTML);
+                    removeBeads(square);
+                    square.appendChild(createBeadValue(0));
                     zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
                 }
                 // If last bead was placed in other players zone, choose to dump, move, or nothing
-                else if((this._flag === 0 && zone === 1 && parseInt(square.innerHTML) === 1) || 
-                (this._flag === 1 && zone === 0 && parseInt(square.innerHTML) === 1)){
+                else if((this._flag === 0 && zone === 1 && parseInt(square.children[0].innerHTML) === 1) || 
+                (this._flag === 1 && zone === 0 && parseInt(square.children[0].innerHTML) === 1)){
                     clearInterval(move);
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
@@ -218,6 +223,7 @@ class Mancala{
                     this._greenZone = true;
                 }
                 else{
+                    this._moving = false;
                     clearInterval(move);
                     this.checkWinner();
                     this.changeTurns();
@@ -237,10 +243,8 @@ class Mancala{
     }
 
     changeBeads(square, number){
-        square.innerHTML = number;
-        for(let i = 0; i < number; i++){
-            square.appendChild(createMarble());
-        }   
+        square.children[0].innerHTML = number;
+        square.appendChild(createMarble()); 
     }
 
     changeTurns(){
@@ -297,7 +301,7 @@ class Mancala{
         let col2 = document.createElement('td');
         col2.rowSpan = "2";
         col2.setAttribute("class", "left-zone");
-        col2.innerHTML = "0";
+        col2.appendChild(createBeadValue(0));
         row1.appendChild(col2);
 
         // Loop through six cols 
@@ -319,7 +323,7 @@ class Mancala{
         col2 = document.createElement('td');
         col2.rowSpan = "2";
         col2.setAttribute("class", "right-zone");
-        col2.innerHTML = "0";
+        col2.appendChild(createBeadValue(0));
         row1.appendChild(col2);
 
         mancalaTable.appendChild(row1);
@@ -392,5 +396,10 @@ const removeBeads = (parent) =>{
     }
 }
 
+const createBeadValue = (value) =>{
+    const pValue = document.createElement("p");
+    pValue.innerHTML = value;
+    return pValue;
+}
 
 export { Mancala };
