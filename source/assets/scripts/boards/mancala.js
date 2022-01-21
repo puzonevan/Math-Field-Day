@@ -130,20 +130,12 @@ class Mancala{
     moveBeads(index){
 
         // Initialize zone and position
-        let zone; 
-        let position; 
-        if(this._flag === 0){
-            zone = 0;
-            position = index;
-        }
-        else if(this._flag === 1){
-            zone = 1;
-            position = index - 8;
-        }
+        let zone = this.getRow();
+        let position = this.getCol(index);
 
         // Initialize square and number of beads
         let square = document.getElementById("mancala").children[zone].children[position];
-        let numberOfBeads = parseInt(square.innerHTML);
+        let numberOfBeads = parseInt(square.children[0].innerHTML);
 
         // Change the square to 0 
         removeBeads(square);
@@ -234,6 +226,14 @@ class Mancala{
             
         }, 500);
 
+    }
+
+    getRow(){
+        return(this._flag === 0 ? 0 : 1);
+    }
+
+    getCol(index){
+        return(this._flag === 0 ? index : index - 8);
     }
 
     changeBeads(square, number){
@@ -339,8 +339,6 @@ class Mancala{
             }
             
             row2.appendChild(nCol);
-
-
         }
         mancalaTable.appendChild(row2);
         document.getElementById('board').appendChild(mancalaTable);
