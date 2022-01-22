@@ -34,7 +34,8 @@ class Mancala{
         // Highlight Player 1 Zone
         this.highlightZone();
 
-        // Loop through each square
+        // Loop through each square 
+        // Event listeners to each square
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
             // Square 'click' listen: move beads
@@ -83,6 +84,8 @@ class Mancala{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
                     this.changeTurns();
+                    this._moving = false;
+                    this._greenZone = false;
                 }
             });
             // Square 'dragstart' listen: dump beads
@@ -91,6 +94,8 @@ class Mancala{
                 if(this._greenZone){
                     square.classList.remove("green-zone");
                     this.dumpBeads(index);
+                    this._moving = false;
+                    this._greenZone = false;
                 }
             });
         });
@@ -249,9 +254,6 @@ class Mancala{
 
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        if(this._greenZone){
-            this._greenZone = 0;
-        }
         this.highlightZone();
     }
 
