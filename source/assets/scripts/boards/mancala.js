@@ -346,10 +346,10 @@ class Mancala{
     }
 
     changeRules(){
-        // Change game title in header
+        // Change Header Title
         document.getElementById("game-title-current").innerHTML = "Mancala";
 
-        // Change game rules in rules lightbox
+        // Change rules in lightbox
         document.getElementById("game-name").innerHTML = "Mancala";
         document.getElementById("game-rules").innerHTML = "Choose which player starts. The player can choose any hole with beads on \
         their side, scoops up the beads, and distributes them one bead to a hole \
