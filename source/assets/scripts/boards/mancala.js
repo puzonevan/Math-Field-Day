@@ -308,9 +308,7 @@ class Mancala{
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "o-zone");
-            const amount = document.createElement("p");
-            amount.innerHTML = "4";
-            nCol.appendChild(amount);
+            nCol.appendChild(createBeadValue(4));
 
             for(let j = 0; j < 4; j++){
                 const nMarble = createMarble();
@@ -333,9 +331,7 @@ class Mancala{
         for(let i = 0; i < 6; i++){
             const nCol = document.createElement('td');
             nCol.setAttribute("class", "x-zone");
-            const amount = document.createElement("p");
-            amount.innerHTML = "4";
-            nCol.appendChild(amount);
+            nCol.appendChild(createBeadValue(4));
 
             for(let j = 0; j < 4; j++){
                 const nMarble = createMarble();
