@@ -143,7 +143,8 @@ class Mancala{
 
         // Initialize square and number of beads
         let square = document.getElementById("mancala").children[zone].children[position];
-        let numberOfBeads = parseInt(square.children[0].innerHTML);
+        let value = square.children[0].innerHTML;
+        let numberOfBeads = parseInt(value);
 
         // Change the square to 0 
         removeBeads(square);
