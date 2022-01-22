@@ -194,7 +194,8 @@ class Mancala{
             // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
             value = square.children[0].innerHTML;
-            this.changeBeads(square,  parseInt(value) + 1);
+            this.changeBeads(square, parseInt(value) + 1);
+            value = square.children[0].innerHTML;
 
             
             // Remove a Bead
