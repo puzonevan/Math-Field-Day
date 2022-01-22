@@ -292,55 +292,55 @@ class Mancala{
     }
 
     createBoard(){
+
+        /***** HELPER FUNCTIONS *****/
+        // Create large zone for bead collecting
+        const createZone = () =>{
+            let zone = document.createElement("td");
+            zone.rowSpan = "2";
+            zone.setAttribute("class", "left-zone");
+            zone.appendChild(createBeadValue(0));
+            return zone;
+        }
+
+        // Create 6 squares for the player
+        const createSix = (row) =>{
+            for(let i = 0; i < 6; i++){
+                const nCol = document.createElement('td');
+                nCol.setAttribute("class", "o-zone");
+                nCol.appendChild(createBeadValue(4));
+
+                for(let j = 0; j < 4; j++){
+                    const nMarble = createMarble();
+                    nCol.appendChild(nMarble);
+                }
+                row.appendChild(nCol);
+            }
+        }
+
+        /***** Mancala Table *****/
         // Mancala Table
         const mancalaTable = createTable("mancala");
 
-        // Insert First Row 
+        // First Row 
         const row1 = document.createElement('tr');
-        // Insert First Col with row span 2 
-        let col2 = document.createElement('td');
-        col2.rowSpan = "2";
-        col2.setAttribute("class", "left-zone");
-        col2.appendChild(createBeadValue(0));
-        row1.appendChild(col2);
-
-        // Loop through six cols 
-        for(let i = 0; i < 6; i++){
-            const nCol = document.createElement('td');
-            nCol.setAttribute("class", "o-zone");
-            nCol.appendChild(createBeadValue(4));
-
-            for(let j = 0; j < 4; j++){
-                const nMarble = createMarble();
-                nCol.appendChild(nMarble);
-            }
-            row1.appendChild(nCol);
-        }
-
-        // Insert Second Col with row span 2 
-        col2 = document.createElement('td');
-        col2.rowSpan = "2";
-        col2.setAttribute("class", "right-zone");
-        col2.appendChild(createBeadValue(0));
-        row1.appendChild(col2);
-
+        // Left Zone
+        row1.appendChild(createZone());
+        // 6 Squares
+        createSix(row1);
+        // Right Zone 
+        row1.appendChild(createZone());
+        // Add to Table
         mancalaTable.appendChild(row1);
 
-        // Create row 2
+        // Second Row
         const row2 = document.createElement('tr');
-        for(let i = 0; i < 6; i++){
-            const nCol = document.createElement('td');
-            nCol.setAttribute("class", "x-zone");
-            nCol.appendChild(createBeadValue(4));
-
-            for(let j = 0; j < 4; j++){
-                const nMarble = createMarble();
-                nCol.appendChild(nMarble);
-            }
-            
-            row2.appendChild(nCol);
-        }
+        // 6 Squares
+        createSix(row2);
+        // Add to Table
         mancalaTable.appendChild(row2);
+
+        // Add table to DOM 
         document.getElementById('board').appendChild(mancalaTable);
     
     }
