@@ -193,7 +193,8 @@ class Mancala{
             
             // Update Board DOM
             square = document.getElementById("mancala").children[zone].children[position];
-            this.changeBeads(square,  parseInt(square.children[0].innerHTML) + 1);
+            value = square.children[0].innerHTML;
+            this.changeBeads(square,  parseInt(value) + 1);
 
             
             // Remove a Bead
@@ -207,32 +208,33 @@ class Mancala{
                 // If last bead was placed on an end zone, clear and don't change turns
                 if((zone === 0 && position === 0) || (zone === 0 && position === 7)){
                     this._moving = false;
-                    clearInterval(move);
                     this.checkWinner();
+                    clearInterval(move);
                 }
                 // If last bead was placed in the same zone as the player, grab beads and continue moving
-                else if((this._flag === 0 && zone === 0 && parseInt(square.children[0].innerHTML) > 1) || 
-                (this._flag === 1 && zone === 1 && parseInt(square.children[0].innerHTML) > 1)){
-                    numberOfBeads = parseInt(square.children[0].innerHTML);
+                else if((this._flag === 0 && zone === 0 && parseInt(value) > 1) || 
+                (this._flag === 1 && zone === 1 && parseInt(value) > 1)){
+                    numberOfBeads = parseInt(value);
                     removeBeads(square);
                     square.appendChild(createBeadValue(0));
                     zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
                 }
                 // If last bead was placed in other players zone, choose to dump, move, or nothing
-                else if((this._flag === 0 && zone === 1 && parseInt(square.children[0].innerHTML) === 1) || 
-                (this._flag === 1 && zone === 0 && parseInt(square.children[0].innerHTML) === 1)){
-                    clearInterval(move);
+                else if((this._flag === 0 && zone === 1 && parseInt(value) === 1) || 
+                (this._flag === 1 && zone === 0 && parseInt(value) === 1)){
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
                     square.setAttribute("class", `${square.className} green-zone`);
                     console.log('Landed on empty other player zone');
                     this._greenZone = true;
+                    clearInterval(move);
                 }
                 else{
+                    console.log('Change Turns');
                     this._moving = false;
-                    clearInterval(move);
                     this.checkWinner();
                     this.changeTurns();
+                    clearInterval(move);
                 }
             }
             
@@ -254,7 +256,9 @@ class Mancala{
     }
 
     changeTurns(){
+        console.log(this._flag);
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
+        console.log(this._flag);
         this.highlightZone();
     }
 
@@ -307,10 +311,10 @@ class Mancala{
         }
 
         // Create 6 squares for the player
-        const createSix = (row) =>{
+        const createSix = (row, zone) =>{
             for(let i = 0; i < 6; i++){
                 const nCol = document.createElement('td');
-                nCol.setAttribute("class", "o-zone");
+                nCol.setAttribute("class", `${zone}-zone`);
                 nCol.appendChild(createBeadValue(4));
 
                 for(let j = 0; j < 4; j++){
@@ -330,7 +334,7 @@ class Mancala{
         // Left Zone
         row1.appendChild(createZone());
         // 6 Squares
-        createSix(row1);
+        createSix(row1, 'o');
         // Right Zone 
         row1.appendChild(createZone());
         // Add to Table
@@ -339,7 +343,7 @@ class Mancala{
         // Second Row
         const row2 = document.createElement('tr');
         // 6 Squares
-        createSix(row2);
+        createSix(row2, 'x');
         // Add to Table
         mancalaTable.appendChild(row2);
 
