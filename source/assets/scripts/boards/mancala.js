@@ -366,6 +366,8 @@ class Mancala{
     
 }
 
+/***** HELPER FUNCTIONS *****/
+// Create Marble DOM element
 const createMarble = () =>{
     const nMarble = document.createElement("img");
     nMarble.setAttribute("class", "marble-img");
@@ -386,12 +388,14 @@ const createMarble = () =>{
     return nMarble;
 }
 
+// Remove Marbles from DOM 
 const removeBeads = (parent) =>{
     while(parent.firstChild){
         parent.removeChild(parent.firstChild);
     }
 }
 
+// Create p containing value of beads
 const createBeadValue = (value) =>{
     const pValue = document.createElement("p");
     pValue.innerHTML = value;
