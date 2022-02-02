@@ -380,6 +380,7 @@ const createMarble = () =>{
     const nMarble = document.createElement("img");
     nMarble.setAttribute("class", "marble-img");
     let marble = Math.random(); 
+    // Chance for blue or red marble 
     if(marble <= .5){
         nMarble.src = "source/assets/images/icons/bluemarble.png";
         nMarble.alt = "blue marble";
