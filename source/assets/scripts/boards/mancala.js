@@ -12,9 +12,9 @@ class Mancala{
         this._leftZone = 0;
         this._rightZone = 0;
         this._greenZone = false;
+        this._moving = false;
         this._board = this.initializeBoard();
         this._flag = 0;
-        this._moving = false;
     }
 
     initializeBoard(){
@@ -101,40 +101,6 @@ class Mancala{
                 }
             });
         });
-    }
-
-
-    highlightZone(){
-        // If player 1's turn
-        // highlight their zone blue 
-        // highlight other zone clear
-        if(this._flag === 0){
-            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-zone"){
-                    square.style.backgroundColor = "rgba(0, 0, 255, .2)";
-                }
-            });
-            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-zone"){
-                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
-                }
-            });
-        }
-        // Player 2's turn 
-        // highlight their zone red 
-        // highlight other zone clear
-        else if(this._flag === 1){
-            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-zone"){
-                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
-                }
-            });
-            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-zone"){
-                    square.style.backgroundColor = "rgba(255, 0, 0, .2)";
-                }
-            });
-        }
     }
 
     moveBeads(index){
@@ -245,24 +211,6 @@ class Mancala{
 
     }
 
-    getRow(){
-        return(this._flag === 0 ? 0 : 1);
-    }
-
-    getCol(index){
-        return(this._flag === 0 ? index : index - 8);
-    }
-
-    changeBeads(square, number){
-        square.children[0].innerHTML = number;
-        square.appendChild(createMarble()); 
-    }
-
-    changeTurns(){
-        this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        this.highlightZone();
-    }
-
     dumpBeads(index){
         // Find opposite square of the green
         let rowOpp = this._flag === 1 ? 1 : 0;
@@ -276,6 +224,60 @@ class Mancala{
 
         this.changeTurns();
     }
+
+    changeTurns(){
+        this._flag === 1 ? this._flag = 0 : this._flag = 1;
+        this.highlightZone();
+    } 
+
+    highlightZone(){
+        // If player 1's turn
+        // highlight their zone blue 
+        // highlight other zone clear
+        if(this._flag === 0){
+            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
+                if(square.className == "o-zone"){
+                    square.style.backgroundColor = "rgba(0, 0, 255, .2)";
+                }
+            });
+            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
+                if(square.className == "x-zone"){
+                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+            });
+        }
+        // Player 2's turn 
+        // highlight their zone red 
+        // highlight other zone clear
+        else if(this._flag === 1){
+            [...document.getElementById("mancala").children[0].children].forEach((square) =>{
+                if(square.className == "o-zone"){
+                    square.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+            });
+            [...document.getElementById("mancala").children[1].children].forEach((square) =>{
+                if(square.className == "x-zone"){
+                    square.style.backgroundColor = "rgba(255, 0, 0, .2)";
+                }
+            });
+        }
+    }
+
+    
+
+    getRow(){
+        return(this._flag === 0 ? 0 : 1);
+    }
+
+    getCol(index){
+        return(this._flag === 0 ? index : index - 8);
+    }
+
+    
+
+    
+
+    
 
     checkWinner(){
         let sum = this._board[this._flag].reduce((acc, curr) =>{
