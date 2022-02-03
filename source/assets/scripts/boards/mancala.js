@@ -56,7 +56,9 @@ class Mancala{
                 // Check for green zone 
                 if(this._greenZone && square.className.includes("green-zone")){
                     console.log("Player clicks on green zone");
-                    square.removeEventListener("dblclick", this.test);
+                    // move opposite beads
+                    
+                    
                 }
                 else if(this._greenZone && !square.className.includes("green-zone")){
                     return;
@@ -257,9 +259,7 @@ class Mancala{
     }
 
     changeTurns(){
-        console.log(this._flag);
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        console.log(this._flag);
         this.highlightZone();
     }
 
@@ -274,13 +274,7 @@ class Mancala{
 
         // Update the beads
 
-        console.log(rowOpp);
-        console.log(colOpp);
-        console.log(squareOpp);
         this.changeTurns();
-        if(this._greenZone){
-            this._greenZone = 0;
-        }
     }
 
     checkWinner(){
