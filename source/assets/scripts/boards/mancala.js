@@ -32,7 +32,7 @@ class Mancala{
     start(){
 
         // Highlight Player 1 rowDOM
-        this.highlightrowDOM();
+        this.highlightZone();
 
         // Loop through each square 
         // Event listeners to each square
@@ -40,42 +40,27 @@ class Mancala{
 
             // Square 'click' listen: move beads
             square.addEventListener("click", () =>{
-
                 // Do nothing 
                 // If player clicked on the left or right rowDOM
-                if(square.className === "left-rowDOM" || square.className == "right-rowDOM"){
-                    return;
-                }
-
-                // Do nothing 
-                // if player clicks on empty rowDOM 
-                if(parseInt(square.innerHTML) === 0){
-                    return;
-                }
+                if(square.className === "left-zone" || square.className == "right-zone")return;
+                // If player clicks on empty rowDOM 
+                if(parseInt(square.children[0].innerHTML) === 0)return;
+                // If green and doesn't contain green zone class
+                if(this._green && !square.className.includes("green-zone")) return;
+                if(this._moving) return;
                 
+                this._moving = true;
+
                 // Check for green rowDOM 
-                if(this._green && square.className.includes("green-rowDOM")){
-                    console.log("Player clicks on green rowDOM");
-                    // move opposite beads
-                    
-        
-                }
-                else if(this._green && !square.className.includes("green-rowDOM")){
-                    return;
+                if(this._green && square.className.includes("green-zone")){
+                    console.log("move opposite beads");
                 }
                 
                 // If player 1's turn and square is player's rowDOM
-                if(this._flag === 0 && square.className == "o-rowDOM" && !this._moving){
-                    this._moving = true;
+                if((this._flag === 0 && square.className == "o-zone") || 
+                    (this._flag === 1 && square.className == "x-zone")){
                     this.moveBeads(index);
-                }
-                // If player 2's turn and square is player's rowDOM
-                else if(this._flag === 1 && square.className == "x-rowDOM" && !this._moving){
-                    this._moving = true;
-                    this.moveBeads(index);
-                }   
-
-                 
+                }  
                 
                 console.log(this._board);
             });
@@ -200,6 +185,7 @@ class Mancala{
     }
 
     updateBoard(row, col, value){
+        if(row === 0 && (col === 0 || col === 7)) return;
         if(row === 0){
             this._board[row][col - 1] = value;
         }
@@ -234,21 +220,21 @@ class Mancala{
 
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        this.highlightrowDOM();
+        this.highlightZone();
     } 
 
-    highlightrowDOM(){
+    highlightZone(){
         // If player 1's turn
         // highlight their rowDOM blue 
         // highlight other rowDOM clear
         if(this._flag === 0){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-rowDOM"){
+                if(square.className == "o-zone"){
                     square.style.backgroundColor = "rgba(0, 0, 255, .2)";
                 }
             });
             [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-rowDOM"){
+                if(square.className == "x-zone"){
                     square.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 }
             });
@@ -258,12 +244,12 @@ class Mancala{
         // highlight other rowDOM clear
         else if(this._flag === 1){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-rowDOM"){
+                if(square.className == "o-zone"){
                     square.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 }
             });
             [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-rowDOM"){
+                if(square.className == "x-zone"){
                     square.style.backgroundColor = "rgba(255, 0, 0, .2)";
                 }
             });
@@ -309,19 +295,19 @@ class Mancala{
 
         /***** HELPER FUNCTIONS *****/
         // Create large rowDOM for bead collecting
-        const createrowDOM = () =>{
-            let rowDOM = document.createElement("td");
-            rowDOM.rowSpan = "2";
-            rowDOM.setAttribute("class", "left-rowDOM");
-            rowDOM.appendChild(createBeadValue(0));
-            return rowDOM;
+        const createZone = (name) =>{
+            let zone = document.createElement("td");
+            zone.rowSpan = "2";
+            zone.setAttribute("class", `${name}-zone`);
+            zone.appendChild(createBeadValue(0));
+            return zone;
         }
 
         // Create 6 squares for the player
-        const createSix = (row, rowDOM) =>{
+        const createSix = (row, col) =>{
             for(let i = 0; i < 6; i++){
                 const nCol = document.createElement('td');
-                nCol.setAttribute("class", `${rowDOM}-rowDOM`);
+                nCol.setAttribute("class", `${col}-zone`);
                 nCol.appendChild(createBeadValue(4));
 
                 for(let j = 0; j < 4; j++){
@@ -339,11 +325,11 @@ class Mancala{
         // First Row 
         const row1 = document.createElement('tr');
         // Left rowDOM
-        row1.appendChild(createrowDOM());
+        row1.appendChild(createZone('left'));
         // 6 Squares
         createSix(row1, 'o');
         // Right rowDOM 
-        row1.appendChild(createrowDOM());
+        row1.appendChild(createZone('right'));
         // Add to Table
         mancalaTable.appendChild(row1);
 
