@@ -41,22 +41,26 @@ class Mancala{
             // Square 'click' listen: move beads
             square.addEventListener("click", () =>{
                 // Do nothing 
-                // If player clicked on the left or right rowDOM
-                if(square.className === "left-zone" || square.className == "right-zone")return;
                 // If player clicks on empty rowDOM 
                 if(parseInt(square.children[0].innerHTML) === 0)return;
-                // If green and doesn't contain green zone class
-                if(this._green && !square.className.includes("green-zone")) return;
                 // If beads are already moving
                 if(this._moving) return;
+
+                if(this._green && (square.className.includes("left-zone") || square.className.includes("right-zone"))){
+                    // Remove green from square
+                    this.changeTurns();
+                    this._moving = false;
+                    this._green = false;
+                }
                 
                 this._moving = true;
 
-                // Check for green rowDOM 
+                // If square is green, move opposite beads
                 if(this._green && square.className.includes("green-zone")){
                     console.log("move opposite beads");
                     let opposite = index < 8 ? index + 7 : index - 7;
                     square.classList.remove("green-zone");
+                    this._green = false;
                     this.moveBeads(opposite);
                 }
                 
@@ -68,18 +72,10 @@ class Mancala{
                 }  
                 
                 console.log(this._board);
+                console.log(this._flag);
             });
 
-            // Square 'dblclick' listen: change turns 
-            // Only if green rowDOM is true
-            square.addEventListener('dblclick', () =>{
-                if(this._green){
-                    square.classList.remove("green-zone");
-                    this.changeTurns();
-                    this._moving = false;
-                    this._green = false;
-                }
-            });
+        
             // Square 'dragstart' listen: dump beads
             // Only if green rowDOM is true 
             square.addEventListener('dragstart', () =>{
