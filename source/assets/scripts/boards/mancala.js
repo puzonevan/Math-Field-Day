@@ -9,9 +9,9 @@ class Mancala{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
-        this._leftrowDOM = 0;
-        this._rightrowDOM = 0;
-        this._greenrowDOM = false;
+        this._left = 0;
+        this._right = 0;
+        this._green = false;
         this._moving = false;
         this._board = this.initializeBoard();
         this._flag = 0;
@@ -54,13 +54,13 @@ class Mancala{
                 }
                 
                 // Check for green rowDOM 
-                if(this._greenrowDOM && square.className.includes("green-rowDOM")){
+                if(this._green && square.className.includes("green-rowDOM")){
                     console.log("Player clicks on green rowDOM");
                     // move opposite beads
                     
-                    
+        
                 }
-                else if(this._greenrowDOM && !square.className.includes("green-rowDOM")){
+                else if(this._green && !square.className.includes("green-rowDOM")){
                     return;
                 }
                 
@@ -83,21 +83,21 @@ class Mancala{
             // Square 'dblclick' listen: change turns 
             // Only if green rowDOM is true
             square.addEventListener('dblclick', () =>{
-                if(this._greenrowDOM){
-                    square.classList.remove("green-rowDOM");
+                if(this._green){
+                    square.classList.remove("green-zone");
                     this.changeTurns();
                     this._moving = false;
-                    this._greenrowDOM = false;
+                    this._green = false;
                 }
             });
             // Square 'dragstart' listen: dump beads
             // Only if green rowDOM is true 
             square.addEventListener('dragstart', () =>{
-                if(this._greenrowDOM){
-                    square.classList.remove("green-rowDOM");
+                if(this._green){
+                    square.classList.remove("green-zone");
                     this.dumpBeads(index);
                     this._moving = false;
-                    this._greenrowDOM = false;
+                    this._green = false;
                 }
             });
         });
@@ -150,13 +150,12 @@ class Mancala{
                 }
             }
             
-            // Update Board DOM
+            // Update Board and DOM
             square = document.getElementById("mancala").children[rowDOM].children[colDOM];
             this.updateBoard(rowDOM, colDOM, parseInt(square.children[0].innerHTML)+ 1);
             this.addBeads(square, parseInt(square.children[0].innerHTML)+ 1);
             value = square.children[0].innerHTML;
 
-            
             // Remove a Bead
             numberOfBeads--;
 
@@ -165,32 +164,30 @@ class Mancala{
 
             // If beads are 0 
             if(numberOfBeads === 0){
-                // If last bead was placed on an end rowDOM, clear and don't change turns
+                // If last bead was placed on an end row, clear and don't change turns
                 if((rowDOM === 0 && colDOM === 0) || (rowDOM === 0 && colDOM === 7)){
                     this._moving = false;
                     this.checkWinner();
                     clearInterval(move);
                 }
-                // If last bead was placed in the same rowDOM as the player, grab beads and continue moving
+                // If last bead was placed in the same row as the player, grab beads and continue moving
                 else if((this._flag === 0 && rowDOM === 0 && parseInt(value) > 1) || 
                 (this._flag === 1 && rowDOM === 1 && parseInt(value) > 1)){
                     numberOfBeads = parseInt(value);
                     removeBeads(square);
                     square.appendChild(createBeadValue(0));
-                    rowDOM == 0 ? this._board[rowDOM][colDOM - 1] = 0 : this._board[rowDOM][colDOM] = 0;
+                    this.updateBoard(rowDOM, colDOM, 0);
                 }
                 // If last bead was placed in other players rowDOM, choose to dump, move, or nothing
                 else if((this._flag === 0 && rowDOM === 1 && parseInt(value) === 1) || 
                 (this._flag === 1 && rowDOM === 0 && parseInt(value) === 1)){
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
-                    square.setAttribute("class", `${square.className} green-rowDOM`);
-                    console.log('Landed on empty other player rowDOM');
-                    this._greenrowDOM = true;
+                    square.setAttribute("class", `${square.className} green-zone`);
+                    this._green = true;
                     clearInterval(move);
                 }
                 else{
-                    console.log('Change Turns');
                     this._moving = false;
                     this.checkWinner();
                     this.changeTurns();
@@ -304,7 +301,7 @@ class Mancala{
         this._flag = 0;
         this._player1.reset();
         this._player2.reset();
-        this._greenrowDOM = false;
+        this._green = false;
         this.start();
     }
 
