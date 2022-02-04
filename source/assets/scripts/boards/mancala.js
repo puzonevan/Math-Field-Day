@@ -9,9 +9,9 @@ class Mancala{
     constructor(player1, player2){
         this._player1 = player1; 
         this._player2 = player2;
-        this._leftZone = 0;
-        this._rightZone = 0;
-        this._greenZone = false;
+        this._leftrowDOM = 0;
+        this._rightrowDOM = 0;
+        this._greenrowDOM = false;
         this._moving = false;
         this._board = this.initializeBoard();
         this._flag = 0;
@@ -20,19 +20,19 @@ class Mancala{
     initializeBoard(){
         let boards = [];
         for(let i = 0; i < 2; i++){
-            let zone = [];
+            let rowDOM = [];
             for(let j = 0; j < 6; j++){
-                zone.push(4);
+                rowDOM.push(4);
             }
-            boards.push(zone);
+            boards.push(rowDOM);
         }
         return boards;
     }
 
     start(){
 
-        // Highlight Player 1 Zone
-        this.highlightZone();
+        // Highlight Player 1 rowDOM
+        this.highlightrowDOM();
 
         // Loop through each square 
         // Event listeners to each square
@@ -42,35 +42,35 @@ class Mancala{
             square.addEventListener("click", () =>{
 
                 // Do nothing 
-                // If player clicked on the left or right zone
-                if(square.className === "left-zone" || square.className == "right-zone"){
+                // If player clicked on the left or right rowDOM
+                if(square.className === "left-rowDOM" || square.className == "right-rowDOM"){
                     return;
                 }
 
                 // Do nothing 
-                // if player clicks on empty zone 
+                // if player clicks on empty rowDOM 
                 if(parseInt(square.innerHTML) === 0){
                     return;
                 }
                 
-                // Check for green zone 
-                if(this._greenZone && square.className.includes("green-zone")){
-                    console.log("Player clicks on green zone");
+                // Check for green rowDOM 
+                if(this._greenrowDOM && square.className.includes("green-rowDOM")){
+                    console.log("Player clicks on green rowDOM");
                     // move opposite beads
                     
                     
                 }
-                else if(this._greenZone && !square.className.includes("green-zone")){
+                else if(this._greenrowDOM && !square.className.includes("green-rowDOM")){
                     return;
                 }
                 
-                // If player 1's turn and square is player's zone
-                if(this._flag === 0 && square.className == "o-zone" && !this._moving){
+                // If player 1's turn and square is player's rowDOM
+                if(this._flag === 0 && square.className == "o-rowDOM" && !this._moving){
                     this._moving = true;
                     this.moveBeads(index);
                 }
-                // If player 2's turn and square is player's zone
-                else if(this._flag === 1 && square.className == "x-zone" && !this._moving){
+                // If player 2's turn and square is player's rowDOM
+                else if(this._flag === 1 && square.className == "x-rowDOM" && !this._moving){
                     this._moving = true;
                     this.moveBeads(index);
                 }   
@@ -81,23 +81,23 @@ class Mancala{
             });
 
             // Square 'dblclick' listen: change turns 
-            // Only if green zone is true
+            // Only if green rowDOM is true
             square.addEventListener('dblclick', () =>{
-                if(this._greenZone){
-                    square.classList.remove("green-zone");
+                if(this._greenrowDOM){
+                    square.classList.remove("green-rowDOM");
                     this.changeTurns();
                     this._moving = false;
-                    this._greenZone = false;
+                    this._greenrowDOM = false;
                 }
             });
             // Square 'dragstart' listen: dump beads
-            // Only if green zone is true 
+            // Only if green rowDOM is true 
             square.addEventListener('dragstart', () =>{
-                if(this._greenZone){
-                    square.classList.remove("green-zone");
+                if(this._greenrowDOM){
+                    square.classList.remove("green-rowDOM");
                     this.dumpBeads(index);
                     this._moving = false;
-                    this._greenZone = false;
+                    this._greenrowDOM = false;
                 }
             });
         });
@@ -105,64 +105,55 @@ class Mancala{
 
     moveBeads(index){
 
-        // Initialize zone and position
-        let zone = this.getRow();
-        let position = this.getCol(index);
+        // Initialize rowDOM and colDOM
+        let rowDOM = this.getRow(index);
+        let colDOM = this.getCol(index);
 
         // Initialize square and number of beads
-        let square = document.getElementById("mancala").children[zone].children[position];
+        let square = document.getElementById("mancala").children[rowDOM].children[colDOM];
         let value = square.children[0].innerHTML;
         let numberOfBeads = parseInt(value);
 
         // Change the square to 0 
         removeBeads(square);
-        zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
         square.appendChild(createBeadValue(0));
-
+        this.updateBoard(rowDOM, colDOM, 0);
+        
         // Every .5 seconds, keep moving beads until no more to move
         var move = setInterval(() =>{
 
-            // Update zone and position 
-            if(zone === 0){
-                if(position === 1 && this._flag === 0){
-                    zone = 0; 
-                    position = 0;
+            // Update rowDOM and colDOM 
+            if(rowDOM === 0){
+                if(colDOM === 1 && this._flag === 0){
+                    rowDOM = 0; 
+                    colDOM = 0;
                 }
-                else if(position === 0){
-                    zone = 1; 
-                    position = 0;
-                }
-                else{
-                    position--;
-                }
-            }
-            else if(zone === 1){
-                
-                if(position === 5 && this._flag === 1){
-                    zone = 0; 
-                    position = 7;
-                }
-                else if(position === 5){
-                    zone = 0;
-                    position = 6;
+                else if(colDOM === 0){
+                    rowDOM = 1; 
+                    colDOM = 0;
                 }
                 else{
-                    position++;
+                    colDOM--;
                 }
             }
-
-            // Update Board
-            if(zone === 0 && position > 0 && position < 7){
-                this._board[zone][position - 1]++;
-            }
-            else if(zone === 1 && position >= 0 && position <= 5){
-                this._board[zone][position]++;
+            else if(rowDOM === 1){
+                if(colDOM === 5 && this._flag === 1){
+                    rowDOM = 0; 
+                    colDOM = 7;
+                }
+                else if(colDOM === 5){
+                    rowDOM = 0;
+                    colDOM = 6;
+                }
+                else{
+                    colDOM++;
+                }
             }
             
             // Update Board DOM
-            square = document.getElementById("mancala").children[zone].children[position];
-            value = square.children[0].innerHTML;
-            this.changeBeads(square, parseInt(value) + 1);
+            square = document.getElementById("mancala").children[rowDOM].children[colDOM];
+            this.updateBoard(rowDOM, colDOM, parseInt(square.children[0].innerHTML)+ 1);
+            this.addBeads(square, parseInt(square.children[0].innerHTML)+ 1);
             value = square.children[0].innerHTML;
 
             
@@ -174,28 +165,28 @@ class Mancala{
 
             // If beads are 0 
             if(numberOfBeads === 0){
-                // If last bead was placed on an end zone, clear and don't change turns
-                if((zone === 0 && position === 0) || (zone === 0 && position === 7)){
+                // If last bead was placed on an end rowDOM, clear and don't change turns
+                if((rowDOM === 0 && colDOM === 0) || (rowDOM === 0 && colDOM === 7)){
                     this._moving = false;
                     this.checkWinner();
                     clearInterval(move);
                 }
-                // If last bead was placed in the same zone as the player, grab beads and continue moving
-                else if((this._flag === 0 && zone === 0 && parseInt(value) > 1) || 
-                (this._flag === 1 && zone === 1 && parseInt(value) > 1)){
+                // If last bead was placed in the same rowDOM as the player, grab beads and continue moving
+                else if((this._flag === 0 && rowDOM === 0 && parseInt(value) > 1) || 
+                (this._flag === 1 && rowDOM === 1 && parseInt(value) > 1)){
                     numberOfBeads = parseInt(value);
                     removeBeads(square);
                     square.appendChild(createBeadValue(0));
-                    zone == 0 ? this._board[zone][position - 1] = 0 : this._board[zone][position] = 0;
+                    rowDOM == 0 ? this._board[rowDOM][colDOM - 1] = 0 : this._board[rowDOM][colDOM] = 0;
                 }
-                // If last bead was placed in other players zone, choose to dump, move, or nothing
-                else if((this._flag === 0 && zone === 1 && parseInt(value) === 1) || 
-                (this._flag === 1 && zone === 0 && parseInt(value) === 1)){
+                // If last bead was placed in other players rowDOM, choose to dump, move, or nothing
+                else if((this._flag === 0 && rowDOM === 1 && parseInt(value) === 1) || 
+                (this._flag === 1 && rowDOM === 0 && parseInt(value) === 1)){
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
-                    square.setAttribute("class", `${square.className} green-zone`);
-                    console.log('Landed on empty other player zone');
-                    this._greenZone = true;
+                    square.setAttribute("class", `${square.className} green-rowDOM`);
+                    console.log('Landed on empty other player rowDOM');
+                    this._greenrowDOM = true;
                     clearInterval(move);
                 }
                 else{
@@ -211,12 +202,31 @@ class Mancala{
 
     }
 
+    updateBoard(row, col, value){
+        if(row === 0){
+            this._board[row][col - 1] = value;
+        }
+        else{
+            this._board[row][col] = value;
+        }
+    }
+
+    addBeads(square, value){
+        while(parseInt(square.children[0].innerHTML) < value){
+            square.appendChild(createMarble());
+            square.children[0].innerHTML = parseInt(square.children[0].innerHTML) + 1;
+        }
+    }
+
     dumpBeads(index){
         // Find opposite square of the green
         let rowOpp = this._flag === 1 ? 1 : 0;
         let colOpp = this._flag === 1 ? index - 1 : index - 7;
         let squareOpp = document.getElementById("mancala").children[rowOpp].children[colOpp];
         // Find green square 
+        let row = this.getRow(index);
+        let col = this.getCol(index);
+        
         
         // Get value at green square and add it to opposite square
 
@@ -227,57 +237,60 @@ class Mancala{
 
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        this.highlightZone();
+        this.highlightrowDOM();
     } 
 
-    highlightZone(){
+    highlightrowDOM(){
         // If player 1's turn
-        // highlight their zone blue 
-        // highlight other zone clear
+        // highlight their rowDOM blue 
+        // highlight other rowDOM clear
         if(this._flag === 0){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-zone"){
+                if(square.className == "o-rowDOM"){
                     square.style.backgroundColor = "rgba(0, 0, 255, .2)";
                 }
             });
             [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-zone"){
+                if(square.className == "x-rowDOM"){
                     square.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 }
             });
         }
         // Player 2's turn 
-        // highlight their zone red 
-        // highlight other zone clear
+        // highlight their rowDOM red 
+        // highlight other rowDOM clear
         else if(this._flag === 1){
             [...document.getElementById("mancala").children[0].children].forEach((square) =>{
-                if(square.className == "o-zone"){
+                if(square.className == "o-rowDOM"){
                     square.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 }
             });
             [...document.getElementById("mancala").children[1].children].forEach((square) =>{
-                if(square.className == "x-zone"){
+                if(square.className == "x-rowDOM"){
                     square.style.backgroundColor = "rgba(255, 0, 0, .2)";
                 }
             });
         }
     }
 
-    
-
-    getRow(){
-        return(this._flag === 0 ? 0 : 1);
+    getRow(index){
+        if(index < 8){
+            return 0;
+        }
+        else{
+            return 1;
+        }
     }
 
     getCol(index){
-        return(this._flag === 0 ? index : index - 8);
+        if(index < 8){
+            return index;
+        }
+        else{
+            return index - 8;
+        }
     }
 
-    
-
-    
-
-    
 
     checkWinner(){
         let sum = this._board[this._flag].reduce((acc, curr) =>{
@@ -291,27 +304,27 @@ class Mancala{
         this._flag = 0;
         this._player1.reset();
         this._player2.reset();
-        this._greenZone = false;
+        this._greenrowDOM = false;
         this.start();
     }
 
     createBoard(){
 
         /***** HELPER FUNCTIONS *****/
-        // Create large zone for bead collecting
-        const createZone = () =>{
-            let zone = document.createElement("td");
-            zone.rowSpan = "2";
-            zone.setAttribute("class", "left-zone");
-            zone.appendChild(createBeadValue(0));
-            return zone;
+        // Create large rowDOM for bead collecting
+        const createrowDOM = () =>{
+            let rowDOM = document.createElement("td");
+            rowDOM.rowSpan = "2";
+            rowDOM.setAttribute("class", "left-rowDOM");
+            rowDOM.appendChild(createBeadValue(0));
+            return rowDOM;
         }
 
         // Create 6 squares for the player
-        const createSix = (row, zone) =>{
+        const createSix = (row, rowDOM) =>{
             for(let i = 0; i < 6; i++){
                 const nCol = document.createElement('td');
-                nCol.setAttribute("class", `${zone}-zone`);
+                nCol.setAttribute("class", `${rowDOM}-rowDOM`);
                 nCol.appendChild(createBeadValue(4));
 
                 for(let j = 0; j < 4; j++){
@@ -328,12 +341,12 @@ class Mancala{
 
         // First Row 
         const row1 = document.createElement('tr');
-        // Left Zone
-        row1.appendChild(createZone());
+        // Left rowDOM
+        row1.appendChild(createrowDOM());
         // 6 Squares
         createSix(row1, 'o');
-        // Right Zone 
-        row1.appendChild(createZone());
+        // Right rowDOM 
+        row1.appendChild(createrowDOM());
         // Add to Table
         mancalaTable.appendChild(row1);
 
