@@ -47,6 +47,7 @@ class Mancala{
                 if(parseInt(square.children[0].innerHTML) === 0)return;
                 // If green and doesn't contain green zone class
                 if(this._green && !square.className.includes("green-zone")) return;
+                // If beads are already moving
                 if(this._moving) return;
                 
                 this._moving = true;
@@ -54,11 +55,15 @@ class Mancala{
                 // Check for green rowDOM 
                 if(this._green && square.className.includes("green-zone")){
                     console.log("move opposite beads");
+                    let opposite = index < 8 ? index + 7 : index - 7;
+                    square.classList.remove("green-zone");
+                    this.moveBeads(opposite);
                 }
                 
-                // If player 1's turn and square is player's rowDOM
+                // If player 1 or 2 turn's and square clicked is appropriate square
                 if((this._flag === 0 && square.className == "o-zone") || 
                     (this._flag === 1 && square.className == "x-zone")){
+                    console.log("move current square");
                     this.moveBeads(index);
                 }  
                 
@@ -166,6 +171,7 @@ class Mancala{
                 // If last bead was placed in other players rowDOM, choose to dump, move, or nothing
                 else if((this._flag === 0 && rowDOM === 1 && parseInt(value) === 1) || 
                 (this._flag === 1 && rowDOM === 0 && parseInt(value) === 1)){
+                    this._moving = false;
                     this.checkWinner();
                     square.style.backgroundColor = "rgba(0, 255, 0, .2)";
                     square.setAttribute("class", `${square.className} green-zone`);
