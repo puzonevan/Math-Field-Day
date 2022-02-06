@@ -75,18 +75,16 @@ class Mancala{
                     this.moveBeads(index);
                 }  
                 
-                console.log(this._board);
             });
 
-        
             // Square 'dragstart' listen: dump beads
             // Only if green rowDOM is true 
             square.addEventListener('dragstart', () =>{
-                if(this._green){
-                    square.classList.remove("green-zone");
-                    this.dumpBeads(index);
+                if(this._green && square.className.includes("green-zone")){
                     this._moving = false;
                     this._green = false;
+                    square.classList.remove("green-zone");
+                    this.dumpBeads(index);
                 }
             });
         });
@@ -207,18 +205,30 @@ class Mancala{
     }
 
     dumpBeads(index){
+
         // Find opposite square of the green
-        let rowOpp = this._flag === 1 ? 1 : 0;
-        let colOpp = this._flag === 1 ? index - 1 : index - 7;
-        let squareOpp = document.getElementById("mancala").children[rowOpp].children[colOpp];
+        let opp = this.getOpp(index);
+        let oppRow = this.getRow(opp);
+        let oppCol = this.getCol(opp);
+        let oppSquare = document.getElementById("mancala").children[oppRow].children[oppCol];
+
         // Find green square 
         let row = this.getRow(index);
         let col = this.getCol(index);
-        
+        let currentSquare = document.getElementById("mancala").children[row].children[col];
         
         // Get value at green square and add it to opposite square
+        let oppSquareValue = parseInt(oppSquare.children[0].innerHTML);
+        let currentSquareValue = parseInt(currentSquare.children[0].innerHTML);
 
         // Update the beads
+        removeBeads(oppSquare);
+        oppSquare.appendChild(createBeadValue(0));
+        this.addBeads(currentSquare, oppSquareValue + currentSquareValue);
+
+        // Update the Board
+        this.updateBoard(oppRow, oppCol, 0);
+        this.updateBoard(row, col, oppSquareValue + currentSquareValue);
 
         this.changeTurns();
     }
