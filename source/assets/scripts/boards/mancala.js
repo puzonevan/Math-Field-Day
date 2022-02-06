@@ -40,12 +40,14 @@ class Mancala{
 
             // Square 'click' listen: move beads
             square.addEventListener("click", () =>{
+
                 // Do nothing 
                 // If player clicks on empty rowDOM 
                 if(parseInt(square.children[0].innerHTML) === 0)return;
                 // If beads are already moving
                 if(this._moving) return;
 
+                // If there is a green square and player clicks on left zone or right zone, end turn, no move
                 if(this._green && (square.className.includes("left-zone") || square.className.includes("right-zone"))){
                     // Remove green from square
                     this.changeTurns();
@@ -53,14 +55,16 @@ class Mancala{
                     this._green = false;
                 }
                 
+                // At this point, a proper player square should have been clicked on 
+                // Set moving to true 
                 this._moving = true;
 
-                // If square is green, move opposite beads
+                // If square is green and click on green square, 
+                // move opposite beads 
                 if(this._green && square.className.includes("green-zone")){
-                    console.log("move opposite beads");
                     let opposite = index < 8 ? index + 7 : index - 7;
                     square.classList.remove("green-zone");
-                    this._green = false;
+                    this._green = false; 
                     this.moveBeads(opposite);
                 }
                 
@@ -276,6 +280,9 @@ class Mancala{
         }
     }
 
+    getOpp(index){
+        return(index < 8 ? index + 7 : index - 7);
+    }
 
     checkWinner(){
         let sum = this._board[this._flag].reduce((acc, curr) =>{
