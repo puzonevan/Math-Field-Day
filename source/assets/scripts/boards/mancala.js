@@ -39,18 +39,20 @@ class Mancala{
                 // If there is a green square and player clicks on left zone or right zone, end turn, no move
                 if(this._green && (square.className.includes("left-zone") || square.className.includes("right-zone"))){
                     // Remove green from square
-                    this.changeTurns();
+                    square.classList.remove("green-zone");
                     this._moving = false;
                     this._green = false;
+                    this.changeTurns();
                 }
+
+                if(this._green && (square.className.includes("x-zone") || square.className.includes("o-zone")))return;
                 
                 // At this point, a proper player square should have been clicked on 
-                // Set moving to true 
-                this._moving = true;
 
                 // If square is green and click on green square, 
                 // move opposite beads 
                 if(this._green && square.className.includes("green-zone")){
+                    this._moving = true;
                     this._green = false; 
                     square.classList.remove("green-zone");
                     let opposite = this.getOpp(index);
@@ -59,11 +61,13 @@ class Mancala{
                 
                 // If player 1 or 2 turn's and square clicked is appropriate square
                 // move beads
-                if((this._flag === 0 && square.className == "o-zone") || 
-                    (this._flag === 1 && square.className == "x-zone")){
+                if((this._flag === 0 && square.className.includes("o-zone")) || 
+                    (this._flag === 1 && square.className.includes("x-zone"))){
+                    this._moving = true;
                     this.moveBeads(index);
                 }  
 
+                console.log(this._flag);
                 console.log(this._board);
                 
             });
