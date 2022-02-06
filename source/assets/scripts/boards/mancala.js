@@ -13,20 +13,9 @@ class Mancala{
         this._right = 0;
         this._green = false;
         this._moving = false;
-        this._board = new Array(2).fill(new Array(6).fill(0));
+        this._board = [[4, 4, 4, 4, 4, 4],
+                        [4, 4, 4, 4, 4, 4]]
         this._flag = 0;
-    }
-
-    initializeBoard(){
-        let boards = [];
-        for(let i = 0; i < 2; i++){
-            let rowDOM = [];
-            for(let j = 0; j < 6; j++){
-                rowDOM.push(4);
-            }
-            boards.push(rowDOM);
-        }
-        return boards;
     }
 
     start(){
@@ -74,6 +63,8 @@ class Mancala{
                     (this._flag === 1 && square.className == "x-zone")){
                     this.moveBeads(index);
                 }  
+
+                console.log(this._board);
                 
             });
 
@@ -87,6 +78,8 @@ class Mancala{
                     this.dumpBeads(index);
                 }
             });
+
+            
         });
     }
 
