@@ -13,7 +13,7 @@ class Mancala{
         this._right = 0;
         this._green = false;
         this._moving = false;
-        this._board = this.initializeBoard();
+        this._board = new Array(2).fill(new Array(6).fill(0));
         this._flag = 0;
     }
 
