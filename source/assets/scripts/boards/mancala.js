@@ -45,7 +45,7 @@ class Mancala{
                     this.changeTurns();
                 }
 
-                if(this._green && (square.className.includes("x-zone") || square.className.includes("o-zone")))return;
+                if(this._green && (square.className === "x-zone" || square.className === "o-zone"))return;
                 
                 // At this point, a proper player square should have been clicked on 
 
@@ -56,6 +56,8 @@ class Mancala{
                     this._green = false; 
                     square.classList.remove("green-zone");
                     let opposite = this.getOpp(index);
+
+                    
                     this.moveBeads(opposite);
                 }
                 
@@ -98,6 +100,10 @@ class Mancala{
         let value = square.children[0].innerHTML;
         let numberOfBeads = parseInt(value);
 
+        if(numberOfBeads === 0){
+            this.changeTurns();
+            this._moving = false;
+        }
         // Change the square to 0 
         removeBeads(square);
         square.appendChild(createBeadValue(0));
