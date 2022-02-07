@@ -107,16 +107,21 @@ class Mancala{
 
             // Update rowDOM and colDOM 
             if(rowDOM === 0){
-                if(colDOM === 1 && this._flag === 0){
-                    rowDOM = 0; 
-                    colDOM = 0;
-                }
-                else if(colDOM === 0){
-                    rowDOM = 1; 
-                    colDOM = 0;
+                if(colDOM > 1){
+                    colDOM--;
                 }
                 else{
-                    colDOM--;
+                    if(rowDOM === 0 && colDOM === 0){
+                        rowDOM = 1;
+                    }
+                    else if(this._flag === 0){
+                        rowDOM = 0; 
+                        colDOM = 0;
+                    }
+                    else if(this._flag === 1){
+                        rowDOM = 1; 
+                        colDOM = 0;
+                    }
                 }
             }
             else if(rowDOM === 1){
