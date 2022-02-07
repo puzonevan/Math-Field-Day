@@ -67,7 +67,7 @@ class Mancala{
                     this.moveBeads(index);
                 }  
 
-                console.log(this._flag);
+                
                 console.log(this._board);
                 
             });
