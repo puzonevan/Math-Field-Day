@@ -36,16 +36,18 @@ class Mancala{
                 // If beads are already moving
                 if(this._moving) return;
 
+                // If there is a green square 
                 if(this._green){
+                    // If square is either end zone, end turn 
                     if(square.className === "left-zone" || square.className === "right-zone"){
                         this._moving = false;
                         this._green = false;
                         this.changeTurns();
                     }
+                    // If square is green, move the opposite beads
                     else if(square.classList.contains("green-zone")){
                         this._moving = true;
                         this._green = false; 
-                        square.classList.remove("green-zone");
                         let opposite = this.getOpp(index);
                         this.moveBeads(opposite);
                     }
