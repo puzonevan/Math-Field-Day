@@ -73,7 +73,6 @@ class Mancala{
                 if(this._green && square.className.includes("green-zone")){
                     this._moving = false;
                     this._green = false;
-                    square.classList.remove("green-zone");
                     this.dumpBeads(index);
                 }
             });
@@ -96,6 +95,7 @@ class Mancala{
         if(numberOfBeads === 0){
             this.changeTurns();
             this._moving = false;
+            return;
         }
         // Change the square to 0 
         removeBeads(square);
