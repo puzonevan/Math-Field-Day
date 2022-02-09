@@ -110,31 +110,32 @@ class Mancala{
                 if(colDOM > 1){
                     colDOM--;
                 }
-                else{
-                    if(rowDOM === 0 && colDOM === 0){
-                        rowDOM = 1;
-                    }
-                    else if(this._flag === 0){
-                        rowDOM = 0; 
-                        colDOM = 0;
-                    }
-                    else if(this._flag === 1){
-                        rowDOM = 1; 
-                        colDOM = 0;
-                    }
+                else if(colDOM === 0){
+                    rowDOM = 1;
+                }
+                else if(this._flag === 0){
+                    rowDOM = 0; 
+                    colDOM = 0;
+                }
+                else if(this._flag === 1){
+                    rowDOM = 1; 
+                    colDOM = 0;
                 }
             }
             else if(rowDOM === 1){
-                if(colDOM === 5 && this._flag === 1){
+                if(colDOM < 5){
+                    colDOM++;
+                }
+                else if(colDOM === 7){
+                    rowDOM = 0;
+                }
+                else if(this._flag === 1){
                     rowDOM = 0; 
                     colDOM = 7;
                 }
-                else if(colDOM === 5){
-                    rowDOM = 0;
+                else if(this._flag === 0){
+                    rowDOM = 0; 
                     colDOM = 6;
-                }
-                else{
-                    colDOM++;
                 }
             }
             
