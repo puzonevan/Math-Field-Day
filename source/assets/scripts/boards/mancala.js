@@ -1,5 +1,6 @@
 /************* IMPORTS *************/
 import { createTable, createRow, createCol } from "./board.js"
+import { winnerLightbox } from "../header/winner.js";
 
 /////////////////////////////////////////////////////////////////////
 
@@ -238,6 +239,7 @@ class Mancala{
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
         this.highlightZone();
+        this.checkWinner();
     } 
 
     highlightZone(){
@@ -311,7 +313,44 @@ class Mancala{
         let sum = this._board[this._flag].reduce((acc, curr) =>{
             return acc + curr;
         });
-        console.log(sum);
+
+        if(sum === 0){
+            console.log("sum 0")
+            if(this._flag === 0){
+                console.log("winner 1")
+                this.declareWinner(this._player1);
+            }
+            else if(this._flag === 1){
+                console.log("winner 2");
+                this.declareWinner(this._player2);
+            }
+        }
+
+        console.log(`${this._flag}: ${sum}`);
+
+    }
+
+    /**
+     * create the winner lightbox and display
+     * @param {Object} player - player to be the winner
+     */
+     declareWinner(player){
+        // Display the winner lightbox
+        document.getElementById("board").style.filter = "blur(10px)";
+        winnerLightbox.style.display = "flex";
+
+        // Change the name to Player 2's name
+        if(typeof player.name !== "string"){
+            if(player === this._player2){
+                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+            }
+            else if(player === this._player1){
+                document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+            }
+        }
+        else{
+            document.getElementById("winner-name").innerHTML = `${player.name} wins!`; 
+        }
     }
 
     reset(){
