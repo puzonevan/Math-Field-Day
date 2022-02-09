@@ -191,6 +191,24 @@ class Mancala{
     }
 
     /**
+     * get row of index for DOM 
+     * @param {Number} index - square index
+     * @returns 0 if index is less than 8, otherwise 1
+     */
+    getRow(index){
+        return(index < 8 ? 0 : 1);
+    }
+
+    getCol(index){
+        if(index < 8){
+            return index;
+        }
+        else{
+            return index - 8;
+        }
+    }
+
+    /**
      * update the board given row, column, and value
      * @param {Number} row - row for the board
      * @param {Number} col - column for the board
@@ -294,23 +312,7 @@ class Mancala{
         }
     }
 
-    getRow(index){
-        if(index < 8){
-            return 0;
-        }
-        else{
-            return 1;
-        }
-    }
-
-    getCol(index){
-        if(index < 8){
-            return index;
-        }
-        else{
-            return index - 8;
-        }
-    }
+    
 
     getOpp(index){
         return(index < 8 ? index + 7 : index - 7);
