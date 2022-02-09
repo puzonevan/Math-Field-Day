@@ -190,6 +190,10 @@ class Mancala{
 
     }
 
+    /////////////////////////////////////////////////////////////////////
+
+    /************* DOM HELPERS *************/
+
     /**
      * get row of index for DOM 
      * @param {Number} index - square index
@@ -208,6 +212,9 @@ class Mancala{
         return(index < 8 ? index : index - 8);
     }
 
+    /////////////////////////////////////////////////////////////////////
+
+    /************* GLOBALS *************/
     /**
      * update the board given row, column, and value
      * @param {Number} row - row for the board
