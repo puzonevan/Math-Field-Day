@@ -222,6 +222,12 @@ class Mancala{
         this.changeTurns();
     }
 
+    changeTurns(){
+        this._flag === 1 ? this._flag = 0 : this._flag = 1;
+        this.highlightZone();
+        this.checkWinner();
+    } 
+
     /////////////////////////////////////////////////////////////////////
 
     /************* DOM HELPERS *************/
@@ -255,7 +261,7 @@ class Mancala{
 
     /////////////////////////////////////////////////////////////////////
 
-    /*************  *************/
+    /************* BOARD METHODS *************/
     /**
      * update the board given row, column, and value
      * @param {Number} row - row for the board
@@ -273,6 +279,14 @@ class Mancala{
         }
     }
 
+    /////////////////////////////////////////////////////////////////////
+
+    /************* UPDATE VISUALS METHODS *************/
+    /**
+     * add beads until you reach value
+     * @param {Object} square - square to add beads to 
+     * @param {*} value - value to have number of beads
+     */
     addBeads(square, value){
         while(parseInt(square.children[0].innerHTML) < value){
             square.appendChild(createMarble());
@@ -280,14 +294,9 @@ class Mancala{
         }
     }
 
-    
-
-    changeTurns(){
-        this._flag === 1 ? this._flag = 0 : this._flag = 1;
-        this.highlightZone();
-        this.checkWinner();
-    } 
-
+    /**
+     * update row colors based on current player
+     */
     highlightZone(){
         // If player 1's turn
         // highlight their rowDOM blue 
@@ -332,13 +341,10 @@ class Mancala{
             });
         }
     }
-
-    
-
     
     /////////////////////////////////////////////////////////////////////
 
-    /************* WIN FUNCTIONS *************/
+    /************* WINNER METHODS *************/
 
     /**
      * checks if a player won (no more beads)
@@ -366,7 +372,7 @@ class Mancala{
      * create the winner lightbox and display
      * @param {Object} player - player to be the winner
      */
-     declareWinner(player){
+    declareWinner(player){
         // Display the winner lightbox
         document.getElementById("board").style.filter = "blur(10px)";
         winnerLightbox.style.display = "flex";
@@ -385,8 +391,12 @@ class Mancala{
         }
     }
 
+    /////////////////////////////////////////////////////////////////////
 
-    
+    /************* INITIALIZE AND RESTART METHODS *************/
+    /**
+     * reset the class
+     */
     reset(){
         this.initializeBoard();
         this._flag = 0;
