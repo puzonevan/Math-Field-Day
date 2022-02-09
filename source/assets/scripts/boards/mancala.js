@@ -199,13 +199,13 @@ class Mancala{
         return(index < 8 ? 0 : 1);
     }
 
+    /**
+     * get column of index for DOM 
+     * @param {Number} index - square index
+     * @returns 0 index if index is less than 0, otherwise index - 8
+     */
     getCol(index){
-        if(index < 8){
-            return index;
-        }
-        else{
-            return index - 8;
-        }
+        return(index < 8 ? index : index - 8);
     }
 
     /**
