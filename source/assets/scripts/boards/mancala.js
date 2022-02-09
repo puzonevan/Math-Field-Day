@@ -190,6 +190,13 @@ class Mancala{
 
     }
 
+    /**
+     * update the board given row, column, and value
+     * @param {Number} row - row for the board
+     * @param {Number} col - column for the board
+     * @param {Number} value - value to be set
+     * @returns 
+     */
     updateBoard(row, col, value){
         if(row === 0 && (col === 0 || col === 7)) return;
         if(row === 0){
