@@ -86,7 +86,9 @@ class Hex{
             // Loop through rest of columns
             for(let col = 0; col < 12; col++){
                 const nCol = createCol("hex", col);
+                nCol.setAttribute("class", "cell");
                 nRow.appendChild(nCol);
+
             }
             hexTable.appendChild(nRow);
         }
