@@ -19,6 +19,9 @@ class Mancala{
         this._flag = 0;
     }
 
+    /////////////////////////////////////////////////////////////////////
+
+    /************* START & PLAYER MOVES *************/
     start(){
 
         // Highlight Player 1 rowDOM
@@ -190,55 +193,6 @@ class Mancala{
 
     }
 
-    /////////////////////////////////////////////////////////////////////
-
-    /************* DOM HELPERS *************/
-
-    /**
-     * get row of index for DOM 
-     * @param {Number} index - square index
-     * @returns 0 if index is less than 8, otherwise 1
-     */
-    getRow(index){
-        return(index < 8 ? 0 : 1);
-    }
-
-    /**
-     * get column of index for DOM 
-     * @param {Number} index - square index
-     * @returns 0 index if index is less than 0, otherwise index - 8
-     */
-    getCol(index){
-        return(index < 8 ? index : index - 8);
-    }
-
-    /////////////////////////////////////////////////////////////////////
-
-    /************* GLOBALS *************/
-    /**
-     * update the board given row, column, and value
-     * @param {Number} row - row for the board
-     * @param {Number} col - column for the board
-     * @param {Number} value - value to be set
-     * @returns 
-     */
-    updateBoard(row, col, value){
-        if(row === 0 && (col === 0 || col === 7)) return;
-        if(row === 0){
-            this._board[row][col - 1] = value;
-        }
-        else{
-            this._board[row][col] = value;
-        }
-    }
-
-    addBeads(square, value){
-        while(parseInt(square.children[0].innerHTML) < value){
-            square.appendChild(createMarble());
-            square.children[0].innerHTML = parseInt(square.children[0].innerHTML) + 1;
-        }
-    }
-
     dumpBeads(index){
 
         // Find opposite square of the green
@@ -267,6 +221,66 @@ class Mancala{
 
         this.changeTurns();
     }
+
+    /////////////////////////////////////////////////////////////////////
+
+    /************* DOM HELPERS *************/
+
+    /**
+     * get row of index for DOM 
+     * @param {Number} index - square index
+     * @returns 0 if index is less than 8, otherwise 1
+     */
+    getRow(index){
+        return(index < 8 ? 0 : 1);
+    }
+
+    /**
+     * get column of index for DOM 
+     * @param {Number} index - square index
+     * @returns 0 index if index is less than 0, otherwise index - 8
+     */
+    getCol(index){
+        return(index < 8 ? index : index - 8);
+    }
+
+    /**
+     * get opposite square from index
+     * @param {Number} index - square index
+     * @returns index + 7 if index < 8, otherwise return index - 7
+     */
+    getOpp(index){
+        return(index < 8 ? index + 7 : index - 7);
+    }
+
+    /////////////////////////////////////////////////////////////////////
+
+    /*************  *************/
+    /**
+     * update the board given row, column, and value
+     * @param {Number} row - row for the board
+     * @param {Number} col - column for the board
+     * @param {Number} value - value to be set
+     * @returns 
+     */
+    updateBoard(row, col, value){
+        if(row === 0 && (col === 0 || col === 7)) return;
+        if(row === 0){
+            this._board[row][col - 1] = value;
+        }
+        else{
+            this._board[row][col] = value;
+        }
+    }
+
+    addBeads(square, value){
+        while(parseInt(square.children[0].innerHTML) < value){
+            square.appendChild(createMarble());
+            square.children[0].innerHTML = parseInt(square.children[0].innerHTML) + 1;
+        }
+    }
+
+    
 
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
@@ -321,10 +335,15 @@ class Mancala{
 
     
 
-    getOpp(index){
-        return(index < 8 ? index + 7 : index - 7);
-    }
+    
+    /////////////////////////////////////////////////////////////////////
 
+    /************* WIN FUNCTIONS *************/
+
+    /**
+     * checks if a player won (no more beads)
+     * @returns 
+     */
     checkWinner(){
         let sum = this._board[this._flag].reduce((acc, curr) =>{
             return acc + curr;
@@ -341,9 +360,6 @@ class Mancala{
                 this.declareWinner(this._player2);
             }
         }
-
-        console.log(`${this._flag}: ${sum}`);
-
     }
 
     /**
@@ -369,6 +385,8 @@ class Mancala{
         }
     }
 
+
+    
     reset(){
         this.initializeBoard();
         this._flag = 0;
