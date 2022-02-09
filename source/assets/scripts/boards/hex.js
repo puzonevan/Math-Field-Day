@@ -19,6 +19,46 @@ class Hex{
     }
 
     start(){
+        // Loop through each square
+        [...document.getElementsByTagName("td")].forEach((square, index) =>{
+
+            // Each square listens for a player move(click)
+            square.addEventListener("click", () =>{
+
+                // Do nothing if there is already an X or O
+                if(square.className === "y-player" || square.className === "x-player"){
+                    return;
+                }
+
+                // O Player's move 
+                if(this._flag === 0){
+                        // Display the Y player's icon
+                        square.setAttribute("class", "y-player");
+
+                        // Player's Move 
+                        this.move("O", index);
+
+                        // X player's turn
+                        this._flag = 1;
+                    
+                }
+                else if(this._flag === 1){
+                    
+                        // Display the X Player's icon 
+                        square.setAttribute("class", "x-player");
+
+                        // Player's Move 
+                        this.move("X", index);
+
+                        // Y Player's turn
+                        this._flag = 0;
+                    
+                }
+            });
+        });
+    }
+
+    move(move, index){
 
     }
 
@@ -42,25 +82,10 @@ class Hex{
         // Hex loop: 12x12
         for (let row = 0; row < 12; row++){
             const nRow = createRow("hex", row);
-            
-            // Create the first column in order to offset 
-            const firstCol = createCol("hex", 0);
-
-            // Offset amount
-            firstCol.style.marginLeft = `${row*31}px `;
-
-            // Inner Div
-            const firstDiv = document.createElement("div");
-            firstCol.appendChild(firstDiv);
-
-            // Append to nRow
-            nRow.appendChild(firstCol);
-
+        
             // Loop through rest of columns
-            for(let col = 1; col < 11; col++){
+            for(let col = 0; col < 12; col++){
                 const nCol = createCol("hex", col);
-                const firstDiv = document.createElement("div");
-                nCol.appendChild(firstDiv);
                 nRow.appendChild(nCol);
             }
             hexTable.appendChild(nRow);
