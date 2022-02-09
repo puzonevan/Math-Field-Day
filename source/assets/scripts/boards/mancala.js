@@ -22,6 +22,9 @@ class Mancala{
     /////////////////////////////////////////////////////////////////////
 
     /************* START & PLAYER MOVES *************/
+    /**
+     * start the game
+     */
     start(){
 
         // Highlight Player 1 rowDOM
@@ -85,6 +88,11 @@ class Mancala{
         });
     }
 
+    /**
+     * move the beads on the square
+     * @param {Number} index - square's index
+     * @returns 
+     */
     moveBeads(index){
 
         // Initialize rowDOM and colDOM
@@ -193,6 +201,10 @@ class Mancala{
 
     }
 
+    /**
+     * dump the beads from the opposite square
+     * @param {Number} index - square index
+     */
     dumpBeads(index){
 
         // Find opposite square of the green
@@ -222,6 +234,9 @@ class Mancala{
         this.changeTurns();
     }
 
+    /**
+     * Change the player turns
+     */
     changeTurns(){
         this._flag === 1 ? this._flag = 0 : this._flag = 1;
         this.highlightZone();
@@ -406,6 +421,9 @@ class Mancala{
         this.start();
     }
 
+    /**
+     * create the board on the DOM 
+     */
     createBoard(){
 
         /***** HELPER FUNCTIONS *****/
@@ -460,6 +478,9 @@ class Mancala{
     
     }
 
+    /**
+     * change the rules content
+     */
     changeRules(){
         // Change Header Title
         document.getElementById("game-title-current").innerHTML = "Mancala";
@@ -477,7 +498,6 @@ class Mancala{
         The player can also not move at all when this happens. \
         Whenever a player lands in an empty hole on their side, their turn is over.";
     }
-
     
 }
 
