@@ -215,12 +215,16 @@ td{
 
 
 
-.board table{
+.board .capture, .board .tic-tac-toe-3d, .board .mancala{
     margin: 3em auto;
 }
 
 
 /* Different Board Styles */
+.board .hex{
+    margin-top: 3em;
+    margin-left: 25vw;
+}
 .hex td{
     border: none;
     width: 50px;

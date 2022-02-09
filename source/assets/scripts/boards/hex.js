@@ -82,13 +82,20 @@ class Hex{
         // Hex loop: 12x12
         for (let row = 0; row < 12; row++){
             const nRow = createRow("hex", row);
+            nRow.style.position = "relative";
+            
+            nRow.style.width = "auto";
+            nRow.style.height = "35px";
+            nRow.style.left = `${row * 20}px`;
         
             // Loop through rest of columns
             for(let col = 0; col < 12; col++){
                 const nCol = createCol("hex", col);
                 nCol.setAttribute("class", "cell");
+                nCol.style.position = "absolute";
+                nCol.style.left = `${col * 41}px`;
+                nCol.style.top = "0px";
                 nRow.appendChild(nCol);
-
             }
             hexTable.appendChild(nRow);
         }
