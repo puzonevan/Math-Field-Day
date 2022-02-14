@@ -71,7 +71,7 @@ class Hex{
         // Find row and column
         let row = Math.floor(index / 12);
         let col = index % 12;
-        console.log(`row: ${row} | col: ${col}`);
+        // console.log(`row: ${row} | col: ${col}`);
 
         // Update board
         this._flag == 0 ? this._board[row][col] = "O" : this._board[row][col] = "X";
@@ -85,12 +85,9 @@ class Hex{
         
         stack.forEach(value =>{
             if(this._flag == 0){
-                if(this._board[value][0] != "O") continue;
-                // DFS
                 if(this.dfs({ row: value, col: 0 })) return true;
             }
             else{
-                if(this._board[0][value] != "X") continue;
                 if(this.dfs({ row: 0, col: value })) return true;
             }
         });
@@ -100,11 +97,65 @@ class Hex{
     }
 
     dfs(start){
-        let visited = [start];
-        let stack = [];
+        
+        if(this._flag == 0 && this._board[start.row][start.col] != "O") return false;
+        if(this._flag == 1 && this._board[start.row][start.col] != "X") return false;
+
+        const visited = [`${start.row}, ${start.col}`];
+        const move = this._flag == 0 ? "O" : "X";
+        const stack = [];
         stack.push(start);
 
-        while(!stack.length){
+        while(stack.length > 0){
+            
+            const current = stack.pop();
+            console.log(current);
+            console.log(visited);
+
+            // Add 6 possible neighbors
+            // Top left (row - 1)(col)
+            // Top right (row - 1)(col + 1)
+            // left (row)(col - 1)
+            // right (row)(col + 1)
+            // Bot left (row + 1)(col - 1)
+            // Bot right (row + 1)(col)
+            if(current.col - 1 > 0 && this._board[current.row][current.col - 1] == move){
+                if(!visited.includes(`${current.row}, ${current.col - 1}`)){
+                    visited.push(`${current.row}, ${current.col - 1}`);
+                    stack.push({ row: current.row, col: current.col - 1 });
+                }
+            }
+            if(current.col + 1 < 12 && this._board[current.row][current.col + 1] == move){
+                if(!visited.includes(`${current.row}, ${current.col + 1}`)){
+                    visited.push(`${current.row}, ${current.col + 1}`);
+                    stack.push({ row: current.row, col: current.col + 1});
+                }
+            }
+            if(current.row - 1 > 0){
+                if(this._board[current.row - 1][current.col] == move && !visited.includes(`${current.row - 1}, ${current.col}`)){
+                    visited.push(`${current.row - 1}, ${current.col}`);
+                    stack.push({ row: current.row - 1, col: current.col});
+                }
+                if(this._board[current.row - 1][current.col + 1] == move && current.col + 1 < 12){
+                    if(!visited.includes(`${current.row - 1}, ${current.col + 1}`)){
+                        visited.push(`${current.row - 1}, ${current.col + 1}`);
+                        stack.push({ row: current.row - 1, col: current.col + 1});
+                    }
+                }
+            }
+            if(current.row + 1 < 12){
+                if(this._board[current.row + 1][current.col] == move && !visited.includes(`${current.row + 1}, ${current.col}`)){
+                    visited.push(`${current.row + 1}, ${current.col}`);
+                    stack.push({ row: current.row + 1, col: current.col});
+                }
+                if(current.col - 1 > 0){
+                    if(this._board[current.row + 1][current.col - 1] == move && !visited.includes(`${current.row + 1}, ${current.col - 1}`)){
+                        visited.push(`${current.row + 1}, ${current.col - 1}`);
+                        stack.push({ row: current.row + 1, col: current.col - 1});
+                    }
+                }
+            }
+            
             
         }
     }
