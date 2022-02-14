@@ -10,17 +10,28 @@ class Hex{
     constructor(player1, player2){
         this._player1 = player1;
         this._player2 = player2;
-        this._board;
+        this._board = this.initializeBoard();
         this._flag = 0;
     }
 
+    initializeBoard(){
+        let board = [];
+        for(let i = 0; i < 12; i++){
+            let row = [];
+            for(let j = 0; j < 12; j++){
+                row.push("");
+            }
+            board.push(row);
+        }
+        return board;
+    }
     
 
     start(){
         // Loop through each square
         [...document.getElementsByTagName("td")].forEach((square, index) =>{
 
-            // Each square listens for a player move(click)
+            // Listen for click events
             square.addEventListener("click", () =>{
 
                 // Do nothing if there is already an X or O
@@ -57,10 +68,45 @@ class Hex{
 
     move(index){
 
+        // Find row and column
+        let row = Math.floor(index / 12);
+        let col = index % 12;
+        console.log(`row: ${row} | col: ${col}`);
+
+        // Update board
+        this._flag == 0 ? this._board[row][col] = "O" : this._board[row][col] = "X";
+        
+        if(this.checkWinner()) this.declareWinner();
     }
 
     checkWinner(){
 
+        const stack = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        
+        stack.forEach(value =>{
+            if(this._flag == 0){
+                if(this._board[value][0] != "O") continue;
+                // DFS
+                if(this.dfs({ row: value, col: 0 })) return true;
+            }
+            else{
+                if(this._board[0][value] != "X") continue;
+                if(this.dfs({ row: 0, col: value })) return true;
+            }
+        });
+
+        return false;
+
+    }
+
+    dfs(start){
+        let visited = [start];
+        let stack = [];
+        stack.push(start);
+
+        while(!stack.length){
+            
+        }
     }
 
     /**
