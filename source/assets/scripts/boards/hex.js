@@ -1,5 +1,6 @@
 /************* IMPORTS *************/
-import { createTable, createRow, createCol } from "./board.js"
+import { createTable, createRow, createCol } from "./board.js";
+import { winnerLightbox } from "../header/winner.js";
 
 /////////////////////////////////////////////////////////////////////
 
@@ -10,13 +11,10 @@ class Hex{
         this._player1 = player1;
         this._player2 = player2;
         this._board;
-        this.initializeBoard();
         this._flag = 0;
     }
 
-    initializeBoard(){
-
-    }
+    
 
     start(){
         // Loop through each square
@@ -26,33 +24,30 @@ class Hex{
             square.addEventListener("click", () =>{
 
                 // Do nothing if there is already an X or O
-                if(square.className === "y-player" || square.className === "x-player"){
-                    return;
-                }
+                if(square.innerHTML == "O" || square.innerHTML == "X") return;
 
-                // O Player's move 
+                // Player 1's move 
                 if(this._flag === 0){
-                        // Display the Y player's icon
+                        // Display the O 
                         square.innerHTML = "O";
-                        square.style.textAlign = "center";
+                        square.style.color = "#276FBF";
 
                         // Player's Move 
-                        this.move("O", index);
+                        this.move(index);
 
-                        // X player's turn
+                        // Change turns
                         this._flag = 1;
-                    
                 }
+                // Player 2's move
                 else if(this._flag === 1){
-                    
-                        // Display the X Player's icon 
+                        // Display the X 
                         square.innerHTML = "X";
-                        square.style.textAlign = "center";
+                        square.style.color = "#F03A47";
 
                         // Player's Move 
-                        this.move("X", index);
+                        this.move(index);
 
-                        // Y Player's turn
+                        // Change Turns
                         this._flag = 0;
                     
                 }
@@ -60,11 +55,35 @@ class Hex{
         });
     }
 
-    move(move, index){
+    move(index){
 
     }
 
-    
+    checkWinner(){
+
+    }
+
+    /**
+     * create the winner lightbox and display
+     */
+     declareWinner(){
+        // Display the winner lightbox
+        document.getElementById("board").style.filter = "blur(10px)";
+        winnerLightbox.style.display = "flex";
+
+        // Change the name to Player 2's name
+        if(typeof player.name !== "string"){
+            if(player === this._player2){
+                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+            }
+            else if(player === this._player1){
+                document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+            }
+        }
+        else{
+            document.getElementById("winner-name").innerHTML = `${player.name} wins!`; 
+        }
+    }
     
 
     reset(){
