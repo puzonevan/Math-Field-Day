@@ -33,7 +33,8 @@ class Hex{
                 // O Player's move 
                 if(this._flag === 0){
                         // Display the Y player's icon
-                        square.setAttribute("class", "y-player");
+                        square.innerHTML = "O";
+                        square.style.textAlign = "center";
 
                         // Player's Move 
                         this.move("O", index);
@@ -45,7 +46,8 @@ class Hex{
                 else if(this._flag === 1){
                     
                         // Display the X Player's icon 
-                        square.setAttribute("class", "x-player");
+                        square.innerHTML = "X";
+                        square.style.textAlign = "center";
 
                         // Player's Move 
                         this.move("X", index);
@@ -61,6 +63,9 @@ class Hex{
     move(move, index){
 
     }
+
+    
+    
 
     reset(){
         this.initializeBoard();
