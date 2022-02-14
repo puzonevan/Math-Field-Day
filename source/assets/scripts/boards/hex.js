@@ -76,7 +76,7 @@ class Hex{
         // Update board
         this._flag == 0 ? this._board[row][col] = "O" : this._board[row][col] = "X";
         
-        if(this.checkWinner()) this.declareWinner();
+        this.checkWinner();
     }
 
     checkWinner(){
@@ -85,10 +85,10 @@ class Hex{
         
         stack.forEach(value =>{
             if(this._flag == 0){
-                if(this.dfs({ row: value, col: 0 })) return true;
+                if(this.dfs({ row: value, col: 0 })) this.declareWinner();
             }
             else{
-                if(this.dfs({ row: 0, col: value })) return true;
+                if(this.dfs({ row: 0, col: value })) this.declareWinner();
             }
         });
 
@@ -109,6 +109,12 @@ class Hex{
         while(stack.length > 0){
             
             const current = stack.pop();
+            if(this._flag == 0){
+                if(current.col == 11) return true;
+            }
+            else if(this._flag == 1){
+                if(current.row == 11) return true;
+            }
             console.log(current);
             console.log(visited);
 
@@ -156,7 +162,6 @@ class Hex{
                 }
             }
             
-            
         }
     }
 
@@ -169,17 +174,21 @@ class Hex{
         winnerLightbox.style.display = "flex";
 
         // Change the name to Player 2's name
-        if(typeof player.name !== "string"){
-            if(player === this._player2){
-                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
-            }
-            else if(player === this._player1){
+        if(this._flag == 0){
+            if(typeof this._player1.name !== "string"){
                 document.getElementById("winner-name").innerHTML = `Player 1 wins!`;
+            }else{
+                document.getElementById("winner-name").innerHTML = `${this._player1.name} wins!`; 
             }
         }
-        else{
-            document.getElementById("winner-name").innerHTML = `${player.name} wins!`; 
+        else if(this._flag == 1){
+            if(typeof this._player2.name !== "string"){
+                document.getElementById("winner-name").innerHTML = `Player 2 wins!`;
+            }else{
+                document.getElementById("winner-name").innerHTML = `${this._player2.name} wins!`; 
+            }
         }
+        
     }
     
 
