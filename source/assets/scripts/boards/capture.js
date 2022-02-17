@@ -86,36 +86,24 @@ class Capture{
      */
     isValidMove(index){
         
-        let player;
-        let enemy; 
-        this._flag === 1 ? player = this._player2 : player = this._player1;
-        this._flag === 1 ? enemy = this._player1 : enemy = this._player2;
+        let player = this._flag === 1 ? this._player2 : this._player1;
+        let enemy = this._flag === 1 ? this._player1 : this._player2;
 
-        // If first player's first turn 
-        // -> any move is valid, return true
-        if(player.currentMove === -1 && player.lastMove === -1 && enemy.currentMove === -1 && enemy.lastMove === -1){
-            return true;
-        }
+        // If first turn of game -> any move valid so return true
+        if(player.currentMove === -1 && player.lastMove === -1 && enemy.currentMove === -1 && enemy.lastMove === -1) return true;
 
-        // If second player's first turn
+        // If second turn of game -> only check if in range of enemy
         // -> only check if in range of enemy, should be false
-        if(player.currentMove === -1 && player.lastMove === -1){
-            return !this.isInRangeOf(index, enemy.currentMove);
-        }
+        if(player.currentMove === -1 && player.lastMove === -1) return !this.isInRangeOf(index, enemy.currentMove);
 
-        // when player is moving, we need to check two things
-        // 1. Their new move is in range of the last move 
-        // 2. Their new move is not in range of the current enemy move
+        // At this point, any move needs 2 checks: 
+        // 1. The new move is in range of the last move 
+        // 2. The new move is not in range of the current enemy move
         let inRangeLastMove = this.isInRangeOf(index, player.currentMove);
         let inRangeEnemy = this.isInRangeOf(index, enemy.currentMove);
 
-        if(inRangeEnemy){
-            this.declareWinner(enemy);
-        }
-        
-        // Debugging 
-        // console.log(`Is in range of last move: ${inRangeLastMove}`);
-        // console.log(`Is in range of enemy move: ${inRangeEnemy}`);
+        // If you moved in enemy range, declare enemy winner
+        if(inRangeEnemy) this.declareWinner(enemy);
 
         // Return in Range of last move and not in range of enemy
         return inRangeLastMove && !inRangeEnemy;
