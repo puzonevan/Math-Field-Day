@@ -11,10 +11,6 @@ let initializeBoard = (board) =>{
     }
 }
 
-let isValidMove = (index) =>{
-
-}
-
 let isInRange = (index1, index2) =>{
 
 }

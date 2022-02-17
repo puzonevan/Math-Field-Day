@@ -118,7 +118,7 @@ class Capture{
      */
     isInRangeOf(newMove, otherMove){
 
-        // Positions of new move and other move
+        // Row and Column positions of new move and other move
         let newMoveRow = Math.floor(newMove / 6);
         let newMoveCol = newMove % 6;
         let otherMoveRow = Math.floor(otherMove / 6);
@@ -131,77 +131,57 @@ class Capture{
          * @returns true if board's position is a wall 
          */
         let checkWall = (row, col) => {
-            if(this._board[row][col] === "|"){
-                return true;
-            }
+            if(this._board[row][col] === "|") return true;
         }
 
-        // If player's new move is in the same row as the other move
-        // Check left and right 
+        // If new move same row as other move, check left and right
         if(newMoveRow === otherMoveRow){
-
-            // If other move is on the right of the new move 
+            // If new move left of other move
             if(otherMoveCol > newMoveCol){
-                // Check each square from the new move to the other move 
-                // Go left to right
+                // Check squares left to right
                 for(let i = newMoveCol + 1; i < otherMoveCol; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(newMoveRow, i)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(newMoveRow, i)) return false;
                 }
-
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
 
-            // If other move is on the left of the new move
+            // If new move right of other move
             if(otherMoveCol < newMoveCol){
-                // Check each square from the new move to the other move 
-                // Go right to left
+                // Check squares right to left
                 for(let i = newMoveCol - 1; i > otherMoveCol; i--){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(newMoveRow, i)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(newMoveRow, i)) return false;
                 }
-
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
         }
-        // If player's new move is in the same column as the other move
-        // Check up and down
+        // If new move same column other move, check up and down
         else if(newMoveCol === otherMoveCol){
-            // If other move is below of the new move 
+            // If new move above other move 
             if(otherMoveRow > newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start up and go down
+                // Check squares top to bottom
                 for(let i = newMoveRow + 1; i < otherMoveRow; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(i, newMoveCol)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(i, newMoveCol)) return false;
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
-            // If other move is above of the new move 
+            // If new move below other move 
             if(otherMoveRow < newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start down and go up
+                // Check squares bottom to top 
                 for(let i = newMoveRow - 1; i > otherMoveRow; i--){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(i, newMoveCol)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(i, newMoveCol)) return false;
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
         }
-        // If player's new move is in the same diagonal as the other move
-        // Check all diagonals
+        // If new move same diagonal as other move, check all diagonals
         else if(Math.abs(newMoveCol - otherMoveCol) === Math.abs(newMoveRow - otherMoveRow)){
             // If other move is on the bottom right of the new move
             if(otherMoveCol > newMoveCol && otherMoveRow > newMoveRow){
