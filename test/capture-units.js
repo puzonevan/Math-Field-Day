@@ -18,3 +18,7 @@ let isValidMove = (index) =>{
 let isInRange = (index1, index2) =>{
 
 }
+
+let isTrapped = (index) =>{
+    
+}
