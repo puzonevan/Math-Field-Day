@@ -1,34 +1,6 @@
 
 // Capture Function Unit Tests
 
-const boardCorners = [["X","","","","","X"],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["X","","","","","X"]];
-
-const boardCornersBlock = [["X","","|","","","X"],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["|","","|","","","|"],
-                ["","","","","",""],
-                ["X","","","|","","X"]];
-
-const boardCorner3 = [["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""]];
-
-const boardCorner4 = [["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""],
-                ["","","","","",""]];
-
 let isInRange = (board, index1, index2) =>{
     // Row and Column positions of new move and other move
     let index1Row = Math.floor(index1 / 6);
@@ -163,3 +135,6 @@ let isTrapped = (board, index) =>{
     // at this point, square is surrounded, return true
     return true;
 }
+
+exports.isInRange = isInRange;
+exports.isTrapped = isTrapped;
