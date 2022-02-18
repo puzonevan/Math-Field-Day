@@ -183,62 +183,53 @@ class Capture{
         }
         // If new move same diagonal as other move, check all diagonals
         else if(Math.abs(newMoveCol - otherMoveCol) === Math.abs(newMoveRow - otherMoveRow)){
-            // If other move is on the bottom right of the new move
+            // If new move top left of other move
             if(otherMoveCol > newMoveCol && otherMoveRow > newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start at new move and go bot right direction
+                // Check each square top left to bottom right
                 for(let i = 1; newMoveCol + i <= otherMoveCol; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(newMoveRow + i, newMoveCol + i)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(newMoveRow + i, newMoveCol + i)) return false;
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
-            // If other move is on the top left of the new move
+            // If new move bottom right of other move
             if(otherMoveCol < newMoveCol && otherMoveRow < newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start at new move and go to top left direction
+                // Check each square bottom right to top left
                 for(let i = 1; newMoveCol - i >= otherMoveCol; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
-                    if(checkWall(newMoveRow - i, newMoveCol - i)){
-                        return false;
-                    }
+                    // If there is a wall, new move not in range of other move, return false
+                    if(checkWall(newMoveRow - i, newMoveCol - i)) return false;
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
-            // If other move is on the top right of the new move 
+            // If new move bottom left of other move 
             if(otherMoveCol > newMoveCol && otherMoveRow < newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start at new move and go to top right direction
+                // Check each square bottom left to top right
                 for(let i = 1; i + newMoveCol <= otherMoveCol; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
+                    // If there is a wall, new move not in range of other move, return false
                     if(checkWall(newMoveRow - i, newMoveCol + i)){
                         return false;
                     }
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
-            // If other move is on the bottom left of the new move
+            // If new move top right of other move
             if(otherMoveCol < newMoveCol && otherMoveRow > newMoveRow){
-                // Check each square from the new move to the other move 
-                // Start at new move and go to bot left direction
+                // Check each square top right to bottom left
                 for(let i = 1; newMoveCol - i >= otherMoveCol; i++){
-                    // If there is a wall, new move is not in range of the other move, return false
+                    // If there is a wall, new move not in range of other move, return false
                     if(checkWall(newMoveRow + i, newMoveCol - i)){
                         return false;
                     }
                 }
-                // If it reaches here, then the new move reaches the other move, return true
+                // If it reaches here, then new move reaches the other move, return true
                 return true;
             }
         }
 
-        // If code reaches here, new move is not in range at all of the other move
-        // -> return false
+        // If code reaches here, new move not in range of other move, return false
         return false;
     }
 
@@ -248,34 +239,21 @@ class Capture{
      * @returns true if all surrounding is walls, false otherwise
      */
     isTrapped(index){
+        // Row and column of move
         let row = Math.floor(index / 6);
         let col = index % 6;
         
-        if(row - 1 > -1 && this._board[row - 1][col] !== "|"){
-            return false;
-        }
-        if(col - 1 > -1 && this._board[row][col - 1] !== "|"){
-            return false;
-        }
-        if(row - 1 > -1 && col - 1 > -1 && this._board[row - 1][col - 1] !== "|"){
-            return false
-        }
-        if(row + 1 < 6 && this._board[row + 1][col] !== "|"){
-            return false;
-        }
-        if(col + 1 < 6 && this._board[row][col + 1] !== "|"){
-            return false;
-        }
-        if(row + 1 < 6 && col + 1 < 6 && this._board[row + 1][col + 1] !== "|"){
-            return false;
-        }
-        if(row - 1 > -1 && col + 1 < 6 && this._board[row - 1][col + 1] !== "|"){
-            return false;
-        }
-        if(row + 1 < 6 && col - 1 > -1 && this._board[row + 1][col - 1] !== "|"){
-            return false;
-        }
+        // Check squares all around
+        if(row - 1 > -1 && this._board[row - 1][col] !== "|") return false;
+        if(col - 1 > -1 && this._board[row][col - 1] !== "|") return false;
+        if(row - 1 > -1 && col - 1 > -1 && this._board[row - 1][col - 1] !== "|") return false;
+        if(row + 1 < 6 && this._board[row + 1][col] !== "|") return false;
+        if(col + 1 < 6 && this._board[row][col + 1] !== "|") return false;
+        if(row + 1 < 6 && col + 1 < 6 && this._board[row + 1][col + 1] !== "|") return false;
+        if(row - 1 > -1 && col + 1 < 6 && this._board[row - 1][col + 1] !== "|") return false;
+        if(row + 1 < 6 && col - 1 > -1 && this._board[row + 1][col - 1] !== "|") return false;
 
+        // at this point, square is surrounded, return true
         return true;
     }
 
