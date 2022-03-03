@@ -30,8 +30,6 @@ The opponent moves similarly. The players continue until there is a winner. The 
 
 ![Capture](./admin/images/capture-snapshot.png)
 
----
-
 ## Five in a Row 
 ### Rules
 Very similary to Tic Tac Toe, but the goal is not 3 in a row, it's 5 in a row. 
@@ -39,8 +37,6 @@ Very similary to Tic Tac Toe, but the goal is not 3 in a row, it's 5 in a row.
 Players take turns placing their marks(X or O) in the squares. The first player to get 5 in a row in any direction is the winner.
 
 ![Five in a Row](./admin/images/five-snapshot.png)
-
----
 
 ## Mancala 
 ### Rules
@@ -52,15 +48,11 @@ If a player's last bead lands in an empty square on the opponent's side, the pla
 
 ![Mancala](./admin/images/mancala-snapshot.png)
 
----
-
 ## 3D Tic Tac Toe
 ### Rules
 There are 3 tic tac to boards this time. The game works similarly to tic tac toe where the winner is decided by getting 3 marks in a row horizontally, vertically, or diagonally. However, the winner can also win by getting three in a row in the same spot of the 3 boards or across the 3 boards.
 
 ![3D Tic Tac Toe](./admin/images/tic-tac-toe-snapshot.png)
-
----
 
 ## Hex
 ### Rules
