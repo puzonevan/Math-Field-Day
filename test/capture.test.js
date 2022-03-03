@@ -78,6 +78,9 @@ describe('.isInRange()', () =>{
         diagonal = capture.isInRange(boardCornersBlock, 30, 5);
         expect(diagonal).toBeFalsy();
     });
+
+    // Test generic non blocks
+    
 });
 
 
