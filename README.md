@@ -68,5 +68,8 @@ The winner must form a continous path from their starting side to the opposite s
 
 ![Hex](./admin/images/hex-snapshot.png)
 
-
-
+# Improvements
+- ```<dialog>``` element can be used instead of creating seperate lightboxes
+- Infinite board for 5 in a row? 
+- Better mancala animations and usability
+- Hex clicking is inaccurate 
