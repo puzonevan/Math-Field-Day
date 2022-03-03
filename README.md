@@ -27,6 +27,7 @@ This game is played on a 6x6 grid. The main objective of the game is to avoid pl
 The starting player marks his symbol anywhere on the grid. The next player then add their symbol avoiding a hit described above. The first player can move their symbol anywhere diagonally, horizontally, or vertically(like a queen in chess) to an unused space and shades in their previous mark. The shaded mark is now a wall.
 
 The opponent moves similarly. The players continue until there is a winner. The winner is determined either by forcing the opponent to no longer have any more usable spots to move (CAPTURED) or moving in a space that is in the direction of the opponent.(CAPTURES)
+
 ![Capture](./admin/images/capture-snapshot.png)
 
 ---
@@ -36,6 +37,7 @@ The opponent moves similarly. The players continue until there is a winner. The 
 Very similary to Tic Tac Toe, but the goal is not 3 in a row, it's 5 in a row. 
 
 Players take turns placing their marks(X or O) in the squares. The first player to get 5 in a row in any direction is the winner.
+
 ![Five in a Row](./admin/images/five-snapshot.png)
 
 ---
@@ -47,6 +49,7 @@ Each turn, a player can choose any square with beads on their side, scoops up th
 If a player's last bead lands in the end hole, they can go again.
 
 If a player's last bead lands in an empty square on the opponent's side, the player can either move the beads on their side opposite to the hole or scoop and place all the beads from the opposite hole to the landed hole. The player can also not move at all when this happens. Whenever a player lands in an empty hole on their side, their turn is over.
+
 ![Mancala](./admin/images/mancala-snapshot.png)
 
 ---
@@ -54,6 +57,7 @@ If a player's last bead lands in an empty square on the opponent's side, the pla
 ## 3D Tic Tac Toe
 ### Rules
 There are 3 tic tac to boards this time. The game works similarly to tic tac toe where the winner is decided by getting 3 marks in a row horizontally, vertically, or diagonally. However, the winner can also win by getting three in a row in the same spot of the 3 boards or across the 3 boards.
+
 ![3D Tic Tac Toe](./admin/images/tic-tac-toe-snapshot.png)
 
 ---
@@ -61,6 +65,7 @@ There are 3 tic tac to boards this time. The game works similarly to tic tac toe
 ## Hex
 ### Rules
 The winner must form a continous path from their starting side to the opposite side by connecting the hexagons on their edges. The four corners of the board can be considered to be part of either of the sides that they face.
+
 ![Hex](./admin/images/hex-snapshot.png)
 
 
