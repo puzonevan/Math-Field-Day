@@ -77,6 +77,7 @@ class Hex{
         this._flag == 0 ? this._board[row][col] = "O" : this._board[row][col] = "X";
         
         this.checkWinner();
+        console.log(this._board);
     }
 
     checkWinner(){
