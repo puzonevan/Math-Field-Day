@@ -154,5 +154,52 @@ describe('7x7 board .checkWinner()', () => {
             expect(check).toBeFalsy();
         });
     });
+
+    describe('general all direction cases', () => {
+        test('left to right', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[3][i + 2] = "X";
+            }
+            let check = checkWinner("X", 3, 2, board, numRows, numCols);
+            expect(check).toBeTruthy();
+            board[3][4] = "O";
+            check = checkWinner("X", 3, 2, board, numRows, numCols);
+            expect(check).toBeFalsy();
+        });
+        test('up to down', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[i + 2][3] = "X";
+            }
+            let check = checkWinner("X", 2, 3, board, numRows, numCols);
+            expect(check).toBeTruthy();
+            board[3][3] = "O";
+            check = checkWinner("X", 2, 3, board, numRows, numCols);
+            expect(check).toBeFalsy();
+        });
+        test('diagonal 1', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[i + 1][i + 1] = "X";
+            }
+            let check = checkWinner("X", 1, 1, board, numRows, numCols);
+            expect(check).toBeTruthy();
+            board[2][2] = "O";
+            check = checkWinner("X", 1, 1, board, numRows, numCols);
+            expect(check).toBeFalsy();
+        });
+        test('diagonal 2', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[6 - i][i] = "X";
+            }
+            let check = checkWinner("X", 6, 0, board, numRows, numCols);
+            expect(check).toBeTruthy();
+            board[5][1] = "O";
+            check = checkWinner("X", 6, 0, board, numRows, numCols);
+            expect(check).toBeFalsy();
+        });
+    });
 });
 // Basic Five in a Row Jest Test
