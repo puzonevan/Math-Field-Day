@@ -1,4 +1,10 @@
-const FiveInARow = require("../source/assets/scripts/boards/five-in-a-row-units");
+
+const fiveGame = require('./five-in-a-row-units');
+
+const moveX = "X";
+const moveO = "O";
+
+
 test('adds 1 + 2 to equal 3', () => {
     expect(sum(1, 2)).toBe(3);
 });
