@@ -1,12 +1,12 @@
 
 // Five in a Row Functions to Unit Test
 
-const checkWinner = (move, row, col, board) => {
+const checkWinner = (move, row, col, board, numRows, numCols) => {
     // Pointers for up and down 
     let pointerup;
     row - 1 > -1 ? pointerup = board[row - 1][col] : pointerup = "";
     let pointerdown; 
-    row + 1 < 25 ? pointerdown = board[row + 1][col] : pointerdown = "";
+    row + 1 < numRows ? pointerdown = board[row + 1][col] : pointerdown = "";
     let pointerupOffset = 1;
     let pointerdownOffset = 1;
 
@@ -14,15 +14,15 @@ const checkWinner = (move, row, col, board) => {
     let pointerleft;
     col - 1 > -1 ? pointerleft = board[row][col - 1] : pointerleft = "";
     let pointerright;
-    col + 1 < 50 ? pointerright = board[row][col + 1] : pointerright = "";
+    col + 1 < numCols ? pointerright = board[row][col + 1] : pointerright = "";
     let pointerleftOffset = 1;
     let pointerrightOffset = 1;
 
     // Pointers for Diagonal Right
     let pointertopright;
-    col + 1 < 50 && row - 1 > -1 ? pointertopright = board[row - 1][col + 1] : pointertopright = "";
+    col + 1 < numCols && row - 1 > -1 ? pointertopright = board[row - 1][col + 1] : pointertopright = "";
     let pointerbotleft;
-    col - 1 > -1 && row + 1 < 25 ? pointerbotleft = board[row + 1][col - 1] : pointerbotleft = "";
+    col - 1 > -1 && row + 1 < numRows ? pointerbotleft = board[row + 1][col - 1] : pointerbotleft = "";
     let pointertoprightOffset = 1;
     let pointerbotleftOffset = 1;
 
@@ -30,7 +30,7 @@ const checkWinner = (move, row, col, board) => {
     let pointertopleft;
     col - 1 > -1 && row - 1 > -1 ? pointertopleft = board[row - 1][col - 1] : pointertopleft = "";
     let pointerbotright;
-    col + 1 < 50 && row + 1 < 25 ? pointerbotright = board[row + 1][col + 1] : pointerbotright = "";
+    col + 1 < numCols && row + 1 < numRows ? pointerbotright = board[row + 1][col + 1] : pointerbotright = "";
     let pointertopleftOffset = 1;
     let pointerbotrightOffset = 1;
 
@@ -66,7 +66,7 @@ const checkWinner = (move, row, col, board) => {
             // console.log("down");
             counterVertical++;
             pointerdownOffset++;
-            row + pointerdownOffset < 25 ? pointerdown = board[row + pointerdownOffset][col] : pointerdown = ""; 
+            row + pointerdownOffset < numRows ? pointerdown = board[row + pointerdownOffset][col] : pointerdown = ""; 
         }
 
         // if left is an X or O
@@ -84,7 +84,7 @@ const checkWinner = (move, row, col, board) => {
             // console.log("right");
             counterHorizontal++;
             pointerrightOffset++;
-            col + pointerrightOffset < 50 ? pointerright = board[row][col + pointerrightOffset] : pointerright = "";
+            col + pointerrightOffset < numCols ? pointerright = board[row][col + pointerrightOffset] : pointerright = "";
         }
 
         // if top right is an X or O
@@ -93,7 +93,7 @@ const checkWinner = (move, row, col, board) => {
             // console.log("top right");
             counterDiagonalRight++;
             pointertoprightOffset++;
-            col + pointertoprightOffset < 50 && row - pointertoprightOffset > -1 ? pointertopright = board[row - pointertoprightOffset][col + pointertoprightOffset] : pointertopright = "";
+            col + pointertoprightOffset < numCols && row - pointertoprightOffset > -1 ? pointertopright = board[row - pointertoprightOffset][col + pointertoprightOffset] : pointertopright = "";
         }
 
         // if bottom left is an X or O
@@ -102,7 +102,7 @@ const checkWinner = (move, row, col, board) => {
             // console.log("bot left");
             counterDiagonalRight++;
             pointerbotleftOffset++;
-            col - pointerbotleftOffset > -1 && row + pointerbotleftOffset < 25 ? pointerbotleft = board[row + pointerbotleftOffset][col - pointerbotleftOffset] : pointerbotleft = "";
+            col - pointerbotleftOffset > -1 && row + pointerbotleftOffset < numRows ? pointerbotleft = board[row + pointerbotleftOffset][col - pointerbotleftOffset] : pointerbotleft = "";
         }
         
         // if top left is an X or O
@@ -120,7 +120,7 @@ const checkWinner = (move, row, col, board) => {
             // console.log("bot right");
             counterDiagonalLeft++;
             pointerbotrightOffset++;
-            col + pointerbotrightOffset < 50 && row + pointerbotrightOffset < 25 ? pointerbotright = board[row + pointerbotrightOffset][col + pointerbotrightOffset] : pointerbotright = "";
+            col + pointerbotrightOffset < numCols && row + pointerbotrightOffset < numRows ? pointerbotright = board[row + pointerbotrightOffset][col + pointerbotrightOffset] : pointerbotright = "";
         }
         
     }

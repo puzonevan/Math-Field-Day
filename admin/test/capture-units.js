@@ -1,4 +1,3 @@
-
 // Capture Function Unit Tests
 
 let isInRange = (board, index1, index2) =>{

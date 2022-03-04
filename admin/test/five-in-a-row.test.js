@@ -1,11 +1,23 @@
-
-const fiveGame = require('./five-in-a-row-units');
+const { checkWinner } = require('./five-in-a-row-units');
 
 const moveX = "X";
 const moveO = "O";
 
+const board = [
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+];
 
-test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
+const numRows = 7;
+const numCols = 7;
+
+
+describe('7x7 board .checkWinner()', () => {
+    
 });
 // Basic Five in a Row Jest Test
