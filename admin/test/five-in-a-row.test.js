@@ -201,5 +201,87 @@ describe('7x7 board .checkWinner()', () => {
             expect(check).toBeFalsy();
         });
     });
+
+    describe('more than 5 in a row', () => {
+        test('left to right', () => {
+            resetBoard();
+            for(let i = 0; i < 6; i++){
+                board[3][i + 2] = "X";
+            }
+            let check = checkWinner("X", 3, 2, board, numRows, numCols);
+            expect(check).toBeTruthy();
+        });
+        test('up to down', () => {
+            resetBoard();
+            for(let i = 0; i < 6; i++){
+                board[i + 1][3] = "X";
+            }
+            let check = checkWinner("X", 1, 3, board, numRows, numCols);
+            expect(check).toBeTruthy();
+        });
+        test('diagonal 1', () => {
+            resetBoard();
+            for(let i = 0; i < 6; i++){
+                board[i + 1][i + 1] = "X";
+            }
+            let check = checkWinner("X", 1, 1, board, numRows, numCols);
+            expect(check).toBeTruthy();
+        });
+        test('diagonal 2', () => {
+            resetBoard();
+            for(let i = 0; i < 6; i++){
+                board[6 - i][i] = "X";
+            }
+            let check = checkWinner("X", 6, 0, board, numRows, numCols);
+            expect(check).toBeTruthy();
+        });
+    });
+
+    describe('check each letter', () => {
+        test('left to right', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[3][i + 2] = "X";
+            }
+            let check = checkWinner("X", 3, 2, board, numRows, numCols);
+            for(let i = 0; i < 5; i++){
+                check = checkWinner("X", 3, i + 2, board, numRows, numCols);
+                expect(check).toBeTruthy();
+            }
+        });
+        test('up to down', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[i + 2][3] = "X";
+            }
+            let check = checkWinner("X", 2, 3, board, numRows, numCols);
+            for(let i = 0; i < 5; i++){
+                check = checkWinner("X", i + 2, 3, board, numRows, numCols);
+                expect(check).toBeTruthy();
+            }
+        });
+        test('diagonal 1', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[i + 1][i + 1] = "X";
+            }
+            let check = checkWinner("X", 1, 1, board, numRows, numCols);
+            for(let i = 0; i < 5; i++){
+                check = checkWinner("X", i + 1, i + 1, board, numRows, numCols);
+                expect(check).toBeTruthy();
+            }
+        });
+        test('diagonal 2', () => {
+            resetBoard();
+            for(let i = 0; i < 5; i++){
+                board[6 - i][i] = "X";
+            }
+            let check = checkWinner("X", 6, 0, board, numRows, numCols);
+            for(let i = 0; i < 5; i++){
+                check = checkWinner("X", 6 - i, i, board, numRows, numCols);
+                expect(check).toBeTruthy();
+            }
+        });
+    })
 });
 // Basic Five in a Row Jest Test
