@@ -1,4 +1,5 @@
 // Mancala functions to unit test
+
 const getRow = (index)=>{
     return(index < 8 ? 0 : 1);
 }

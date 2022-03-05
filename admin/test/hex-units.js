@@ -1,4 +1,5 @@
 // Hex functions to unit test
+
 const dfs = (start, flag, board) => {
     if(flag == 0 && board[start.row][start.col] != "O") return false;
     if(flag == 1 && board[start.row][start.col] != "X") return false;
@@ -65,6 +66,8 @@ const dfs = (start, flag, board) => {
         }
         
     }
+
+    return false;
 }
 
 exports.dfs = dfs;

@@ -1,4 +1,3 @@
-
 // Five in a Row Functions to Unit Test
 
 const checkWinner = (move, row, col, board, numRows, numCols) => {
