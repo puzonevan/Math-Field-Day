@@ -1,8 +1,5 @@
 const { checkWinner } = require('./five-in-a-row-units');
 
-const moveX = "X";
-const moveO = "O";
-
 const board = [
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],
@@ -26,7 +23,9 @@ const resetBoard = () => {
 
 describe('7x7 board .checkWinner()', () => {
     describe('corner cases', () => {
+        // EACH CORNER ONLY HAS 3 DIRECTIONS TO CHECK
         test('top left - all direction', () => {
+            // left to right 
             resetBoard();
             for(let i = 0; i < 5; i++){
                 board[0][i] = "X";
@@ -37,6 +36,7 @@ describe('7x7 board .checkWinner()', () => {
             check = checkWinner("X", 0, 0, board, numRows, numCols);
             expect(check).toBeFalsy();
 
+            // top to down
             resetBoard();
             for(let i = 0; i < 5; i++){
                 board[i][0] = "X";
@@ -47,6 +47,7 @@ describe('7x7 board .checkWinner()', () => {
             check = checkWinner("X", 0, 0, board, numRows, numCols);
             expect(check).toBeFalsy();
 
+            // diagonal
             resetBoard();
             for(let i = 0; i < 5; i++){
                 board[i][i] = "X";
@@ -238,6 +239,9 @@ describe('7x7 board .checkWinner()', () => {
     });
 
     describe('check each letter', () => {
+        // if you have X X X X X, check each one
+        // because player could have placed the 
+        // last x in any of those spots
         test('left to right', () => {
             resetBoard();
             for(let i = 0; i < 5; i++){
@@ -282,6 +286,6 @@ describe('7x7 board .checkWinner()', () => {
                 expect(check).toBeTruthy();
             }
         });
-    })
+    });
+
 });
-// Basic Five in a Row Jest Test
