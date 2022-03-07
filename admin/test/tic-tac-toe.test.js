@@ -70,28 +70,37 @@ const diag2 = [
 const resetBoard = () =>{
     for(let i = 0; i < 3; i++){
         for(let j = 0; j < 3; j++){
-            for(let k = 0; k < 3; j++){
+            for(let k = 0; k < 3; k++){
                 board[i][j][k] = "";
             }
         }
     }
 }
 
+const initBoard = (boardNum, newBoard) => {
+    board[boardNum] = newBoard;
+}
+
+const blockBoard = (x, y, z) => {
+    board[x][y][z] = "O";
+}
+
 describe('.checkWinner()', () => {
-    describe('all possible combinations one board', () =>{
+    describe('all possible combinations on one board', () =>{
         let check;
         for(let i = 0; i < 3; i++){
             test(`board ${i}`, () =>{
                 resetBoard();
-                board[i] = topRow;
+                initBoard(i, topRow);
                 check = checkWinner(i, board, flag);
+                console.log(board);
                 expect(check).toBeTruthy();
                 board[i][0][1] = "O";
                 check = checkWinner(i, board, flag);
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = middleRow;
+                initBoard(i, middleRow);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][1] = "O";
@@ -99,7 +108,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = bottomRow;
+                initBoard(i, bottomRow);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][2][1] = "O";
@@ -107,7 +116,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = leftCol;
+                initBoard(i, leftCol);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][0] = "O";
@@ -115,7 +124,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = middleCol;
+                initBoard(i, middleCol);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][1] = "O";
@@ -123,7 +132,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = rightCol;
+                initBoard(i, rightCol);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][2] = "O";
@@ -131,7 +140,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = diag1;
+                initBoard(i, diag1);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][1] = "O";
@@ -139,7 +148,7 @@ describe('.checkWinner()', () => {
                 expect(check).toBeFalsy();
 
                 resetBoard();
-                board[i] = diag2;
+                initBoard(i, diag2);
                 check = checkWinner(i, board, flag);
                 expect(check).toBeTruthy();
                 board[i][1][1] = "O";
