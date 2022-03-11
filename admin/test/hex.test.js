@@ -7,6 +7,14 @@ const start = {
 
 const flag = 0;
 
-describe('', () => {
-    
-})
+describe('.dfs()', () => {
+    describe('basic paths', () => {
+
+    });
+    describe('blocked paths', () => {
+
+    });
+    describe('corner paths', () => {
+
+    });
+});

@@ -3,7 +3,7 @@ const { getRow, getCol, getOpp, updateBoard, checkWinner } = require('./mancala-
 let index;
 
 describe('.getRow()', () => {
-
+    
 });
 
 describe('.getCol()', () => {
